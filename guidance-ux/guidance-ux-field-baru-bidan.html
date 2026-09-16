@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><title>Guidance UX — Field Baru (CRM Bidan)</title>
+<style>
+:root{--ink:#111827;--ink-soft:#6b7280;--clay-100:#f3f4f6;--clay-200:#e5e7eb;--clay-300:#d1d5db;--primary:#1a73e8;--primary-dark:#1e40af;--plum:#ea9036;--sage:#16a34a;--amber:#d97706;--rose:#dc2626}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Plus Jakarta Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{page-break-after:always;padding:0 0 8mm}
+.page:last-child{page-break-after:auto}
+.hdr{border-bottom:3px solid var(--primary);padding-bottom:10px;margin-bottom:16px}
+.eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+h1{font-size:26px;margin:6px 0 4px;line-height:1.2}
+h2{font-size:20px;margin:6px 0 3px}
+h3{font-size:15px;margin:16px 0 6px}
+.sub{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.55}
+.box{background:var(--clay-100);border:1px solid var(--clay-200);border-radius:14px;padding:13px 15px;margin:13px 0}
+.box h3{margin:0 0 7px;font-size:14px}
+.box ul{margin:0;padding-left:19px;font-size:13px;line-height:1.65}
+.note{background:#eef4fe;border:1px solid #cfe0fb;border-radius:12px;padding:11px 14px;font-size:13px;line-height:1.6;color:#1b3a6b;margin:11px 0}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0 4px}
+th{background:#eef4fe;text-align:left;padding:7px 9px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#33507e;border-bottom:2px solid #cfe0fb}
+td{padding:8px 9px;border-bottom:1px solid var(--clay-200);vertical-align:top;line-height:1.45}
+td.k{font-weight:700;width:30%}
+.foot{font-size:11px;color:#9aa2ad;margin-top:16px;border-top:1px solid var(--clay-200);padding-top:8px}
+/* ---- mockup perangkat ---- */
+.row{display:flex;gap:16px;margin:14px 0}
+.phone{width:300px;flex:none;border:1px solid var(--clay-200);border-radius:20px;background:#fff;padding:12px}
+.phone .cap{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:8px}
+.desc{flex:1;font-size:13px;line-height:1.6}
+.lbl{font-size:12px;font-weight:600;color:var(--ink);margin:9px 0 4px;display:block}
+.inp{border:1px solid var(--clay-300);border-radius:8px;background:#fff;padding:8px 10px;font-size:12.5px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
+.inp .ph{color:#9aa2ad}
+.unit{color:var(--ink-soft);font-size:11.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg{display:flex;border:1px solid var(--clay-300);border-radius:8px;overflow:hidden}
+.seg div{flex:1;text-align:center;padding:7px 4px;font-size:12px;color:var(--ink-soft);background:#fff}
+.seg div.on{background:var(--primary);color:#fff;font-weight:700}
+.hint{font-size:11px;color:var(--ink-soft);margin-top:3px;line-height:1.45}
+.chip{display:inline-block;background:#eef4fe;color:var(--primary-dark);border-radius:99px;padding:3px 9px;font-size:11px;font-weight:700;margin:2px 4px 0 0}
+.btn{background:var(--primary);color:#fff;border-radius:99px;text-align:center;padding:9px;font-size:12.5px;font-weight:700;margin-top:10px}
+.btn.ghost{background:#fff;color:var(--primary);border:1px dashed var(--primary)}
+.card{border:1px solid var(--clay-200);border-radius:12px;padding:10px;margin-top:8px;background:#fcfcfd}
+.card .ttl{font-size:12px;font-weight:700}
+.tog{width:38px;height:21px;border-radius:99px;background:var(--clay-300);position:relative}
+.tog.on{background:var(--sage)}
+.tog i{position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#fff}
+.tog.on i{left:19px}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:99px;letter-spacing:.03em}
+.b-blue{background:#eef4fe;color:var(--primary-dark)}
+.b-green{background:#e7f5ec;color:#1d6b37}
+.b-amber{background:#fdf2e0;color:#8a5a0b}
+.b-red{background:#fdeaea;color:#a52020}
+.empty{border:1px dashed var(--clay-300);border-radius:10px;padding:11px;font-size:12px;color:var(--ink-soft);text-align:center;background:#fbfbfc}
+.compact ul.tight{font-size:12.5px;line-height:1.55}
+.compact table{font-size:11.5px;margin:6px 0 2px}
+.compact td,.compact th{padding:5px 7px}
+.compact h3{font-size:14px;margin:11px 0 4px}
+.compact .note{padding:9px 11px;font-size:12.5px;margin:9px 0}
+</style></head><body>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Guidance UX · CRM Bidan (O3)</div>
+    <h1>Tampilan Field Baru — Form Pendaftaran &amp; Catatan ANC</h1>
+    <p class="sub">Panduan visual untuk tim UX · berbasis masukan Bidan Erlyna &amp; Bidan Yessy · Prototype v14 Sep 2026</p>
+  </div>
+
+  <div class="box">
+    <h3>Isi dokumen</h3>
+    <ul>
+      <li><b>Bagian A</b> — Form Pendaftaran: pola "Riwayat Kebidanan" (4 masukan Erlyna) → <b>list berulang</b>, bukan kolom teks</li>
+      <li><b>Bagian B</b> — Catatan ANC: Antropometri &amp; Gizi (TB, IMT), Pemeriksaan Janin (Leopold, presentasi/bagian terendah, TBJ), USG, Pemeriksaan Dalam (kondisional)</li>
+      <li><b>Bagian C</b> — Analisis/Diagnosa + aturan komponen bersama &amp; tabel spesifikasi</li>
+      <li><b>Bagian D</b> — Keputusan yang perlu diambil UX (termasuk opsi struktur SOAP)</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <b>Cara pakai:</b> tiap bagian berisi <b>contoh tampilan</b> (kiri, dalam lebar layar mobile 360px) dan <b>alasan/aturan desain</b> (kanan).
+    Semua warna, radius, dan komponen mengikuti <b>design token prototype v14 Sep</b>: primary <span class="badge b-blue">#1a73e8</span>,
+    netral <span class="badge b-blue">clay-100/200/300</span>, radius input 8px, radius kartu 12px, font Plus Jakarta Sans.
+  </div>
+
+  <div class="box">
+    <h3>Prinsip utama (3 hal)</h3>
+    <ul>
+      <li><b>1. Riwayat itu multi-kejadian</b> — pakai komponen list berulang + tombol "Tambah", bukan 4 kolom teks panjang.</li>
+      <li><b>2. Jangan tampilkan field kondisional sebelum dipicu</b> — pemeriksaan dalam &amp; USG muncul setelah toggle = Ya.</li>
+      <li><b>3. Bedakan hasil pemeriksaan vs kesimpulan</b> — semua hasil (objektif) di atas, "Kesimpulan/Diagnosa" di paling bawah form.</li>
+    </ul>
+  </div>
+
+  <div class="foot">Disusun 14 Sep 2026 · sumber: masukan Bidan Erlyna &amp; Bidan Yessy</div>
+</div>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Bagian A · Form Pendaftaran</div>
+    <h2>Pola "Riwayat Kebidanan" — 4 masukan Bidan Erlyna</h2>
+    <p class="sub">Riwayat KB · Riwayat Persalinan · Riwayat Kehamilan Terdahulu · Riwayat Pernikahan</p>
+  </div>
+
+  <div class="row">
+    <div class="phone">
+      <div class="cap">Contoh tampilan</div>
+      <div class="lbl">Riwayat Kebidanan <span class="badge b-blue">opsional</span></div>
+      <div class="hint" style="margin-bottom:6px">Diisi bila pasien pernah hamil / melahirkan sebelumnya. Boleh dilewati.</div>
+
+      <div class="card">
+        <div class="ttl">Kehamilan &amp; Persalinan ke-1</div>
+        <div class="grid2" style="margin-top:7px">
+          <div><span class="lbl" style="margin-top:0">Tahun</span><div class="inp"><span class="ph">2022</span></div></div>
+          <div><span class="lbl" style="margin-top:0">Usia hamil</span><div class="inp"><span class="ph">39</span><span class="unit">mgg</span></div></div>
+        </div>
+        <span class="lbl">Hasil</span>
+        <div class="inp"><span>Lahir hidup</span><span class="unit">▾</span></div>
+        <span class="lbl">Cara persalinan</span>
+        <div class="inp"><span>Normal</span><span class="unit">▾</span></div>
+        <span class="lbl">Komplikasi</span>
+        <div class="inp"><span class="ph">Tidak ada / tulis bila ada</span></div>
+      </div>
+
+      <div class="btn ghost">+ Tambah kehamilan / persalinan</div>
+
+      <div class="lbl" style="margin-top:14px">Riwayat KB</div>
+      <div class="card">
+        <div class="ttl">Suntik 3 bulan</div>
+        <div class="grid2" style="margin-top:7px">
+          <div><span class="lbl" style="margin-top:0">Mulai</span><div class="inp"><span class="ph">03/2024</span></div></div>
+          <div><span class="lbl" style="margin-top:0">Selesai</span><div class="inp"><span class="ph">—</span></div></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:8px"><div class="tog on"><i></i></div><span style="font-size:12px">Masih digunakan</span></div>
+      </div>
+      <div class="btn ghost">+ Tambah riwayat KB</div>
+
+      <div class="lbl" style="margin-top:14px">Riwayat Pernikahan</div>
+      <div class="inp"><span>Menikah</span><span class="unit">▾</span></div>
+      <div class="grid2" style="margin-top:7px">
+        <div><span class="lbl" style="margin-top:0">Menikah ke-</span><div class="inp"><span class="ph">1</span></div></div>
+        <div><span class="lbl" style="margin-top:0">Usia menikah pertama</span><div class="inp"><span class="ph">21</span><span class="unit">th</span></div></div>
+      </div>
+    </div>
+
+    <div class="desc">
+      <h3>Aturan desain</h3>
+      <ul class="tight">
+        <li><b>Satu komponen, dipakai 3×</b> — kartu riwayat berulang dengan tombol "+ Tambah". Tiap kartu: Selesai/Dihapus lewat menu (⋮), bukan tombol besar.</li>
+        <li><b>Kehamilan &amp; Persalinan digabung jadi satu kartu</b> (1 kehamilan = 1 hasil). Ini mengurangi input ganda dibanding 2 daftar terpisah — tapi UX boleh memisah bila ingin laporan per-kejadian.</li>
+        <li><b>Riwayat Pernikahan = single field</b>, bukan list. Sub-field (menikah ke-, usia menikah pertama, lama) hanya muncul bila status = Menikah / Janda.</li>
+        <li><b>Letak:</b> setelah blok G / P / A, di dalam accordion <i>"Riwayat Kebidanan (opsional)"</i> — konsisten dengan accordion "Lengkapi Identitas…" yang sudah ada.</li>
+        <li><b>Empty state:</b> pasien primigravida → tampilkan kartu kosong bertulisan <i>"Belum ada riwayat. Tambahkan bila pasien pernah hamil."</i> — jangan sembunyikan seksi.</li>
+        <li><b>Konsistensi data:</b> bila G/P/A = 3/2/0 tapi riwayat terisi 1 baris → tampilkan info lembut (bukan blokir): <i>"G3P2A0 · riwayat terisi 1 kejadian. Lengkapi?"</i></li>
+        <li><b>Ringkasan collapsed:</b> saat accordion tertutup, tampilkan chip: <span class="chip">G3P2A0</span><span class="chip">KB: suntik 3 bulan</span><span class="chip">Menikah</span> agar bidan tak perlu buka-tutup.</li>
+      </ul>
+      <div class="note" style="margin-top:10px">
+        <b>Catatan untuk UX:</b> keempat riwayat ini masuk kategori <b>Subjektif (anamnesis)</b> — bukan data identitas.
+        Kalau nanti form pendaftaran dipecah per langkah, letakkan di langkah <b>Riwayat Kesehatan</b>, bukan langkah Identitas.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Bagian A · masukan Bidan Erlyna (form pendaftaran pasien kebidanan)</div>
+</div>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Bagian B1 · Catatan ANC</div>
+    <h2>Antropometri &amp; Gizi — Tinggi Badan + IMT</h2>
+    <p class="sub">Masukan Bidan Yessy · TB belum ada di prototype; BB &amp; LiLA sudah ada</p>
+  </div>
+
+  <div class="row">
+    <div class="phone">
+      <div class="cap">Contoh tampilan</div>
+      <div class="lbl">Antropometri &amp; Gizi</div>
+      <div class="grid2">
+        <div><span class="lbl" style="margin-top:0">Tinggi badan <span class="badge b-blue">baru</span></span><div class="inp"><span>158</span><span class="unit">cm</span></div></div>
+        <div><span class="lbl" style="margin-top:0">Berat badan</span><div class="inp"><span>62</span><span class="unit">kg</span></div></div>
+      </div>
+      <div class="grid2" style="margin-top:8px">
+        <div><span class="lbl" style="margin-top:0">LiLA</span><div class="inp"><span>24</span><span class="unit">cm</span></div></div>
+        <div><span class="lbl" style="margin-top:0">IMT (otomatis)</span><div class="inp" style="background:#f7f9fc;border-style:dashed"><span>24,8</span><span class="badge b-green">Normal</span></div></div>
+      </div>
+      <div class="hint">LiLA &lt; 23,5 cm → risiko KEK. IMT dihitung otomatis dari TB &amp; BB pra-hamil.</div>
+      <div class="hint" style="margin-top:6px;color:#8a5a0b">TB otomatis terkunci setelah kunjungan pertama. Ada tombol "Ubah" kecil bila perlu dikoreksi.</div>
+      <div class="btn">Simpan</div>
+    </div>
+
+    <div class="desc">
+      <h3>Aturan desain</h3>
+      <ul class="tight">
+        <li><b>Tinggi badan masuk grup "Antropometri &amp; Gizi"</b> — satu grup dengan BB &amp; LiLA, karena ketiganya dipakai untuk skrining gizi. Jangan ditaruh di blok tanda vital.</li>
+        <li><b>Number input + unit sebagai suffix di dalam kotak</b> (bukan di label) → mengecilkan lebar dan mencegah salah tulis satuan.</li>
+        <li><b>IMT dihitung otomatis</b> (read-only, tampilan dashed) + badge kategori: Kurus / Normal / Gemuk. Bidan tidak perlu menghitung, tapi tetap bisa lihat asalnya (TB × BB).</li>
+        <li><b>TB hanya diisi sekali</b> — setelah tersimpan, jadi read-only dengan aksi "Ubah" (bukan input bebas tiap kunjungan). BB &amp; LiLA tetap diisi setiap kunjungan.</li>
+        <li><b>Urutan dalam grup:</b> TB → BB → LiLA → IMT. Grid 2 kolom, tinggi field seragam 40px.</li>
+        <li><b>Keyboard:</b> numeric pad untuk TB/BB/LiLA; tampilkan koma desimal bila perlu (IMT 1 angka di belakang koma).</li>
+        <li><b>Validasi lembut</b> (peringatan kuning, tidak memblokir simpan): TB 120–200 cm · BB 25–150 kg · LiLA 15–45 cm. Bila di luar rentang, minta konfirmasi <i>"Angka ini tidak biasa. Sudah benar?"</i>.</li>
+      </ul>
+      <div class="note">
+        <b>Kenapa TB penting:</b> tanpa TB, IMT tidak bisa dihitung — padahal kenaikan BB ideal selama hamil dinilai dari <b>IMT pra-hamil</b>.
+        Jadi TB bukan sekadar arsip, tapi <b>input</b> untuk penilaian kenaikan BB.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Bagian B1 · masukan Bidan Yessy (catatan ANC)</div>
+</div>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Bagian B2 · Catatan ANC</div>
+    <h2>Pemeriksaan Janin — Leopold, Presentasi &amp; TBJ</h2>
+    <p class="sub">Masukan Bidan Erlyna · TFU &amp; DJJ sudah ada di prototype</p>
+  </div>
+
+  <div class="row">
+    <div class="phone">
+      <div class="cap">Contoh tampilan</div>
+      <div class="lbl">Pemeriksaan Janin</div>
+      <div class="grid2">
+        <div><span class="lbl" style="margin-top:0">TFU</span><div class="inp"><span>30</span><span class="unit">cm</span></div></div>
+        <div><span class="lbl" style="margin-top:0">DJJ</span><div class="inp"><span>140</span><span class="unit">bpm</span></div></div>
+      </div>
+
+      <span class="lbl">Presentasi / letak janin <span class="badge b-blue">baru</span></span>
+      <div class="inp"><span>Kepala</span><span class="unit">▾</span></div>
+
+      <span class="lbl">Bagian terendah janin <span class="badge b-blue">baru</span></span>
+      <div class="inp"><span>Kepala</span><span class="unit">▾</span></div>
+
+      <span class="lbl">TBJ <span class="badge b-blue">baru</span></span>
+      <div class="inp"><span>2.450</span><span class="unit">gram</span></div>
+      <div class="hint">Estimasi otomatis dari TFU &amp; usia kehamilan.</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:6px"><div class="tog on"><i></i></div><span style="font-size:12px">Ubah manual (hasil USG berbeda)</span></div>
+
+      <div style="margin-top:10px" class="lbl">Catatan Leopold (opsional)</div>
+      <div class="inp"><span class="ph">cth: kepala di bawah, punggung kiri</span></div>
+
+      <div class="btn">Simpan</div>
+    </div>
+
+    <div class="desc">
+      <h3>Aturan desain</h3>
+      <ul class="tight">
+        <li><b>Yang disimpan adalah HASIL, bukan 4 manuver.</b> Leopold I–IV adalah cara memeriksa; yang perlu tersimpan = <b>presentasi/letak janin</b> + <b>bagian terendah janin</b>. Bidan tidak perlu mengisi 4 dropdown manuver tiap kunjungan.</li>
+        <li><b>Kedua field pakai select</b> (bukan teks bebas) dengan opsi baku: Kepala · Bokong/Sungsang · Lintang/Melintang · Tidak jelas. Ini menjaga data bisa direkap.</li>
+        <li><b>Variasi opsional:</b> bila UX ingin tetap menampilkan Leopold, pakai 4 select ringkas dalam grid 2×2, disembunyikan di dalam <i>"Catatan Leopold (opsional)"</i> — jangan di posisi utama.</li>
+        <li><b>TBJ = number + auto-estimasi.</b> Tampilkan angka estimasi lebih dulu (read-only), lalu toggle "Ubah manual" bila bidan punya angka dari USG. Sumber angka ikut dicatat (Estimasi TFU / USG) agar tidak ambigu.</li>
+        <li><b>TBJ hanya relevan mulai ±20 minggu</b> (TFU &gt; 20 cm). Sebelum itu, tampilkan field nonaktif dengan keterangan <i>"Belum dihitung pada usia ini"</i>.</li>
+        <li><b>Urutan dalam grup:</b> TFU → DJJ → Presentasi → Bagian terendah → TBJ → Catatan Leopold. Field hasil pemeriksaan raga sebelum catatan.</li>
+        <li><b>Validasi lembut:</b> TFU 10–45 cm · DJJ 60–200 bpm · TBJ 200–5.000 gram.</li>
+      </ul>
+      <div class="note">
+        <b>Contoh perhitungan yang diharapkan (untuk tim tech):</b> TBJ (gram) ≈ (TFU − 12) × 155 untuk posisi kepala — cukup sebagai <b>estimasi default</b>,
+        selalu bisa ditimpa manual, dan <b>jangan</b> dipakai untuk klaim klinis (beri label "estimasi").
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Bagian B2 · masukan Bidan Erlyna (catatan ANC)</div>
+</div>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Bagian B3 · Catatan ANC</div>
+    <h2>USG &amp; Pemeriksaan Dalam (Kondisional)</h2>
+    <p class="sub">Masukan Bidan Yessy (USG + catatan) &amp; Bidan Erlyna (pemeriksaan dalam bila perlu)</p>
+  </div>
+
+  <div class="row">
+    <div class="phone">
+      <div class="cap">Contoh tampilan — kondisi "Ya"</div>
+      <div class="lbl">USG</div>
+      <div class="card" style="margin-top:0">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12.5px;font-weight:600">USG dilakukan?</span>
+          <div class="seg" style="width:104px"><div>Tidak</div><div class="on">Ya</div></div>
+        </div>
+        <div class="grid2" style="margin-top:8px">
+          <div><span class="lbl" style="margin-top:0">Tanggal USG</span><div class="inp"><span class="ph">14/09/2026</span></div></div>
+          <div><span class="lbl" style="margin-top:0">Pemeriksa</span><div class="inp"><span>Dokter</span><span class="unit">▾</span></div></div>
+        </div>
+        <span class="lbl">Catatan hasil USG</span>
+        <div class="inp" style="min-height:52px;align-items:flex-start"><span class="ph">cth: janin tunggal, DJJ +, air ketuban cukup, plasenta fundus</span></div>
+      </div>
+
+      <div class="lbl" style="margin-top:12px">Pemeriksaan dalam</div>
+      <div class="card" style="margin-top:0">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12.5px;font-weight:600">Dilakukan?</span>
+          <div class="seg" style="width:104px"><div>Tidak</div><div class="on">Ya</div></div>
+        </div>
+        <span class="lbl">Pembukaan serviks</span>
+        <div class="inp"><span>2</span><span class="unit">cm</span></div>
+        <span class="lbl">Ketuban</span>
+        <div class="inp"><span>Utuh</span><span class="unit">▾</span></div>
+        <span class="lbl">Penurunan / Hodge</span>
+        <div class="inp"><span>Hodge II</span><span class="unit">▾</span></div>
+        <span class="lbl">Catatan</span>
+        <div class="inp"><span class="ph">cth: panggul normal</span></div>
+      </div>
+      <div class="btn">Simpan</div>
+    </div>
+
+    <div class="desc">
+      <h3>Aturan desain — USG</h3>
+      <ul class="tight">
+        <li><b>Bentuk final: satu kartu "USG"</b> dengan segmented <b>Tidak / Ya</b>. Prototype sekarang hanya punya penanda + "Catatan hasil USG" — jadikan satu grup yang rapi.</li>
+        <li><b>Sub-field muncul hanya bila Ya</b> (Tanggal · Pemeriksa · Catatan hasil). Default <b>Tidak</b>, sehingga form tetap ringkas untuk kunjungan tanpa USG.</li>
+        <li><b>Pemeriksa</b> dipakai untuk menandai kunjungan dokter (ANC oleh dokter), bisa direkap terpisah.</li>
+        <li><b>Kolom catatan dibuat tinggi (3 baris)</b> karena jawabannya naratif; beri contoh isi sebagai placeholder, bukan label panjang.</li>
+      </ul>
+
+      <h3>Aturan desain — Pemeriksaan dalam</h3>
+      <ul class="tight">
+        <li><b>Wajib kondisional</b>, bukan field terbuka. Label harus jelas: <i>"Pemeriksaan dalam (bila perlu)"</i> dengan default <b>Tidak</b>.</li>
+        <li><b>Sub-field mengikuti praktik klinis</b>: Pembukaan serviks (cm) · Ketuban (utuh/pecah) · Penurunan/Hodge · Catatan. Tambahkan <b>Presentasi</b> bila perlu, tapi field presentasi sudah ada di grup Pemeriksaan Janin — jangan duplikasi.</li>
+        <li><b>Hindari istilah yang tidak dipakai bidan</b> di label: pakai "Pembukaan", bukan "dilatasi serviks"; pakai "Hodge", bukan "station".</li>
+        <li><b>Kapan dipakai:</b> ANC umumnya tidak rutin VT (lebih sering di persalinan). Karena itu toggle-nya bisa ditampilkan <b>di paling bawah</b> grup pemeriksaan, setelah field non-invasif.</li>
+      </ul>
+      <div class="note">
+        <b>Konsistensi pola:</b> dua field di halaman ini memakai pola yang sama — <b>segmented Tidak/Ya + blok sub-field kondisional</b>.
+        Pakai pola yang sama untuk field kondisional lain agar bidan cepat terbiasa.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Bagian B3 · masukan Bidan Yessy &amp; Bidan Erlyna (catatan ANC)</div>
+</div>
+<div class="page compact">
+  <div class="hdr">
+    <div class="eyebrow">Bagian C · Analisis &amp; Aturan Komponen</div>
+    <h2>Kesimpulan / Diagnosa + Aturan Bersama</h2>
+    <p class="sub">Masukan Bidan Yessy ("catatan buat diagnosa")</p>
+  </div>
+
+  <div class="row">
+    <div class="phone">
+      <div class="cap">Contoh tampilan — bawah form</div>
+      <div class="lbl">Kesimpulan / Diagnosa</div>
+      <div class="inp" style="min-height:64px;align-items:flex-start;border-color:#1a73e8">
+        <span style="font-size:12.5px;line-height:1.5">G2P1A0 hamil 32 minggu, janin tunggal, presentasi kepala, tanpa penyulit</span>
+      </div>
+      <div class="btn ghost" style="margin-top:6px">Ambil dari hasil pemeriksaan</div>
+      <div class="hint">Tombol menyusun kalimat otomatis dari field objektif (usia kehamilan, G/P/A, TFU, presentasi, hasil lab). Bidan boleh mengubah.</div>
+      <span class="lbl">Catatan tambahan (opsional)</span>
+      <div class="inp"><span class="ph">cth: anjurkan kontrol 2 minggu lagi</span></div>
+      <div class="btn">Simpan</div>
+    </div>
+
+    <div class="desc">
+      <h3>Aturan desain — Kesimpulan/Diagnosa</h3>
+      <ul class="tight">
+        <li><b>Textarea full-width, di paling bawah form</b> (setelah semua hasil pemeriksaan) dengan label jelas: <i>"Kesimpulan / Diagnosa"</i>. Ini yang diminta Yessy sebagai "catatan buat diagnosa".</li>
+        <li><b>Jangan digabung dengan "Catatan pemeriksaan"</b> yang sudah ada — beda fungsi: catatan pemeriksaan = temuan, kesimpulan = analisis.</li>
+        <li><b>Sediakan tombol "Ambil dari hasil pemeriksaan"</b> yang menyusun kalimat baku dari data yang sudah diisi (G/P/A, usia kehamilan, TFU, presentasi, lab). Menghemat waktu bidan dan menyeragamkan format catatan.</li>
+        <li><b>Bahasa label:</b> pakai istilah yang dipakai bidan — "Hasil/Diagnosis" sudah dipakai di modul Nifas, jadi <b>samakan penamaannya</b> agar konsisten antar kartu layanan.</li>
+      </ul>
+
+      <h3>Aturan komponen bersama (semua field baru)</h3>
+      <table>
+        <tr><th>Jenis data</th><th>Komponen</th><th>Contoh</th></tr>
+        <tr><td>Angka bersatuan</td><td>Number input + unit di dalam kotak</td><td>TB 158 <span class="unit">cm</span> · TBJ 2.450 <span class="unit">gram</span></td></tr>
+        <tr><td>Pilihan baku</td><td>Select (bukan teks bebas) agar bisa direkap</td><td>Presentasi janin · Metode KB · Cara persalinan</td></tr>
+        <tr><td>Ya / Tidak</td><td>Segmented control + blok kondisional</td><td>USG dilakukan? · Pemeriksaan dalam?</td></tr>
+        <tr><td>Multi-pilih</td><td>Checkbox</td><td>Tanda bahaya nifas (pola existing)</td></tr>
+        <tr><td>Naratif</td><td>Textarea 3 baris + placeholder contoh</td><td>Catatan hasil USG · Kesimpulan/Diagnosa</td></tr>
+        <tr><td>Riwayat berulang</td><td>Kartu list + tombol "+ Tambah" + empty state</td><td>Riwayat persalinan · Riwayat KB</td></tr>
+        <tr><td>Layout kelompok</td><td>Grid 2 kolom untuk field pendek, 1 kolom untuk naratif</td><td>TB/BB · TFU/DJJ</td></tr>
+      </table>
+
+      <div class="note">
+        <b>Konsistensi visual:</b> label di atas input · tinggi field 40px · radius 8px · warna border <code>clay-300</code> · field wajib bertanda <b>*</b> ·
+        field opsional dikelompokkan di accordion <i>"Lengkapi data lain (opsional)"</i> seperti pola prototype saat ini.
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">Bagian C · aturan komponen berlaku untuk seluruh field baru</div>
+</div>
+<div class="page">
+  <div class="hdr">
+    <div class="eyebrow">Bagian D · Keputusan</div>
+    <h2>Yang Perlu Diputuskan UX</h2>
+    <p class="sub">Tiga hal yang menentukan bentuk akhir field baru</p>
+  </div>
+
+  <div class="box">
+    <h3>1. Struktur form ANC: ikut SOAP atau tetap flat?</h3>
+    <ul>
+      <li><b>Opsi A — penuh SOAP:</b> form dipecah menjadi <b>Subjektif</b> (keluhan, riwayat) · <b>Objektif</b> (antropometri, tanda vital, pemeriksaan janin, lab, USG) · <b>Analisis</b> (kesimpulan/diagnosa) · <b>Penatalaksanaan</b> (rencana, jadwal kontrol). Paling sesuai cara bidan berpikir.</li>
+      <li><b>Opsi B — minimum (rekomendasi awal):</b> pertahankan form sekarang, tapi kelompokkan ulang jadi blok berjudul + pindahkan "Kesimpulan/Diagnosa" ke paling bawah. Lebih cepat dikerjakan, tidak mengubah kebiasaan.</li>
+      <li><b>Dampak:</b> Opsi A mengubah hampir semua urutan form ANC dan perlu penyesuaian di ringkasan WA &amp; laporan; Opsi B hanya menambah grup.</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h3>2. Riwayat obstetri: satu kartu gabungan atau dipisah?</h3>
+    <ul>
+      <li><b>Gabung (rekomendasi):</b> 1 kartu = 1 kehamilan + hasilnya (persalinan/nifas). Input lebih sedikit, cocok dengan cara bidan bercerita.</li>
+      <li><b>Pisah:</b> daftar "Riwayat Persalinan" &amp; "Riwayat Kehamilan" sendiri-sendiri → lebih rapi untuk laporan, tapi bidan mengisi dua tempat.</li>
+      <li>Keputusan ini juga menentukan bentuk <b>tampilan riwayat di Profil Pasien</b> (tab ANC/Persalinan/Nifas).</li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h3>3. Leopold: simpan hasil saja, atau 4 manuver?</h3>
+    <ul>
+      <li><b>Hasil saja (rekomendasi):</b> presentasi/letak janin + bagian terendah janin. Cepat diisi, data bisa direkap.</li>
+      <li><b>4 manuver:</b> lebih lengkap untuk pendidikan/dokumentasi, tapi 4 dropdown tiap kunjungan berisiko bikin bidan malas.</li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <b>Urutan pekerjaan yang disarankan:</b> (1) putuskan struktur form → (2) finalkan komponen riwayat berulang → (3) baru susun tampilan tiap grup.
+    Bila struktur belum final, field-field ini sebaiknya <b>jangan</b> langsung dipindah ke desain high-fidelity.
+  </div>
+
+  <div class="foot">Bagian D · keputusan ini menentukan bentuk akhir sebelum high-fidelity design</div>
+</div>
+</body></html>

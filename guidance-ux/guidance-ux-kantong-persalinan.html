@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Guidance UX — Update Prototype: Kantong Persalinan</title>
+<style>
+  :root{
+    --cream:#eaeef1; --paper:#fff; --ink:#111827; --ink-soft:#6b7280;
+    --clay-100:#f3f4f6; --clay-200:#e5e7eb; --clay-300:#d1d5db;
+    --blue:#1a73e8; --blue-dark:#1e40af;
+    --plum:#ea9036; --plum-dark:#f3611c;
+    --sage:#16a34a; --sage-dark:#166534;
+    --amber:#d97706; --rose:#dc2626;
+  }
+  @page{size:A4;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-size:10.5pt;line-height:1.45}
+  .page{page-break-after:always;padding:13mm 12mm}
+  .page:last-child{page-break-after:auto}
+  /* halaman sampul dipadatkan agar tidak meluber */
+  .page.cover h1{font-size:21pt}
+  .page.cover .cards{margin:2mm 0}
+  .page.cover .kpi{padding:2.4mm}
+  .page.cover li{margin-bottom:0.7mm}
+  .page.cover table{font-size:9pt}
+  .page.cover td,.page.cover th{padding:1.5mm 2mm}
+  .page.cover .foot{margin-top:2.5mm}
+  h1{font-size:23pt;line-height:1.2;letter-spacing:-0.02em}
+  h2{font-size:15pt;margin-bottom:2mm;letter-spacing:-0.01em}
+  h3{font-size:11.5pt;margin:4mm 0 1.5mm}
+  p{margin-bottom:2.5mm}
+  .muted{color:var(--ink-soft)}
+  .eyebrow{font-size:8.5pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:2mm}
+  .rule{height:1px;background:var(--clay-200);margin:4mm 0}
+  table{width:100%;border-collapse:collapse;font-size:9.5pt}
+  th{background:var(--clay-100);text-align:left;padding:2mm 2.5mm;border:1px solid var(--clay-200);font-size:9pt;text-transform:uppercase;letter-spacing:.05em}
+  td{padding:2mm 2.5mm;border:1px solid var(--clay-200);vertical-align:top}
+  ul{margin:0 0 2.5mm 4.5mm}
+  li{margin-bottom:1.2mm}
+  .cards{display:flex;gap:3mm;margin:3mm 0}
+  .kpi{flex:1;border:1px solid var(--clay-200);border-radius:3mm;padding:3mm;background:var(--cream)}
+  .kpi b{display:block;font-size:17pt;line-height:1.1}
+  .kpi span{font-size:8.5pt;color:var(--ink-soft)}
+  .tag{display:inline-block;font-size:8pt;font-weight:700;padding:0.8mm 2mm;border-radius:99px}
+  .tag.new{background:rgba(220,38,38,.1);color:var(--rose)}
+  .tag.chg{background:rgba(26,115,232,.1);color:var(--blue-dark)}
+  .tag.keep{background:var(--clay-100);color:var(--ink-soft)}
+  .box{border:1px solid var(--clay-200);border-radius:3mm;padding:3mm;margin:2.5mm 0}
+  .box.blue{background:rgba(26,115,232,.06);border-color:rgba(26,115,232,.25)}
+  .box.amber{background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.3)}
+  .box.rose{background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.28)}
+  /* mockup */
+  .mockwrap{display:flex;flex-wrap:wrap;gap:4mm;align-items:flex-start;margin-top:3mm}
+  .phone{width:63mm;border:1.5px solid var(--clay-300);border-radius:4mm;padding:3mm;background:var(--paper);flex:0 0 auto}
+  .phone .ttl{font-size:8pt;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2mm}
+  .mhead{font-size:9pt;font-weight:600}
+  .mdesc{font-size:7.5pt;color:var(--ink-soft)}
+  .card{border:1px solid var(--clay-200);border-radius:3mm;padding:2.5mm;margin-bottom:2mm;background:var(--paper)}
+  .row{display:flex;justify-content:space-between;align-items:flex-start;gap:2mm}
+  .row > div{min-width:0}
+  .nm{font-size:9pt;font-weight:600}
+  .sub{font-size:7.5pt;color:var(--ink-soft)}
+  .badge{font-size:7pt;font-weight:700;padding:0.7mm 1.8mm;border-radius:99px;white-space:nowrap}
+  .b-tm{background:rgba(234,144,54,.12);color:var(--plum)}
+  .b-lewat{background:rgba(220,38,38,.1);color:var(--rose)}
+  .b-nohpht{background:rgba(217,119,6,.1);color:var(--amber)}
+  .b-ok{background:rgba(22,163,74,.12);color:var(--sage-dark)}
+  .b-neutral{background:var(--clay-100);color:var(--ink-soft)}
+  .bar{height:4px;border-radius:99px;background:var(--clay-200);position:relative;margin-top:2mm}
+  .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--blue)}
+  .field{border:1px solid var(--clay-300);border-radius:2mm;padding:1.6mm 2mm;font-size:8pt;color:var(--ink-soft);margin-bottom:1.5mm}
+  .field b{color:var(--ink);font-weight:600}
+  .hintx{font-size:7pt;color:var(--ink-soft);margin-top:0.8mm}
+  .btn{display:inline-block;background:var(--blue);color:#fff;font-size:8pt;font-weight:600;padding:1.6mm 3mm;border-radius:99px}
+  .btn.ghost{background:var(--paper);color:var(--ink-soft);border:1px solid var(--clay-300)}
+  .notes{flex:1 1 100%}
+  .notes li{font-size:9.5pt}
+  .notes h3{margin-top:1mm}
+  .foot{font-size:8pt;color:var(--ink-soft);margin-top:4mm;border-top:1px solid var(--clay-200);padding-top:2mm}
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="eyebrow">Guidance UX · CRM Bidan</div>
+  <h1>Update Prototype — Kantong Persalinan</h1>
+  <p class="muted" style="margin-top:2mm;font-size:10.5pt">Daftar perubahan yang perlu diterapkan tim UX pada prototype CRM Bidan, hasil pendetailan PRD Kantong Persalinan (PTS-382 · epic PTS-374).</p>
+
+  <div class="cards">
+    <div class="kpi"><b>6</b><span>area yang perlu diubah</span></div>
+    <div class="kpi"><b>5</b><span>keputusan menunggu UX</span></div>
+    <div class="kpi"><b>8</b><span>bagian prototype yang <b style="display:inline;font-size:10pt">tidak</b> berubah</span></div>
+  </div>
+
+  <h3>Konteks</h3>
+  <ul>
+    <li>Prototype acuan: <b>CRMBidan_14sep2026.html</b> — halaman <b>/kantong-bidan</b> dan <b>/kantong-bidan/:year/:month</b>.</li>
+    <li>Keputusan produk yang menyetir perubahan ini: Kantong Persalinan adalah <b>alat operasional bidan</b> (melihat &amp; berpindah, tanpa aksi kirim pesan), pasien yang sudah lewat HPL wajib punya <b>penanda</b>, dan pasien dianggap <b>sudah bersalin</b> bila catatan Kartu Persalinan sudah ada.</li>
+    <li>Semua perubahan memakai <b>design token yang sudah ada</b> di prototype (tidak ada warna/komponen baru).</li>
+  </ul>
+
+  <h3>Ringkasan perubahan</h3>
+  <table>
+    <tr><th style="width:9mm">#</th><th>Area / layar</th><th style="width:30mm">Jenis</th><th style="width:52mm">Inti perubahan</th></tr>
+    <tr><td>1</td><td>Kartu pasien — detail bulan Kantong Persalinan</td><td><span class="tag new">Baru</span></td><td>Badge <b>"Lewat HPL N hr"</b> untuk pasien yang sudah lewat HPL &amp; belum ada catatan persalinan</td></tr>
+    <tr><td>2</td><td>Kartu pasien — Daftar Pasien</td><td><span class="tag new">Baru</span></td><td>Penanda <b>"HPL belum ada"</b> + ajakan melengkapi HPHT (hari ini HPL hanya tampil "—")</td></tr>
+    <tr><td>3</td><td>Form Pendaftaran / Edit Data Pasien</td><td><span class="tag new">Baru</span></td><td>Field opsional <b>HPL hasil USG</b> sebagai HPL aktif bila diisi</td></tr>
+    <tr><td>4</td><td>Tab Ringkasan — Profil Pasien</td><td><span class="tag chg">Ubah</span></td><td>Dua nilai HPL ditampilkan sebagai pembanding + penanda <b>acuan yang dipakai</b></td></tr>
+    <tr><td>5</td><td>Profil Pasien + alur simpan Kartu Persalinan</td><td><span class="tag new">Baru</span></td><td>Umpan balik status <b>sudah bersalin</b> (chip di profil + konfirmasi saat simpan)</td></tr>
+    <tr><td>6</td><td>Navigasi &amp; penamaan</td><td><span class="tag chg">Ubah</span></td><td>Route diselaraskan ke <b>/kantong-persalinan</b>; checklist Kantong 10 item <b>jangan dihidupkan</b></td></tr>
+  </table>
+
+  <div class="foot">Guidance ini disusun dari PRD PTS-382 (Kantong Persalinan) dan pembacaan source prototype v14 Sep 2026 · dilanjutkan keputusan UX pada halaman terakhir.</div>
+</section>
+<section class="page">
+  <div class="eyebrow">Perubahan 1 · Baru</div>
+  <h2>Badge "Lewat HPL N hr" pada kartu pasien detail bulan</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Kantong Persalinan → detail bulan</b> (<span style="font-family:ui-monospace,monospace">/kantong-bidan/:year/:month</span>)</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Sekarang</div>
+      <div class="mhead">Agustus 2026</div>
+      <div class="mdesc" style="margin-bottom:2mm">3 pasien diperkirakan lahir bulan ini.</div>
+      <div class="card"><div class="row"><div><div class="nm">Ayu Lestari</div><div class="sub">HPL 12 Agu 2026</div></div><span class="badge b-tm">TM 3</span></div><div class="bar"><i style="width:92%"></i></div></div>
+      <div class="card"><div class="row"><div><div class="nm">Putri Ramadhani</div><div class="sub">HPL 27 Agu 2026</div></div><span class="badge b-tm">TM 3</span></div><div class="bar"><i style="width:88%"></i></div></div>
+      <div class="mdesc" style="margin-top:1mm">Tidak ada penanda — bidan tidak tahu mana yang sudah bersalin dan mana yang belum.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="mhead">Agustus 2026</div>
+      <div class="mdesc" style="margin-bottom:2mm">3 pasien diperkirakan lahir bulan ini.</div>
+      <div class="card"><div class="row"><div><div class="nm">Ayu Lestari</div><div class="sub">HPL 12 Agu 2026</div></div><span class="badge b-lewat">Lewat HPL 6 hr</span></div><div class="bar"><i style="width:92%"></i></div></div>
+      <div class="card"><div class="row"><div><div class="nm">Putri Ramadhani</div><div class="sub">HPL 27 Agu 2026</div></div><span class="badge b-tm">TM 3</span></div><div class="bar"><i style="width:88%"></i></div></div>
+      <div class="mdesc" style="margin-top:1mm">Pasien yang sudah bersalin <b>tidak muncul lagi</b> (keluar otomatis), sehingga sisa kartu = yang masih perlu dipantau.</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Badge baru di kanan atas kartu, sejajar nama: <b>"Lewat HPL N hr"</b> (N = jumlah hari sejak HPL aktif).</li>
+        <li>Warna memakai token status yang sudah ada: <b>rose</b> (rgba(220,38,38,.1) + teks <span class="badge b-lewat">rose</span>) — sama seperti badge <b>"Lewat jadwal"</b> di halaman Jadwal &amp; Beranda.</li>
+        <li>Aturan tampil: HPL aktif sudah terlewati <b>dan</b> pasien belum punya catatan Kartu Persalinan.</li>
+        <li>Pasien <b>tetap berada</b> pada bulan HPL-nya (tidak dipindah ke bulan berjalan).</li>
+        <li>Badge TM tetap ada untuk pasien yang belum lewat HPL.</li>
+      </ul>
+      <div class="box blue" style="font-size:9pt"><b>Catatan dev:</b> ekstraksi nilai hari sudah tersedia di kode prototype (perhitungan selisih tanggal ke HPL, termasuk nilai negatif). Badge hanya perlu dirender.</div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 2 · Baru</div>
+  <h2>Penanda "HPL belum ada" pada kartu pasien di Daftar Pasien</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Daftar Pasien</b> (<span style="font-family:ui-monospace,monospace">/pasien</span>) — pasien hamil yang HPHT-nya belum diisi</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Sekarang</div>
+      <div class="card"><div class="row"><div><div class="nm">Siti Nurhaliza</div><div class="sub">28 th 4 bln · HPL —</div></div><span class="badge b-tm">Ibu Hamil</span></div></div>
+      <div class="mdesc">HPL hanya tampil "—" tanpa penjelasan. Pasien juga tidak muncul di Kantong Persalinan, jadi terlihat seperti data hilang.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="card"><div class="row"><div><div class="nm">Siti Nurhaliza</div><div class="sub">28 th 4 bln · HPL —</div></div><span class="badge b-tm">Ibu Hamil</span></div>
+        <div style="margin-top:1.5mm"><span class="badge b-nohpht">HPL belum ada</span> <span class="sub" style="font-weight:600;color:var(--blue)">Lengkapi HPHT →</span></div>
+      </div>
+      <div class="mdesc">Bidan langsung tahu penyebabnya dan punya jalur tindakan: lengkapi HPHT lewat edit data pasien.</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Baris kedua kartu: badge <b>"HPL belum ada"</b> + tautan <b>"Lengkapi HPHT →"</b> menuju form edit data pasien (fokus ke field HPHT).</li>
+        <li>Warna badge: usulan <b>amber</b> (rgba(217,119,6,.1) + teks amber) mengikuti konvensi "Segera" yang berarti perlu tindakan — <i>alternatifnya netral (clay) bila UX menilai ini bukan peringatan</i>.</li>
+        <li>Kartu tetap menampilkan kategori "Ibu Hamil"; HPL tetap "—" sampai HPHT diisi (tidak ada angka yang dikarang).</li>
+        <li>Setelah HPHT diisi, kartu otomatis menampilkan HPL dan pasien masuk ke perhitungan Kantong Persalinan.</li>
+      </ul>
+      <div class="box amber" style="font-size:9pt"><b>Perlu diputuskan UX:</b> nada visual badge (amber = perlu tindakan, clay = netral) dan apakah tautan "Lengkapi HPHT" ditaruh di kartu atau cukup sebagai aksi di dalam profil pasien.</div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 3 · Baru</div>
+  <h2>Field "HPL hasil USG" pada form pasien</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Pendaftaran Pasien Baru</b> (<span style="font-family:ui-monospace,monospace">/pasien/baru</span>) dan <b>Edit Data Pasien</b></p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Sekarang</div>
+      <div class="mhead">Data kehamilan</div>
+      <div class="field">HPHT <b>01/01/2026</b></div>
+      <div class="field">HPL (otomatis) <b>08/10/2026</b></div>
+      <div class="mdesc">HPL hanya bisa dari HPHT (+280 hari), tidak bisa dikoreksi.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="mhead">Data kehamilan</div>
+      <div class="field">HPHT <b>01/01/2026</b></div>
+      <div class="field">HPL dari HPHT (otomatis) <b>08/10/2026</b></div>
+      <div class="field">HPL hasil USG <span class="muted">(opsional)</span> <b>15/10/2026</b></div>
+      <div class="hintx">Diisi bila bidan punya hasil USG. Bila diisi, HPL hasil USG dipakai sebagai acuan; HPL dari HPHT tetap tersimpan.</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Field baru opsional <b>HPL hasil USG</b> (input tanggal) di kelompok data kehamilan.</li>
+        <li>Label HPL otomatis dipertegas menjadi <b>"HPL dari HPHT (otomatis)"</b> supaya jelas asal angkanya dan tidak tertukar dengan HPL USG.</li>
+        <li>Hint wajib ada: menjelaskan <b>mana yang dipakai sebagai acuan</b> bila kedua nilai terisi.</li>
+        <li>Field hanya tampil saat status kehamilan = <b>Hamil</b> (mengikuti perilaku HPHT yang sudah ada).</li>
+        <li>Data ini milik modul CRM Bidan (disimpan, belum tampil pada form pemeriksaan PrimaCare) — jangan dianggap kolom master pasien.</li>
+      </ul>
+      <div class="box amber" style="font-size:9pt"><b>Perlu diputuskan UX:</b> penempatan field — sejajar HPHT (terlihat langsung) atau di dalam accordion <b>"Lengkapi data lain (opsional)"</b> supaya form pendaftaran tetap ringkas.</div>
+    </div>
+  </div>
+</section>
+<section class="page">
+  <div class="eyebrow">Perubahan 4 · Ubah</div>
+  <h2>Tab Ringkasan Profil: dua nilai HPL + penanda acuan</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Profil Pasien → tab Ringkasan</b> (<span style="font-family:ui-monospace,monospace">/pasien/:id</span>)</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Sekarang</div>
+      <div class="mhead">Ringkasan kehamilan</div>
+      <div class="field">Usia kehamilan <b>36 mgu 4 hr</b></div>
+      <div class="field">HPHT <b>01 Jan 2026</b></div>
+      <div class="field">HPL <b>08 Okt 2026</b></div>
+      <div class="mdesc">Hanya satu HPL, tanpa keterangan asal angkanya.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="mhead">Ringkasan kehamilan</div>
+      <div class="field">Usia kehamilan <b>36 mgu 4 hr</b> <span class="badge b-ok">acuan USG</span></div>
+      <div class="field">HPL <b>15 Okt 2026</b> <span class="badge b-tm">HPL USG</span></div>
+      <div class="field" style="border-style:dashed">HPHT <b>01 Jan 2026</b> · HPL dari HPHT <b>08 Okt 2026</b></div>
+      <div class="hintx">Nilai pembanding ditampilkan lebih ringan (muted/dashed) supaya acuan tetap menonjol.</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Tab Ringkasan menampilkan <b>HPL aktif</b> (USG bila terisi) dengan badge sumbernya, dan <b>HPL dari HPHT</b> sebagai pembanding.</li>
+        <li>Usia kehamilan &amp; trimester mengikuti <b>HPL aktif</b> — jadi ikut berubah saat HPL USG diisi (progress bar dan badge TM bisa bergeser).</li>
+        <li>Penanda acuan harus eksplisit (mis. badge <span class="badge b-ok">acuan USG</span>) agar bidan tahu angka mana yang dipakai sistem.</li>
+        <li>Nilai pembanding jangan disembunyikan — tetap tersimpan dan bisa dilihat, sejalan dengan “dua-duanya tampil”.</li>
+      </ul>
+      <div class="box amber" style="font-size:9pt"><b>Perlu diputuskan UX:</b> format penulisan dua HPL (satu baris ringkas vs dua baris terpisah), dan apakah butuh ikon/tooltip penjelasan “HPL USG dipakai sebagai acuan”.</div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 5 · Baru</div>
+  <h2>Umpan balik status “sudah bersalin”</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>alur simpan Kartu Persalinan</b> (kartu layanan) dan <b>Profil Pasien</b></p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Saat simpan Kartu Persalinan</div>
+      <div class="card" style="background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.35)">
+        <div class="nm" style="color:var(--sage-dark)">Persalinan tercatat</div>
+        <div class="sub">Status kehamilan pasien menjadi <b>tidak hamil</b>. Pasien keluar dari Kantong Persalinan &amp; daftar “Mendekati Persalinan”.</div>
+      </div>
+      <div class="mdesc">Tanpa umpan balik ini, bidan akan mengira pasiennya “hilang” dari kalender perkiraan kelahiran.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Header Profil Pasien</div>
+      <div class="mhead">Ayu Lestari <span class="badge b-ok">Sudah bersalin</span></div>
+      <div class="mdesc">G1P1A0 · O · Jl. Flamboyan No. 9, RT02/RW03</div>
+      <div class="rule"></div>
+      <div class="mdesc">Tab layanan menyesuaikan kategori <b>Ibu (Tidak Hamil)</b>: Ringkasan · Persalinan · Nifas · KB · Imunisasi · Layanan Lain (tab ANC hilang).</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Konfirmasi saat Kartu Persalinan tersimpan: menyebutkan <b>status kehamilan berubah</b> dan <b>efeknya pada Kantong Persalinan</b>.</li>
+        <li>Chip <b>“Sudah bersalin”</b> di header profil (token sage) sebagai penanda status permanen setelah persalinan tercatat.</li>
+        <li>Tidak ada tombol “tandai bersalin” manual di layar Kantong — status sepenuhnya turunan dari catatan Kartu Persalinan.</li>
+        <li>Data persalinan tetap bisa dibuka dari tab Persalinan; riwayat nifas &amp; KB tetap di tab masing-masing.</li>
+      </ul>
+      <div class="box blue" style="font-size:9pt"><b>Catatan dev:</b> perubahan status dipicu dari alur simpan Kartu Persalinan (epic PTS-375) dan ikut tersinkron ke PrimaCare.</div>
+      <div class="box amber" style="font-size:9pt"><b>Perlu diputuskan UX:</b> bentuk umpan balik (toast ringkas vs banner di layar ringkasan kunjungan yang sudah ada) dan perlu-tidaknya chip “Sudah bersalin” di header profil.</div>
+    </div>
+  </div>
+</section>
+<section class="page">
+  <div class="eyebrow">Perubahan 6 · Ubah &amp; Bersih-bersih</div>
+  <h2>Navigasi, penamaan, dan hal yang jangan dihidupkan</h2>
+
+  <h3>a. Route diselaraskan ke istilah produk</h3>
+  <table>
+    <tr><th style="width:52mm">Sekarang</th><th style="width:52mm">Usulan</th><th>Alasan</th></tr>
+    <tr><td><span style="font-family:ui-monospace,monospace">/kantong-bidan</span></td><td><span style="font-family:ui-monospace,monospace">/kantong-persalinan</span></td><td>Istilah produk resmi = <b>Kantong Persalinan</b> (menggantikan “Kantong Bidan”)</td></tr>
+    <tr><td><span style="font-family:ui-monospace,monospace">/kantong-bidan/:year/:month</span></td><td><span style="font-family:ui-monospace,monospace">/kantong-persalinan/:year/:month</span></td><td>Konsisten dengan route induk</td></tr>
+    <tr><td>Label sidebar: “Kantong Persalinan”<br>Bottom nav: “Kantong”</td><td>Tetap (tidak berubah)</td><td>Label sudah memakai istilah produk</td></tr>
+  </table>
+
+  <h3>b. Checklist “Kantong” 10 item — jangan dihidupkan</h3>
+  <div class="box rose">
+    <p style="margin-bottom:1.5mm"><b>Status:</b> di prototype komponen ini <b>tidak pernah tampil</b> — tidak ada route dan tidak ada render. Yang tersisa hanya data: array 10 item (Buku KIA, surat rujukan, tempat bersalin, pendonor darah, transportasi, dana darurat, perlengkapan ibu, perlengkapan bayi, pendamping, kontak darurat) + seed pasien + nilai persentase yang tidak dipakai layar mana pun.</p>
+    <p><b>Keputusan produk:</b> checklist kesiapan persalinan <b>bukan scope</b> Kantong Persalinan. Jadi tolong <b>jangan</b> memunculkan elemen checklist/kantong fisik di desain berikutnya, dan jangan jadikan sisa data itu acuan desain.</p>
+  </div>
+  <p class="muted" style="font-size:9.5pt">Istilah “kantong persalinan” sebagai <i>tas persiapan</i> tetap dipakai pada materi edukasi trimester 3 (epic WA Follow-up) — itu konten edukasi, bukan komponen UI.</p>
+
+  <h3>c. Tidak ada perubahan visual lain di layar Kantong</h3>
+  <p>Grid perkiraan kelahiran dan detail bulan tetap seperti prototype; satu-satunya tambahan visual adalah badge pada perubahan 1.</p>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Keputusan yang menunggu UX</div>
+  <h2>5 hal yang perlu diputuskan sebelum high-fidelity</h2>
+  <table>
+    <tr><th style="width:8mm">#</th><th style="width:52mm">Keputusan</th><th>Opsi</th><th style="width:44mm">Rekomendasi Jo</th></tr>
+    <tr><td>1</td><td>Nada visual badge <b>“HPL belum ada”</b></td><td>Amber (perlu tindakan) · Clay (netral)</td><td><b>Amber</b> — sejalan dengan konvensi “Segera” yang berarti perlu tindakan bidan</td></tr>
+    <tr><td>2</td><td>Penempatan field <b>HPL hasil USG</b></td><td>Sejajar HPHT · Di dalam accordion “Lengkapi data lain (opsional)”</td><td><b>Sejajar HPHT</b> — field ini mengubah acuan perhitungan, jadi layak terlihat</td></tr>
+    <tr><td>3</td><td>Format <b>dua nilai HPL</b> di tab Ringkasan</td><td>Satu baris ringkas + badge acuan · Dua baris terpisah</td><td><b>Satu baris ringkas</b> dengan nilai pembanding lebih muted, agar acuan tetap menonjol</td></tr>
+    <tr><td>4</td><td>Bentuk <b>umpan balik sudah bersalin</b></td><td>Banner di layar ringkasan kunjungan · Toast ringkas</td><td><b>Banner</b> di layar ringkasan kunjungan — layar itu sudah dipakai setelah simpan, jadi tidak perlu komponen baru</td></tr>
+    <tr><td>5</td><td>Chip <b>“Sudah bersalin”</b> di header profil</td><td>Ya · Tidak perlu</td><td><b>Ya</b> — tanpa itu bidan sulit tahu kenapa pasien tidak ada di Kantong Persalinan</td></tr>
+  </table>
+
+  <div class="box blue" style="margin-top:4mm">
+    <b>Urutan kerja yang disarankan:</b> putuskan 5 hal di atas → terapkan perubahan 1–6 di prototype → high-fidelity. Perubahan 1 &amp; 2 tidak menunggu keputusan apa pun (bisa dikerjakan paralel).
+  </div>
+
+  <h3>Catatan untuk tim UX</h3>
+  <ul>
+    <li>Semua warna diambil dari token prototype yang sudah ada: rose <span style="font-family:ui-monospace,monospace">#dc2626</span>, amber <span style="font-family:ui-monospace,monospace">#d97706</span>, sage <span style="font-family:ui-monospace,monospace">#16a34a</span>, plum <span style="font-family:ui-monospace,monospace">#ea9036</span>, biru <span style="font-family:ui-monospace,monospace">#1a73e8</span> — tidak ada palet baru.</li>
+    <li>Badge tetap memakai pola yang sudah dipakai: pill kecil, teks 8–9pt tebal, latar warna 10–12% opacity.</li>
+    <li>Perubahan berlaku untuk semua kategori pasien; badge hanya relevan untuk pasien berstatus hamil.</li>
+  </ul>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Yang tidak berubah</div>
+  <h2>Bagian prototype yang tetap seperti sekarang</h2>
+  <ul>
+    <li><b>Grid perkiraan kelahiran:</b> label “Perkiraan Kelahiran” + judul “Kantong Persalinan” + deskripsi, total pasien per tahun, grid 12 bulan (3 kolom), tanda “–” untuk bulan kosong, penyorot bulan berjalan.</li>
+    <li><b>Navigasi tahun:</b> pemilih tahun sebelumnya/berikutnya dan tombol “Hari Ini”.</li>
+    <li><b>Detail bulan:</b> judul “&lt;Nama Bulan&gt; &lt;Tahun&gt;” + jumlah pasien, baris pemilih Januari–Desember, urutan kartu berdasarkan HPL terdekat, keadaan kosong, aksi kembali.</li>
+    <li><b>Isi kartu pasien:</b> nama · HPL · badge TM · progress bar (hanya badge status yang ditambahkan pada perubahan 1).</li>
+    <li><b>Aksi kartu:</b> menekan kartu hanya membuka Profil Pasien — tidak ada tombol WhatsApp, tidak ada tombol “tandai sudah bersalin”, tidak ada export.</li>
+    <li><b>Section Beranda “Mendekati Persalinan”:</b> tampilan tetap; perilakunya otomatis menyesuaikan karena daftar itu hanya memuat pasien berstatus hamil.</li>
+    <li><b>Materi edukasi trimester 3:</b> tetap memuat ajakan menyiapkan “Kantong Persalinan (tas persiapan)”.</li>
+    <li><b>Kategori pasien &amp; tab profil:</b> tidak berubah; setelah persalinan pasien otomatis masuk kategori “Ibu (Tidak Hamil)” dengan tab Persalinan · Nifas · KB.</li>
+  </ul>
+
+  <div class="rule"></div>
+
+  <h3>Referensi</h3>
+  <ul>
+    <li><b>PRD:</b> PTS-382 — PRD Kantong Persalinan (epic PTS-374) · https://primaku.atlassian.net/browse/PTS-382</li>
+    <li><b>Prototype acuan:</b> <span style="font-family:ui-monospace,monospace">docs/prototype/CRMBidan_14sep2026.html</span> (halaman <span style="font-family:ui-monospace,monospace">/kantong-bidan</span> dan <span style="font-family:ui-monospace,monospace">/kantong-bidan/:year/:month</span>)</li>
+    <li><b>Keputusan produk &amp; constraint:</b> <span style="font-family:ui-monospace,monospace">features/crm-bidan/context/CONTEXT.md</span></li>
+    <li><b>Guidance UX sebelumnya</b> (field baru ANC/persalinan): <span style="font-family:ui-monospace,monospace">docs/guidance-ux-field-baru-bidan.pdf</span></li>
+  </ul>
+
+  <div class="foot">Guidance UX — Kantong Persalinan · disusun 15 Sep 2026 dari PRD PTS-382 dan source prototype v14 Sep 2026.</div>
+</section>
+
+
+
+</body>
+</html>

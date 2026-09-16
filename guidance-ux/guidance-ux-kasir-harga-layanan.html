@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Guidance UX — Update Prototype: Kasir &amp; Harga Layanan</title>
+<style>
+  :root{
+    --cream:#eaeef1; --paper:#fff; --ink:#111827; --ink-soft:#6b7280;
+    --clay-100:#f3f4f6; --clay-200:#e5e7eb; --clay-300:#d1d5db;
+    --blue:#1a73e8; --blue-dark:#1e40af;
+    --plum:#ea9036; --plum-dark:#f3611c;
+    --sage:#16a34a; --sage-dark:#166534;
+    --amber:#d97706; --rose:#dc2626;
+  }
+  @page{size:A4;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-size:10.5pt;line-height:1.45}
+  .page{page-break-after:always;padding:13mm 12mm}
+  .page:last-child{page-break-after:auto}
+  .page.cover h1{font-size:21pt}
+  .page.cover .cards{margin:2mm 0}
+  .page.cover .kpi{padding:2.4mm}
+  .page.cover li{margin-bottom:0.7mm}
+  .page.cover table{font-size:9pt}
+  .page.cover td,.page.cover th{padding:1.5mm 2mm}
+  .page.cover .foot{margin-top:2.5mm}
+  h1{font-size:23pt;line-height:1.2;letter-spacing:-0.02em}
+  h2{font-size:15pt;margin-bottom:2mm;letter-spacing:-0.01em}
+  h3{font-size:11.5pt;margin:4mm 0 1.5mm}
+  p{margin-bottom:2.5mm}
+  .muted{color:var(--ink-soft)}
+  .eyebrow{font-size:8.5pt;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:2mm}
+  .rule{height:1px;background:var(--clay-200);margin:4mm 0}
+  table{width:100%;border-collapse:collapse;font-size:9.5pt}
+  th{background:var(--clay-100);text-align:left;padding:2mm 2.5mm;border:1px solid var(--clay-200);font-size:9pt;text-transform:uppercase;letter-spacing:.05em}
+  td{padding:2mm 2.5mm;border:1px solid var(--clay-200);vertical-align:top}
+  ul{margin:0 0 2.5mm 4.5mm}
+  li{margin-bottom:1.2mm}
+  .cards{display:flex;gap:3mm;margin:3mm 0}
+  .kpi{flex:1;border:1px solid var(--clay-200);border-radius:3mm;padding:3mm;background:var(--cream)}
+  .kpi b{display:block;font-size:17pt;line-height:1.1}
+  .kpi span{font-size:8.5pt;color:var(--ink-soft)}
+  .tag{display:inline-block;font-size:8pt;font-weight:700;padding:0.8mm 2mm;border-radius:99px}
+  .tag.new{background:rgba(220,38,38,.1);color:var(--rose)}
+  .tag.chg{background:rgba(26,115,232,.1);color:var(--blue-dark)}
+  .tag.keep{background:var(--clay-100);color:var(--ink-soft)}
+  .box{border:1px solid var(--clay-200);border-radius:3mm;padding:3mm;margin:2.5mm 0}
+  .box.blue{background:rgba(26,115,232,.06);border-color:rgba(26,115,232,.25)}
+  .box.amber{background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.3)}
+  .box.rose{background:rgba(220,38,38,.07);border-color:rgba(220,38,38,.28)}
+  .box.sage{background:rgba(22,163,74,.07);border-color:rgba(22,163,74,.28)}
+  .mockwrap{display:flex;flex-wrap:wrap;gap:4mm;align-items:flex-start;margin-top:3mm}
+  .phone{width:63mm;border:1.5px solid var(--clay-300);border-radius:4mm;padding:3mm;background:var(--paper);flex:0 0 auto}
+  .phone .ttl{font-size:8pt;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2mm}
+  .mhead{font-size:9pt;font-weight:600}
+  .mdesc{font-size:7.5pt;color:var(--ink-soft)}
+  .card{border:1px solid var(--clay-200);border-radius:3mm;padding:2.5mm;margin-bottom:2mm;background:var(--paper)}
+  .row{display:flex;justify-content:space-between;align-items:flex-start;gap:2mm}
+  .row > div{min-width:0}
+  .nm{font-size:9pt;font-weight:600}
+  .sub{font-size:7.5pt;color:var(--ink-soft)}
+  .badge{font-size:7pt;font-weight:700;padding:0.7mm 1.8mm;border-radius:99px;white-space:nowrap}
+  .b-tm{background:rgba(234,144,54,.12);color:var(--plum)}
+  .b-lewat{background:rgba(220,38,38,.1);color:var(--rose)}
+  .b-nohpht{background:rgba(217,119,6,.1);color:var(--amber)}
+  .b-ok{background:rgba(22,163,74,.12);color:var(--sage-dark)}
+  .b-neutral{background:var(--clay-100);color:var(--ink-soft)}
+  .bar{height:4px;border-radius:99px;background:var(--clay-200);position:relative;margin-top:2mm}
+  .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--blue)}
+  .field{border:1px solid var(--clay-300);border-radius:2mm;padding:1.6mm 2mm;font-size:8pt;color:var(--ink-soft);margin-bottom:1.5mm}
+  .field b{color:var(--ink);font-weight:600}
+  .field.newf{border-color:rgba(220,38,38,.45);background:rgba(220,38,38,.04)}
+  .hintx{font-size:7pt;color:var(--ink-soft);margin-top:0.8mm}
+  .btn{display:inline-block;background:var(--blue);color:#fff;font-size:8pt;font-weight:600;padding:1.6mm 3mm;border-radius:99px}
+  .btn.ghost{background:var(--paper);color:var(--ink-soft);border:1px solid var(--clay-300)}
+  .btn.sage{background:var(--sage)}
+  .btn.plum{background:var(--plum-dark)}
+  .btn.dis{background:var(--clay-200);color:var(--ink-soft)}
+  .struk{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:7pt;line-height:1.5;border:1px dashed var(--clay-300);border-radius:2mm;padding:2.5mm;background:#fcfcfd}
+  .struk .c{text-align:center}
+  .struk .line{border-top:1px dashed var(--clay-300);margin:1.5mm 0}
+  .warn{background:rgba(217,119,6,.1);color:#8a5200;font-size:7pt;padding:1.5mm 2mm;border-radius:2mm;margin-bottom:2mm}
+  .inforow{background:var(--cream);border-radius:2mm;padding:1.6mm 2mm;font-size:7.5pt;color:var(--ink-soft);margin-bottom:1.5mm}
+  .notes{flex:1 1 100%}
+  .notes li{font-size:9.5pt}
+  .notes h3{margin-top:1mm}
+  .foot{font-size:8pt;color:var(--ink-soft);margin-top:4mm;border-top:1px solid var(--clay-200);padding-top:2mm}
+</style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="eyebrow">Guidance UX · CRM Bidan</div>
+  <h1>Update Prototype — Kasir &amp; Harga Layanan</h1>
+  <p class="muted" style="margin-top:2mm;font-size:10.5pt">Daftar perubahan yang perlu diterapkan tim UX pada prototype CRM Bidan, hasil pendetailan PRD Kasir &amp; Harga Layanan (PTS-614 · epic PTS-602).</p>
+
+  <div class="cards">
+    <div class="kpi"><b>5</b><span>area yang perlu diubah</span></div>
+    <div class="kpi"><b>4</b><span>keputusan menunggu UX</span></div>
+    <div class="kpi"><b>6</b><span>bagian prototype yang <b style="display:inline;font-size:10pt">tidak</b> berubah</span></div>
+  </div>
+
+  <h3>Konteks</h3>
+  <ul>
+    <li>Prototype acuan: <b>CRMBidan_15sep2026.html</b> — layar <b>Kasir</b> (dari 6 kartu layanan), halaman <b>Pengaturan → Harga Layanan</b>, halaman <b>Keuangan</b>, dan <b>Profil Pasien</b>.</li>
+    <li>Keputusan produk yang menyetir perubahan ini: transaksi ditutup lewat Kasir dengan <b>4 field pembayaran baru</b>, bukti bayar berupa <b>struk PDF</b> + ringkasan <b>teks WhatsApp</b>, nomor struk <b>otomatis</b>, transaksi <b>dianggap lunas</b>, dan <b>1 layanan per transaksi</b>.</li>
+    <li>Semua perubahan memakai <b>design token &amp; komponen yang sudah ada</b> di prototype (tidak ada warna/komponen baru).</li>
+  </ul>
+
+  <h3>Ringkasan perubahan</h3>
+  <table>
+    <tr><th style="width:9mm">#</th><th>Area / layar</th><th style="width:30mm">Jenis</th><th style="width:52mm">Inti perubahan</th></tr>
+    <tr><td>1</td><td>Layar <b>Kasir</b> (penutup kunjungan)</td><td><span class="tag new">Baru</span></td><td>Tambahan field <b>Metode bayar</b> &amp; <b>Jumlah dibayar</b> + informasi <b>kembalian</b>; status Lunas &amp; nomor struk dibuat otomatis</td></tr>
+    <tr><td>2</td><td>Layar <b>Struk Pembayaran</b></td><td><span class="tag new">Baru</span></td><td>Layar baru setelah "Selesai": rincian pembayaran + aksi <b>Unduh/Bagikan PDF</b> dan <b>Kirim WA</b></td></tr>
+    <tr><td>3</td><td><b>Profil Pasien</b> — riwayat transaksi</td><td><span class="tag new">Baru</span></td><td>Daftar transaksi pasien yang bisa dibuka ulang untuk <b>kirim struk lagi</b></td></tr>
+    <tr><td>4</td><td>Pengaturan <b>Harga Layanan</b></td><td><span class="tag chg">Ubah</span></td><td>Penyempurnaan: label status <b>Nonaktif</b> (teks, bukan warna saja) + keterangan masa berlaku harga</td></tr>
+    <tr><td>5</td><td>Halaman <b>Keuangan</b></td><td><span class="tag chg">Ubah</span></td><td>Baris transaksi menampilkan <b>nomor struk + metode bayar</b>, dapat dibuka ke struk</td></tr>
+  </table>
+
+  <div class="foot">Guidance ini disusun dari PRD PTS-614 (Kasir &amp; Harga Layanan) dan pembacaan source prototype v15 Sep 2026 · keputusan UX pada halaman terakhir.</div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 1 · Baru</div>
+  <h2>Layar Kasir — tambah field pembayaran &amp; info kembalian</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Kasir</b> (dibuka dari layar ringkasan sukses via "Lanjut ke Kasir") — berlaku untuk 6 kartu layanan: ANC · Persalinan · Nifas · KB · Layanan Lain · Imunisasi.</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Sekarang</div>
+      <div class="mhead">Kasir</div>
+      <div class="mdesc" style="margin-bottom:2mm">Pilih layanan yang diberikan &amp; konfirmasi biayanya sebelum menyelesaikan kunjungan.</div>
+      <div class="warn">Transaksi tidak bisa diedit lagi setelah disimpan. Pastikan layanan &amp; biaya sudah benar.</div>
+      <div class="field"><b>Layanan</b><div class="hintx">Harga otomatis terisi dari pengaturan, tetap bisa diubah manual.</div>ANC Reguler — Rp 50.000 ▾</div>
+      <div class="field"><b>Biaya (Rp)</b><br>50000</div>
+      <div style="text-align:center"><span class="btn plum">Selesai</span></div>
+      <div style="text-align:center;margin-top:1mm"><span class="btn ghost">Lewati</span></div>
+      <div class="mdesc" style="margin-top:2mm">Metode bayar tidak dicatat, tidak ada bukti bayar, dan tidak ada nomor transaksi.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="mhead">Kasir</div>
+      <div class="mdesc" style="margin-bottom:2mm">Pilih layanan yang diberikan &amp; konfirmasi biayanya sebelum menyelesaikan kunjungan.</div>
+      <div class="warn">Transaksi tidak bisa diedit lagi setelah disimpan. Pastikan layanan &amp; biaya sudah benar.</div>
+      <div class="field"><b>Layanan</b><div class="hintx">Harga otomatis terisi dari pengaturan, tetap bisa diubah manual.</div>ANC Reguler — Rp 50.000 ▾</div>
+      <div class="field"><b>Biaya (Rp)</b><br>50000</div>
+      <div class="field newf"><b>Metode bayar</b><br>— Pilih metode bayar — ▾<div class="hintx">Tunai · Transfer · QRIS (wajib diisi)</div></div>
+      <div class="field newf"><b>Jumlah dibayar (Rp)</b><br>50000<div class="hintx">Terisi otomatis sebesar total biaya</div></div>
+      <div class="inforow">Kembalian <b>Rp 0</b> · <span class="badge b-ok">Lunas</span></div>
+      <div class="hintx" style="margin-bottom:1.5mm">Nomor struk dibuat otomatis setelah transaksi disimpan.</div>
+      <div style="text-align:center"><span class="btn dis">Selesai</span>&nbsp;<span class="btn plum">Selesai</span><div class="hintx">kiri: non-aktif sebelum metode bayar dipilih · kanan: aktif</div></div>
+      <div style="text-align:center;margin-top:1mm"><span class="btn ghost">Lewati</span></div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Urutan field final: <b>Layanan → Biaya (Rp) → Metode bayar → Jumlah dibayar</b> (+ baris informasi kembalian) → tombol <b>Selesai</b> / <b>Lewati</b>. Banner peringatan tetap di atas; komponen field memakai komponen yang sudah ada.</li>
+        <li><b>Metode bayar</b>: dropdown <b>Tunai · Transfer · QRIS</b>, wajib dipilih — tombol "Selesai" non-aktif sampai metode &amp; layanan terisi.</li>
+        <li><b>Jumlah dibayar</b> terisi otomatis = total biaya dan tetap bisa diubah: lebih besar → <b>"Kembalian Rp X"</b> (hijau), lebih kecil → <b>"Kurang Rp X dari biaya"</b> (kuning), keduanya <b>tidak memblokir</b> penyimpanan.</li>
+        <li><b>Status "Lunas" &amp; nomor struk</b> tidak perlu input: Lunas tampil sebagai chip dan nilainya tersimpan otomatis; nomor struk dibuat saat transaksi disimpan (cukup teks bantu kecil di layar).</li>
+        <li><b>Format angka &amp; state tombol:</b> kolom input tetap angka polos (<span style="font-family:ui-monospace,monospace">50000</span>) dan format <b>Rp 50.000</b> dipakai di baris informasi/struk/daftar; tombol "Selesai" tampil <b>non-aktif (abu-abu)</b> sebelum metode bayar dipilih, lalu aktif (terracotta).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 2 · Baru</div>
+  <h2>Layar Struk Pembayaran (setelah "Selesai")</h2>
+  <p class="muted" style="font-size:10pt">Layar baru muncul setelah transaksi disimpan — menggantikan perilaku sekarang yang langsung kembali ke profil pasien tanpa bukti bayar.</p>
+
+  <div class="mockwrap">
+    <div class="phone" style="width:70mm">
+      <div class="ttl">Usulan layar struk</div>
+      <div class="mhead">Kasir · Struk</div>
+      <div class="mdesc" style="margin-bottom:2mm">Struk pembayaran untuk Siti Aminah</div>
+      <div class="struk">
+        <div class="c"><b>PMB Ratna Sejahtera</b><br>Jl. Raya Sragen No. 12, Sragen<br>0851-5697-4057</div>
+        <div class="line"></div>
+        <div class="c"><b>STRUK PEMBAYARAN</b></div>
+        <div>No. Struk : PMB001-20260916-003</div>
+        <div>Tanggal&nbsp;&nbsp; : Rabu, 16 September 2026</div>
+        <div class="line"></div>
+        <div>Pasien&nbsp;&nbsp;&nbsp; : Siti Aminah</div>
+        <div>No. RM&nbsp;&nbsp;&nbsp; : RM-000123</div>
+        <div class="line"></div>
+        <div>ANC Reguler&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rp 50.000</div>
+        <div class="line"></div>
+        <div>TOTAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rp 50.000</div>
+        <div>Metode bayar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tunai</div>
+        <div>Jumlah dibayar&nbsp;&nbsp;&nbsp;&nbsp; Rp 50.000</div>
+        <div>Kembalian&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rp 0</div>
+        <div class="line"></div>
+        <div class="c">Terima kasih atas<br>kepercayaan Anda. 🙏</div>
+      </div>
+      <div style="text-align:center;margin-top:2mm"><span class="btn plum">Unduh / Bagikan PDF</span></div>
+      <div style="text-align:center;margin-top:1.5mm"><span class="btn sage">Kirim WA</span></div>
+      <div style="text-align:center;margin-top:1.5mm"><span class="btn ghost">Lihat profil pasien</span></div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li><b>Layar baru</b> (bukan dialog/modal) dengan eyebrow <b>"Kasir · Struk"</b>; selalu muncul setelah tombol "Selesai" berhasil.</li>
+        <li>Isi struk: kop praktik (nama, lokasi, No. HP) · judul <b>STRUK PEMBAYARAN</b> · nomor struk · tanggal · nama pasien (+ No. RM bila ada) · rincian layanan &amp; biaya · <b>TOTAL</b> · metode bayar · jumlah dibayar · <b>kembalian hanya bila ada</b> (jumlah dibayar ≠ biaya).</li>
+        <li>Tiga aksi berurutan: <b>Unduh / Bagikan PDF</b> (tombol utama), <b>Kirim WA</b> (pill sage), <b>Lihat profil pasien</b> (ghost).</li>
+        <li>Tombol <b>Kirim WA</b> hanya dirender bila pasien punya No. HP; teks WA memakai naskah resmi (nomor struk, rincian, total, metode bayar) — <b>file PDF tidak dilampirkan otomatis</b>, jadi label tombol tetap "Kirim WA" dan bidan membagikan PDF via share sheet.</li>
+        <li>Isi struk <b>tanpa data medis</b> (tidak ada diagnosis, hasil lab, atau keluhan) — hanya data transaksi.</li>
+        <li>Untuk <b>imunisasi anak</b>: nama pada struk = nama anak, pengiriman WA ke nomor orang tua.</li>
+        <li>Nomor RM disembunyikan bila pasien belum punya nomor tersebut.</li>
+      </ul>
+
+      <div class="box amber">
+        <b>Jangan lupa:</b> struk yang sudah tampil harus tetap dapat dibuka lagi dari <b>riwayat transaksi di Profil Pasien</b> (perubahan 3) — jadi layar ini dipakai ulang, bukan sekali pakai.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 3 · Baru</div>
+  <h2>Riwayat transaksi di Profil Pasien</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Profil Pasien</b> — supaya bidan bisa mengirim ulang struk kapan pun pasien memintanya.</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Sekarang</div>
+      <div class="mhead">Riwayat layanan</div>
+      <div class="mdesc" style="margin-bottom:2mm">Hanya catatan medis. Biaya yang pernah dibayar tidak terlihat.</div>
+      <div class="card"><div class="row"><div><div class="nm">Kunjungan ANC</div><div class="sub">16 Sep 2026 · ANC</div></div><span class="badge b-neutral">ANC</span></div></div>
+      <div class="card"><div class="row"><div><div class="nm">Kunjungan ANC</div><div class="sub">2 Sep 2026 · ANC</div></div><span class="badge b-neutral">ANC</span></div></div>
+      <div class="mdesc" style="margin-top:1mm">Tidak ada baris transaksi &amp; tidak ada cara mengirim ulang struk.</div>
+    </div>
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="mhead">Riwayat transaksi</div>
+      <div class="mdesc" style="margin-bottom:2mm">Menampilkan transaksi kasir pasien, tap untuk membuka struk.</div>
+      <div class="card"><div class="row"><div><div class="nm">ANC Reguler — Rp 50.000</div><div class="sub">16 Sep 2026 · Tunai · PMB001-20260916-003</div></div><span class="badge b-ok">Lunas</span></div></div>
+      <div class="card"><div class="row"><div><div class="nm">ANC Reguler — Rp 50.000</div><div class="sub">2 Sep 2026 · QRIS · PMB001-20260902-007</div></div><span class="badge b-ok">Lunas</span></div></div>
+      <div class="mdesc" style="margin-top:1mm">Tap baris → layar struk (perubahan 2) → tombol <b>Unduh PDF</b> &amp; <b>Kirim WA</b> untuk kirim ulang.</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Tambah daftar <b>transaksi</b> pada Profil Pasien: nama layanan · biaya · tanggal · <b>metode bayar</b> · <b>nomor struk</b> · chip <b>Lunas</b>.</li>
+        <li>Urutan: transaksi terbaru di atas. Tap baris membuka <b>layar struk</b> yang sama seperti setelah pembayaran.</li>
+        <li>Kasus <b>kunjungan tanpa transaksi</b> (bidan menekan "Lewati") tetap muncul di riwayat layanan medis, tetapi <b>tidak muncul</b> di daftar transaksi.</li>
+        <li>Penempatan daftar ini bisa berupa <b>tab/section baru</b> atau bagian dari tab Riwayat yang ada — lihat keputusan UX halaman terakhir.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 4 · Ubah</div>
+  <h2>Halaman Pengaturan → Harga Layanan (penyempurnaan)</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Pengaturan → Harga Layanan</b> (<span style="font-family:ui-monospace,monospace">/lainnya/harga</span>). Struktur &amp; CRUD SKU sudah ada — hanya perlu penyempurnaan kecil.</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Usulan (detail daftar SKU)</div>
+      <div class="mhead">Harga Layanan</div>
+      <div class="mdesc" style="margin-bottom:2mm">Atur SKU &amp; harga default tiap layanan.</div>
+      <div class="field"><b>Kategori layanan</b><br>KB ▾ <span class="badge b-neutral">3 SKU · 2 aktif</span></div>
+      <div class="card">
+        <div class="row"><div><div class="nm">KB Suntik</div><div class="sub">Rp <b>100.000</b> · <span class="badge b-ok">Aktif</span></div></div>
+        <div class="sub">✎ &nbsp; ⏻ &nbsp; 🗑</div></div>
+      </div>
+      <div class="card">
+        <div class="row"><div><div class="nm" style="color:#6b7280">Pasang KB IUD</div><div class="sub">Rp <b>500.000</b> · <span class="badge b-neutral">Nonaktif</span></div></div>
+        <div class="sub">✎ &nbsp; ⏻ &nbsp; 🗑</div></div>
+      </div>
+      <div class="card">
+        <div class="row"><div><div class="nm">Edukasi KB</div><div class="sub">Rp <b>0</b> · <span class="badge b-ok">Aktif</span></div></div>
+        <div class="sub">✎ &nbsp; ⏻ &nbsp; 🗑</div></div>
+      </div>
+      <div class="hintx">Perubahan harga berlaku untuk kunjungan berikutnya; transaksi yang sudah tersimpan tidak ikut berubah.</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li><b>Status aktif/nonaktif</b> diberi <b>label teks</b> ("Aktif" / "Nonaktif") — jangan hanya membedakan warna teks, karena status ini menentukan SKU muncul atau tidak di layar Kasir.</li>
+        <li>Tambah penghitung <b>"N SKU · M aktif"</b> di samping pemilih kategori (opsional, keputusan UX).</li>
+        <li>Tambahkan keterangan masa berlaku: <b>"Perubahan harga berlaku untuk kunjungan berikutnya; transaksi yang sudah tersimpan tidak ikut berubah."</b></li>
+        <li>Aksi per SKU dirapikan: <b>ubah harga inline</b> (tetap), <b>aktif/nonaktif</b>, <b>hapus</b> dengan konfirmasi <b>"Hapus SKU?"</b> (tetap seperti sekarang).</li>
+        <li><b>Tidak berubah:</b> struktur kategori (ANC · Persalinan · Nifas · KB · Imunisasi · Layanan Lain), form tambah SKU, empty state <i>"Belum ada SKU untuk kategori ini…"</i>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Perubahan 5 · Ubah</div>
+  <h2>Halaman Keuangan — baris transaksi memuat nomor struk &amp; metode bayar</h2>
+  <p class="muted" style="font-size:10pt">Layar: <b>Keuangan</b> (<span style="font-family:ui-monospace,monospace">/keuangan</span>) — rekap pemasukan tiap layanan, sumber datanya transaksi Kasir.</p>
+
+  <div class="mockwrap">
+    <div class="phone">
+      <div class="ttl">Usulan</div>
+      <div class="mhead">Keuangan</div>
+      <div class="mdesc" style="margin-bottom:2mm">Rekap pemasukan tiap layanan.</div>
+      <div class="card"><div class="row"><div><div class="nm">ANC Reguler</div><div class="sub">Siti Aminah · 16 Sep 2026 · Tunai</div><div class="sub" style="font-family:ui-monospace,monospace">PMB001-20260916-003</div></div><span class="nm">Rp 50.000</span></div></div>
+      <div class="card"><div class="row"><div><div class="nm">KB Suntik</div><div class="sub">Rina Wati · 16 Sep 2026 · QRIS</div><div class="sub" style="font-family:ui-monospace,monospace">PMB001-20260916-002</div></div><span class="nm">Rp 100.000</span></div></div>
+      <div class="card"><div class="row"><div><div class="nm">Imunisasi Dasar</div><div class="sub">Dinda (anak Siti) · 16 Sep 2026 · Transfer</div><div class="sub" style="font-family:ui-monospace,monospace">PMB001-20260916-001</div></div><span class="nm">Rp 150.000</span></div></div>
+      <div class="hintx">Tap baris → buka struk (layar yang sama dengan perubahan 2).</div>
+    </div>
+    <div class="notes">
+      <h3>Yang berubah</h3>
+      <ul>
+        <li>Setiap baris menampilkan <b>nomor struk</b> dan <b>metode bayar</b> — supaya bidan bisa mencocokkan saat pasien menanyakan transaksi tertentu.</li>
+        <li>Tap baris membuka <b>layar struk</b> (dipakai ulang), sehingga kirim ulang struk bisa juga dari sini.</li>
+        <li>Pastikan <b>satu sumber data</b>: daftar ini membaca transaksi yang dibuat Kasir (bukan dihitung ulang dari catatan layanan).</li>
+        <li>Transaksi yang <b>dilewati</b> (tanpa bayar) tidak muncul di halaman ini.</li>
+      </ul>
+
+      <div class="box blue">
+        <b>Catatan lingkup:</b> penambahan filter, grafik, atau ekspor laporan <b>tidak termasuk</b> perubahan ini — itu bagian PRD Keuangan &amp; Laporan (epic PTS-603).
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Detail mikro</div>
+  <h2>State khusus &amp; teks yang perlu dipastikan</h2>
+
+  <h3>Keadaan kosong &amp; kesalahan</h3>
+  <table>
+    <tr><th style="width:58mm">Keadaan</th><th>Tampilan yang diharapkan</th></tr>
+    <tr><td>Kategori layanan <b>belum punya SKU aktif</b></td><td>Pemilih "Layanan" kosong + pesan <i>"Belum ada SKU untuk kategori ini."</i> dan tautan <b>"Atur harga layanan"</b> ke Pengaturan; tombol <b>Selesai non-aktif</b> sampai layanan dipilih.</td></tr>
+    <tr><td>Pasien <b>tanpa No. HP</b></td><td>Tombol <b>Kirim WA tidak dirender</b> di layar struk; tombol <b>Unduh / Bagikan PDF</b> tetap tersedia.</td></tr>
+    <tr><td><b>Gagal membuat PDF</b></td><td>Pesan <i>"Struk gagal dibuat. Coba lagi."</i> + tombol coba lagi; <b>data transaksi tetap tersimpan</b> (bukan hilang).</td></tr>
+    <tr><td><b>Jumlah dibayar ≠ biaya</b></td><td>Baris informasi: <b>"Kembalian Rp X"</b> bila lebih besar; <b>"Kurang Rp X dari biaya"</b> bila lebih kecil (kuning, tidak memblokir).</td></tr>
+    <tr><td><b>SKU gratis</b> (harga Rp 0)</td><td>Tetap bisa disimpan; struk &amp; pesan WA menampilkan <b>Rp 0</b>.</td></tr>
+    <tr><td><b>SKU dihapus</b> setelah dipakai transaksi lama</td><td>Riwayat transaksi lama tetap menampilkan nama &amp; biaya yang tersimpan.</td></tr>
+  </table>
+
+  <h3>Aturan format &amp; aksesibilitas</h3>
+  <ul>
+    <li>Mata uang format Indonesia: <b>Rp 50.000</b> (tanpa desimal).</li>
+    <li>Tanggal format panjang: <b>Rabu, 16 September 2026</b> (nama hari + nama bulan penuh), waktu WIB bila ditampilkan.</li>
+    <li>Tombol aksi utama tinggi minimal <b>44 px</b>; tombol "Selesai" punya state non-aktif yang jelas.</li>
+    <li>Status <b>Lunas/Nonaktif</b> selalu punya <b>teks</b>, tidak hanya warna (aksesibilitas).</li>
+    <li>Peringatan <b>"Transaksi tidak bisa diedit lagi setelah disimpan…"</b> tetap tampil sebelum tombol Selesai.</li>
+  </ul>
+
+  <div class="box rose">
+    <b>Yang tidak boleh muncul di struk &amp; pesan WA:</b> diagnosis, hasil pemeriksaan/lab, keluhan, atau catatan medis apa pun. Struk hanya memuat data transaksi (nomor struk, nama, layanan, biaya, metode bayar).
+  </div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Penutup</div>
+  <h2>Keputusan yang menunggu UX</h2>
+  <table>
+    <tr><th style="width:9mm">#</th><th style="width:62mm">Hal</th><th>Usulan</th></tr>
+    <tr><td>1</td><td>Kop struk PDF: pakai <b>logo klinik</b> atau teks saja?</td><td>Teks dulu (nama praktik, lokasi, No. HP) agar cepat; logo menyusul bila klinik sudah punya berkas logo.</td></tr>
+    <tr><td>2</td><td>Layar struk tampil sebagai <b>halaman penuh</b> atau <b>bottom sheet</b>?</td><td><b>Halaman penuh</b> — isinya panjang dan dipakai ulang dari riwayat transaksi.</td></tr>
+    <tr><td>3</td><td>Penghitung <b>"N SKU · M aktif"</b> di Harga Layanan perlu?</td><td>Perlu, membantu bidan melihat ada SKU nonaktif tanpa membuka satu per satu.</td></tr>
+    <tr><td>4</td><td>Penempatan <b>riwayat transaksi</b> di Profil Pasien</td><td>Section baru <b>"Transaksi"</b> di bawah riwayat layanan (bukan tab baru) supaya tidak menambah tab.</td></tr>
+  </table>
+
+  <h3>Bagian prototype yang <b>tidak</b> berubah</h3>
+  <ul>
+    <li>Alur pencatatan 6 kartu layanan + tombol <b>"Lanjut ke Kasir"</b> pada layar ringkasan sukses.</li>
+    <li>Banner peringatan <i>"Transaksi tidak bisa diedit lagi setelah disimpan."</i></li>
+    <li>Field <b>Layanan</b> (SKU aktif per kategori) dan <b>Biaya</b> yang terisi otomatis &amp; bisa diubah manual.</li>
+    <li>Aksi <b>"Lewati"</b> (tutup kunjungan tanpa transaksi) — teks &amp; perilaku tetap.</li>
+    <li>Halaman <b>Harga Layanan</b>: struktur kategori, form tambah SKU, ubah harga inline, hapus + konfirmasi, empty state.</li>
+    <li>Enam kategori layanan: ANC · Persalinan · Nifas · KB · Imunisasi · Layanan Lain.</li>
+  </ul>
+
+  <div class="box sage">
+    <b>Urutan pengerjaan yang disarankan:</b> (1) field pembayaran di layar Kasir → (2) layar struk + tombol PDF/WA → (3) riwayat transaksi di Profil Pasien → (4) penyempurnaan Harga Layanan → (5) baris transaksi di Keuangan.
+  </div>
+
+  <div class="foot">Guidance UX — Kasir &amp; Harga Layanan · disusun dari PRD PTS-614 (epic PTS-602) · prototype acuan CRMBidan_15sep2026.html · CRM Bidan, September 2026.</div>
+</section>
+
+</body>
+</html>
