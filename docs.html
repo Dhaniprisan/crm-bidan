@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRM Bidan — Prototype &amp; Dokumen Produk</title>
+<style>
+  :root{--ink:#111827;--soft:#6b7280;--line:#e5e7eb;--bg:#f7f8fa;--paper:#fff;--terra:#f3611c;--sage:#16a34a;--plum:#ea9036}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Plus Jakarta Sans",-apple-system,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--terra)}
+  h1{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin:10px 0 8px}
+  .lead{color:var(--soft);font-size:15px;max-width:620px}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.1em;color:var(--soft);margin:34px 0 12px;font-weight:700}
+  .card{display:block;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:10px;text-decoration:none;color:inherit;transition:border-color .15s, transform .15s}
+  .card:hover{border-color:#c9cdd4;transform:translateY(-1px)}
+  .card.primary{border-color:rgba(243,97,28,.4);background:linear-gradient(180deg,rgba(243,97,28,.06),rgba(243,97,28,.02))}
+  .t{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .d{color:var(--soft);font-size:13.5px;margin-top:3px}
+  .pill{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--terra);color:#fff;letter-spacing:.03em}
+  .pill.sage{background:rgba(22,163,74,.14);color:#166534}
+  .pill.grey{background:#eef0f3;color:#4b5563}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .btn{font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:99px;background:#eef0f3;color:#374151;text-decoration:none}
+  .btn.dark{background:var(--ink);color:#fff}
+  .note{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--plum);border-radius:12px;padding:14px 16px;font-size:13.5px;color:#374151;margin-top:14px}
+  .foot{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);color:var(--soft);font-size:12.5px}
+  code{background:#eef0f3;padding:1px 5px;border-radius:5px;font-size:12.5px}
+  ul{margin:6px 0 0 18px;font-size:13.5px;color:#374151}
+  li{margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">PrimaCare · CRM Bidan · Daftar Dokumen</div>
+  <h1>Prototype &amp; Dokumen Produk</h1>
+  <p class="lead">Prototype interaktif CRM Bidan (aplikasi web praktik mandiri bidan) beserta guidance UX dan PRD. Prototype = mockup statis satu file HTML (React + Tailwind sudah dibundel, data di <code>localStorage</code> browser).</p>
+
+  <h2>Prototype — buka langsung</h2>
+
+  <a class="card primary" href="prototype/CRMBidan_16sep2026.html">
+    <div class="t">CRM Bidan — versi 16 September 2026 <span class="pill">TERBARU</span></div>
+    <div class="d">Sudah termasuk Kasir &amp; Harga Layanan: field pembayaran, layar struk PDF + kirim WA, tab Transaksi di Profil Pasien, nomor struk di Keuangan.</div>
+  </a>
+
+  <a class="card" href="prototype/CRMBidan_15sep2026.html">
+    <div class="t">CRM Bidan — versi 15 September 2026 <span class="pill grey">sebelum kasir</span></div>
+    <div class="d">Beranda dirombak, modal Kelola Kehamilan, guidance UX Kantong Persalinan sudah masuk.</div>
+  </a>
+
+  <a class="card" href="prototype/CRMBidan_14sep2026.html">
+    <div class="t">CRM Bidan — versi 14 September 2026 <span class="pill grey">arsip</span></div>
+    <div class="d">Versi acuan awal (dipakai untuk guidance UX Kantong Persalinan).</div>
+  </a>
+
+  <div class="note">
+    <b>Cara pakai:</b> layar pertama adalah <b>login demo</b> — pilih salah satu akun contoh, langsung masuk. <b>Alur baru yang perlu dicek:</b> catat layanan (mis. ANC) → <b>Simpan</b> → <b>Lanjut ke Kasir</b> → isi <b>Metode bayar</b> → <b>Selesai</b> → layar <b>Struk Pembayaran</b> (Unduh PDF &amp; Kirim WA) → tab <b>Transaksi</b> di Profil Pasien.
+  </div>
+
+  <h2>Guidance UX</h2>
+
+  <a class="card" href="guidance-ux/guidance-ux-kasir-harga-layanan.pdf">
+    <div class="t">Kasir &amp; Harga Layanan <span class="pill">PDF</span></div>
+    <div class="d">8 halaman: 5 area perubahan (layar Kasir, layar Struk, riwayat transaksi, Harga Layanan, Keuangan), state khusus, dan keputusan yang menunggu UX.</div>
+  </a>
+
+  <a class="card" href="guidance-ux/guidance-ux-kantong-persalinan.pdf">
+    <div class="t">Kantong Persalinan <span class="pill">PDF</span></div>
+    <div class="d">6 area perubahan: badge lewat HPL, penanda HPL belum ada, field HPL USG, pembanding HPL, umpan sudah bersalin, penamaan route.</div>
+  </a>
+
+  <a class="card" href="guidance-ux/guidance-ux-field-baru-bidan.pdf">
+    <div class="t">Field Baru Bidan <span class="pill">PDF</span></div>
+    <div class="d">Penambahan field pemeriksaan (ANC v2, nifas, persalinan, KB) pada formulir Kartu Layanan.</div>
+  </a>
+
+  <h2>Naskah pesan &amp; PRD</h2>
+  <a class="card" href="copy-deck/copy-deck-wa-ringkasan-invoice.pdf">
+    <div class="t">Copy Deck — Ringkasan Pemeriksaan &amp; Invoice WhatsApp <span class="pill">PDF</span></div>
+    <div class="d">6 naskah ringkasan layanan + 3 naskah invoice/struk, siap dipakai tim produk &amp; UX.</div>
+  </a>
+  <a class="card" href="https://github.com/Dhaniprisan/crm-bidan/tree/main/prd">
+    <div class="t">PRD — PTS-367 · PTS-374 · PTS-376 · PTS-602 <span class="pill grey">folder</span></div>
+    <div class="d">Login &amp; Manajemen Data Pasien · Kantong Persalinan · Pengingat Kunjungan via WhatsApp · Kasir &amp; Harga Layanan.</div>
+  </a>
+
+  <div class="row">
+    <a class="btn dark" href="https://github.com/Dhaniprisan/crm-bidan">Repo GitHub</a>
+    <a class="btn" href="https://github.com/Dhaniprisan/crm-bidan/blob/main/README.md">README</a>
+  </div>
+
+  <div class="foot">Dhani Prisantika · PrimaCare · September 2026 · prototype mockup — bukan aplikasi produksi</div>
+</div>
+</body>
+</html>

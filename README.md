@@ -4,6 +4,18 @@ Kumpulan **prototype interaktif** dan **dokumen produk** untuk modul **CRM Bidan
 
 > Prototype ini adalah **mockup statis** (satu file HTML berisi React + Tailwind yang sudah dibundel, data disimpan di `localStorage` browser). Tidak ada backend — dipakai untuk review alur & UX, bukan aplikasi produksi.
 
+
+## 🌐 Lihat langsung (GitHub Pages)
+
+| URL | Isi |
+|---|---|
+| **https://dhaniprisan.github.io/crm-bidan/** | **Prototype terbaru (16 Sep 2026)** — langsung jalan di browser |
+| https://dhaniprisan.github.io/crm-bidan/docs.html | Daftar dokumen: prototype semua versi, guidance UX, copy deck, PRD |
+| https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_15sep2026.html | Prototype versi sebelumnya |
+| https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_14sep2026.html | Prototype arsip |
+
+Struktur repo: `index.html` = prototype terbaru (agar bisa dibuka langsung), `docs.html` = daftar dokumen, `prototype/` = semua versi, `guidance-ux/`, `copy-deck/`, `prd/` = dokumen.
+
 ## Isi repo
 
 | Folder | Isi |
