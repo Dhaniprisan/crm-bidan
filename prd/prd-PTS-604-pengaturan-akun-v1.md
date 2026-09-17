@@ -23,7 +23,7 @@
 5. Kontak praktik **digabung dalam satu field** "No. HP / Email" sehingga sulit dibedakan fungsinya.
 
 **Di dalam cakupan:**
-- Field **Pengaturan Klinik**: Nama bidan (wajib) · Nama praktik/klinik (wajib) · Lokasi praktik · **Tautan lokasi Google Maps** (baru) · **No. HP / WhatsApp praktik** (baru, opsional).
+- Field **Pengaturan Klinik**: Nama bidan (wajib) · Nama praktik/klinik (wajib) · Lokasi praktik · **Tautan lokasi praktik** (baru) · **No. HP / WhatsApp praktik** (baru, opsional).
 - **Identitas akun read-only**: Kode klinik + Email akun dengan keterangan *"dikelola lewat PrimaCare"*.
 - **Kartu "Masuk sebagai"** yang benar (nama bidan + nama praktik) dan **Keluar akun** dengan konfirmasi.
 - **Menghapus menu "Layanan Wellness"** sehingga tidak ada tautan buntu; katalog wellness tetap dikelola lewat **Harga Layanan**.
@@ -41,7 +41,7 @@
 
 | ID | User Story | Prioritas |
 |---|---|---|
-| US-01 | Sebagai bidan, saya ingin **mengelola identitas praktik** (nama bidan, nama praktik, lokasi, tautan lokasi Google Maps, No. HP/WhatsApp praktik) supaya data yang tampil di aplikasi dan pada pesan ke pasien selalu benar. | Must Have |
+| US-01 | Sebagai bidan, saya ingin **mengelola identitas praktik** (nama bidan, nama praktik, lokasi, tautan lokasi Google Maps, No. HP/WhatsApp praktik) supaya data yang tampil pada pesan dan dokumen untuk pasien selalu benar. | Must Have |
 | US-02 | Sebagai bidan, saya ingin **melihat identitas akun** (kode klinik & email) yang sedang saya pakai, supaya saya tahu akun mana yang aktif tanpa harus keluar-masuk aplikasi. | Must Have |
 | US-03 | Sebagai bidan, saya ingin **melihat siapa yang sedang masuk dan bisa keluar akun dari satu tempat**, supaya perangkat praktik tetap aman ketika dipakai bergantian. | Must Have |
 | US-04 | Sebagai bidan, saya ingin **tautan lokasi praktik otomatis ikut terkirim** pada penutup pesan pengingat, supaya pasien mudah menemukan lokasi praktik. | Must Have |
@@ -51,14 +51,14 @@
 
 | ID | Requirement |
 |---|---|
-| FR-01 | **Pengaturan Klinik** memuat field: **Nama bidan** (wajib) · **Nama praktik/klinik** (wajib) · **Lokasi praktik** (teks, mis. `Bandung, Jawa Barat`) · **Tautan lokasi Google Maps** (baru) · **No. HP / WhatsApp praktik** (baru). Field gabungan lama "No. HP / Email" **dihapus**. |
-| FR-02 | **Tautan lokasi Google Maps** diisi dengan **menempel tautan** dari Google Maps, divalidasi ringan: harus diawali `http` dan mengandung `google`/`maps`. Bila tidak memenuhi syarat → **pesan galat** dan data tidak tersimpan. |
+| FR-01 | **Pengaturan Klinik** memuat field: **Nama bidan** (wajib) · **Nama praktik/klinik** (wajib) · **Lokasi praktik** (teks, mis. `Bandung, Jawa Barat`) · **Tautan lokasi praktik** (baru) · **No. HP / WhatsApp praktik** (baru). Field gabungan lama "No. HP / Email" **dihapus**. |
+| FR-02 | **Tautan lokasi praktik** diisi dengan **menempel tautan** dari Google Maps, divalidasi ringan: harus diawali `http` dan mengandung `google`/`maps`. Bila tidak memenuhi syarat → **pesan galat** dan data tidak tersimpan. |
 | FR-03 | Field **Tautan lokasi** dan **No. HP / WhatsApp praktik** bersifat **opsional** — pengaturan tetap bisa disimpan tanpa keduanya. |
 | FR-04 | **Identitas akun read-only**: halaman menampilkan **Kode klinik** dan **Email akun** sebagai data yang tidak dapat diubah dari CRM Bidan, dengan keterangan *"dikelola lewat PrimaCare"*. |
 | FR-05 | **Simpan** menyimpan identitas praktik ke sesi berjalan dan menampilkan **notifikasi toast "Tersimpan"**. Tidak ada tombol tambahan (pratinjau/pesan uji) pada rilis ini. |
 | FR-06 | **Nama praktik** dipakai pada **header aplikasi**, **blok penutup pesan pengingat WhatsApp**, dan **kop struk pembayaran**. Bila nama praktik kosong, dipakai fallback **`Praktik Mandiri Bidan`**. |
 | FR-07 | **Nama bidan tidak dicantumkan** pada pesan ke pasien maupun struk; nama bidan dipakai hanya pada **kartu "Masuk sebagai"** dan sapaan internal aplikasi. |
-| FR-08 | **Tautan lokasi Google Maps** otomatis dipakai sebagai baris `📍 <tautan>` pada penutup pesan pengingat. Bila kosong → **baris lokasi tidak ditampilkan** dan pengingat tetap terkirim. |
+| FR-08 | **Tautan lokasi praktik** otomatis dipakai sebagai baris `📍 <tautan>` pada penutup pesan pengingat. Bila kosong → **baris lokasi tidak ditampilkan** dan pengingat tetap terkirim. |
 | FR-09 | Menu **"Layanan Wellness" dihapus** dari daftar menu (sidebar & halaman Lainnya) sehingga tidak ada tautan menuju halaman yang tidak tersedia. |
 | FR-10 | Halaman **"Lainnya"** memuat kartu menu: **Laporan Puskesmas · Keuangan · Harga Layanan · Pengaturan Klinik**, katalog layanan wellness & komplementer dikelola melalui **Harga Layanan** per kategori. |
 | FR-11 | Kartu **"Masuk sebagai"** menampilkan **nama bidan** dan **nama praktik/klinik** yang sedang aktif (bukan email atau kode klinik). |
@@ -69,7 +69,7 @@
 ## 4. Acceptance Criteria
 
 **US-01 — Kelola identitas praktik**
-- **Given** bidan membuka Pengaturan Klinik, **When** halaman tampil, **Then** tersedia field Nama bidan, Nama praktik/klinik, Lokasi praktik, **Tautan lokasi Google Maps**, dan **No. HP / WhatsApp praktik**.
+- **Given** bidan membuka Pengaturan Klinik, **When** halaman tampil, **Then** tersedia field Nama bidan, Nama praktik/klinik, Lokasi praktik, **Tautan lokasi praktik**, dan **No. HP / WhatsApp praktik**.
 - **Given** nama bidan atau nama praktik/klinik dikosongkan, **When** bidan menekan Simpan, **Then** muncul pesan galat pada field tersebut dan data **tidak** tersimpan.
 - **Given** tautan lokasi diisi `bit.ly/lokasi-praktik`, **When** bidan menekan Simpan, **Then** muncul pesan galat bahwa tautan harus berupa tautan Google Maps.
 - **Given** tautan lokasi diisi `https://maps.app.goo.gl/pmb-ratna-sejahtera`, **When** bidan menekan Simpan, **Then** data tersimpan dan muncul toast *"Tersimpan"*.
@@ -161,4 +161,4 @@
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| **v1** | 16 Sep 2026 | Versi pertama: 5 user story · 12 FR · 15 AC · 8 edge case · 3 NFR. Berdasarkan hasil grill 8/8 (semua opsi A) atas kondisi prototype 16 Sep: field **Tautan lokasi Google Maps** ditambahkan, field kontak dipecah, identitas akun read-only, menu "Layanan Wellness" dihapus, dan pemakaian **nama praktik** diseragamkan pada header/pesan/struk. |
+| **v1** | 16 Sep 2026 | Versi pertama: 5 user story · 12 FR · 15 AC · 8 edge case · 3 NFR. Berdasarkan hasil grill 8/8 (semua opsi A) atas kondisi prototype 16 Sep: field **Tautan lokasi praktik** ditambahkan, field kontak dipecah, identitas akun read-only, menu "Layanan Wellness" dihapus, dan pemakaian **nama praktik** diseragamkan pada header/pesan/struk. |
