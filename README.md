@@ -1,4 +1,6 @@
-# CRM Bidan — Prototype & Dokumen Produk
+# CRM Bidan — Prototype &amp; Dokumen
+
+> **Satu URL:** <https://dhaniprisan.github.io/crm-bidan/> — prototype langsung terbuka, dan tombol **📄 Dokumen & Versi** di kanan bawah berisi PRD, guidance UX, copy deck, serta versi arsip.
 
 Kumpulan **prototype interaktif** dan **dokumen produk** untuk modul **CRM Bidan** (PrimaCare) — aplikasi web untuk praktik mandiri bidan (PMB): manajemen pasien, Kartu Layanan (ANC · Persalinan · Nifas · KB · Imunisasi · Layanan Lain), Kantong Persalinan, pengingat kunjungan via WhatsApp, kasir & harga layanan.
 
