@@ -17,6 +17,7 @@ Kumpulan **prototype interaktif** dan **dokumen produk** untuk modul **CRM Bidan
 | https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_14sep2026.html | Prototype arsip |
 
 **Versi 17 Sep 2026 = hasil gabungan dua jalur pengembangan:**
+- **Pengaturan & Akun (PTS-604)** — halaman Pengaturan Klinik: field baru **Tautan lokasi Google Maps** (divalidasi) + **No. HP / WhatsApp praktik**, blok **Akun** (Kode klinik & Email) yang **read-only — "dikelola lewat PrimaCare"**; menu **"Layanan Wellness" dihapus**; **nama praktik** dipakai pada header aplikasi, kop struk, dan penutup pesan WhatsApp (nama bidan tidak lagi dicantumkan pada pesan ke pasien).
 - **Jadwal kunjungan mandiri** — jadwal dicatat terpisah dari pelayanan sehingga satu pasien bisa punya lebih dari satu jadwal aktif; modal *Jadwalkan / Edit / Hapus jadwal*, preset agenda kontrol (ANC rutin, KB suntik/implan, imunisasi, nifas KF1–KF4), field agenda/catatan pada langkah jadwal, dan catatan tekanan darah pada pemeriksaan.
 - **Kasir & Harga Layanan** — field metode bayar (Tunai/Transfer/QRIS) + jumlah dibayar & kembalian di layar Kasir, **layar struk pembayaran** (Unduh/Bagikan PDF + Kirim WA), **nomor struk otomatis** `PMB001-YYYYMMDD-NNN`, tab **Transaksi** di profil pasien, penanda **Aktif/Nonaktif** + penghitung SKU di Harga Layanan, serta nomor struk & metode bayar pada baris Keuangan.
 
