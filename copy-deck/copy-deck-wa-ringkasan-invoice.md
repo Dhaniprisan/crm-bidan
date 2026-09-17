@@ -13,7 +13,7 @@
 | A1 | **Kanal:** deep link `wa.me` — pesan terisi otomatis, bidan masih boleh menyunting di WhatsApp sebelum kirim. |
 | A2 | **Tanda tangan seragam:** `— <nama bidan>, <nama praktik/klinik>`. Bila nama praktik kosong → `Praktik Mandiri Bidan`. |
 | A3 | **Format tanggal:** Indonesia + nama hari untuk jadwal mendatang (mis. `Sabtu, 20 Sep 2026`); tanggal kejadian lampau tanpa nama hari (`12 Agu 2026`). **Jam tidak disertakan** (data kunjungan hanya tanggal). |
-| A4 | **Sapaan:** nama pasien tanpa gelar (`Halo Siti,` pada pengingat; pada ringkasan langsung menyebut nama di judul). Sapaan **"Ibu"** untuk pasien dewasa; pasien **<18 tahun** memakai bentuk "kamu/-mu". |
+| A4 | **Sapaan:** nama pasien tanpa gelar (`Halo Siti,` pada pengingat; pada ringkasan langsung menyebut nama di judul). Sapaan **"Ibu"** untuk pasien dewasa; pasien **<16 tahun** memakai bentuk "kamu/-mu". |
 | A5 | **Baris kosong dikosongkan otomatis:** field yang tidak diisi bidan **tidak dikirim** (tidak ada baris "-" atau "Tidak ada"). |
 | A6 | **Bahasa:** hangat, singkat, tanpa istilah medis rumit; istilah yang dipakai harus sama dengan yang tertulis di aplikasi. |
 | A7 | **Kalimat privasi** (wajib di semua ringkasan): *"Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain."* |
@@ -219,86 +219,75 @@ Pesan ini berisi data kesehatan anak Ibu. Mohon tidak dibagikan ke pihak lain.
 ## 4. Invoice / Struk Pembayaran via WA (copy baru)
 
 ### 4.1 Aturan
-- **Nomor struk:** `INV-<YYYYMMDD>-<nomor urut harian>` (mis. `INV-20260915-012`).
+- **Nomor struk:** `<kode klinik>-<YYYYMMDD>-<nomor urut 3 digit>` (mis. `PMB001-20260916-003`) — dibuat otomatis saat transaksi disimpan, urut per klinik per hari.
 - **Kapan dikirim:** dari halaman **Kasir**, setelah bidan menekan **Selesai** (transaksi tersimpan) — tombol *Kirim struk ke WhatsApp*.
 - **Bisa dikirim ulang** kapan pun dari riwayat kunjungan (tanpa batas waktu).
 - **Tanpa lampiran file** — `wa.me` hanya bisa membawa teks; struk dikirim sebagai teks WhatsApp.
 - **Boleh disunting bidan** di WhatsApp (sama seperti pengingat).
 - Bila klinik tidak ingin menampilkan harga, bidan dapat menghapus baris biaya sebelum mengirim.
+- **Satu layanan per transaksi** — rincian struk memuat satu layanan (bukan daftar panjang).
+- **Pembayaran selalu lunas** pada rilis ini; baris "Dibayar / Sisa" hanya disiapkan untuk iterasi pelunasan bertahap (belum dipakai).
+- **Tanda tangan pesan** memakai nama praktik + tautan lokasi Google Maps (tanpa nama bidan), sama seperti pesan pengingat.
 
-### 4.2 Struk — pembayaran LUNAS (tunai/transfer)
-
-```
-Struk Pembayaran — PMB Ratna Sejahtera
-No. INV-20260915-012
-
-Halo Siti, berikut struk pembayaran kunjungan Ibu hari ini.
-
-Tanggal: Selasa, 15 Sep 2026
-Pasien: Siti Nurhaliza
-
-Rincian:
-• ANC Reguler — Rp 50.000
-• Tablet Tambah Darah — Rp 10.000
-Total: Rp 60.000
-
-Pembayaran: Tunai
-Status: LUNAS
-
-Terima kasih atas kepercayaannya 🙏 Semoga sehat selalu, Bu.
-
-— Ratna, PMB Ratna Sejahtera
-```
-
-### 4.3 Struk — BELUM LUNAS (ada sisa)
+### 4.2 Struk — pembayaran LUNAS (dipakai)
 
 ```
-Struk Pembayaran — PMB Ratna Sejahtera
-No. INV-20260915-013
+Salam sehat, Ibu Siti.
+Terima kasih sudah berkunjung ke PMB Ratna Sejahtera hari ini.
 
-Halo Siti, berikut rincian pembayaran kunjungan Ibu hari ini ya.
+Berikut rincian pembayaran kunjungan Ibu:
+🧾 No. Struk: PMB001-20260916-003
+📅 Tanggal: Rabu, 16 September 2026
+💉 Layanan: ANC Reguler
+💰 Total: Rp 50.000
+💳 Metode bayar: Tunai
 
-Tanggal: Selasa, 15 Sep 2026
-Pasien: Siti Nurhaliza
+Struk lengkap (PDF) bisa kami kirimkan bila diperlukan ya.
 
-Rincian:
-• ANC Reguler — Rp 50.000
-• Pemeriksaan Lab Dasar — Rp 110.000
-Total: Rp 160.000
+Semoga Ibu dan calon buah hati selalu sehat. 🙏
 
-Dibayar: Rp 100.000
-Sisa: Rp 60.000
-Status: BELUM LUNAS
+PMB Ratna Sejahtera
+📍 https://maps.app.goo.gl/pmb-ratna-sejahtera
+```
 
-Sisa pembayaran dapat dilunasi saat kontrol berikutnya ya, Bu.
+### 4.3 Struk — BELUM LUNAS (belum dipakai)
 
-— Ratna, PMB Ratna Sejahtera
+> **Belum dipakai pada rilis ini.** Transaksi CRM Bidan selalu lunas (PRD PTS-614 · FR-07). Naskah ini disiapkan untuk iterasi **pelunasan bertahap/cicilan** berikutnya.
+
+```
+Salam sehat, Ibu Siti.
+Kami mencatat pembayaran kunjungan Ibu pada Rabu, 16 September 2026:
+🧾 No. Struk: PMB001-20260916-003
+💰 Total: Rp 150.000
+✅ Dibayar: Rp 100.000
+⏳ Sisa: Rp 50.000
+
+Mohon informasi bila ingin dilunasi ya. Terima kasih 🙏
+
+PMB Ratna Sejahtera
+📍 https://maps.app.goo.gl/pmb-ratna-sejahtera
 ```
 
 ### 4.4 Struk — kirim ulang (versi ringkas)
 
 ```
-Struk Pembayaran (kirim ulang) — PMB Ratna Sejahtera
-No. INV-20260915-012
+Salam sehat, Ibu Siti.
+Berikut kami kirimkan kembali rincian pembayaran kunjungan Ibu pada Rabu, 16 September 2026:
+🧾 No. Struk: PMB001-20260916-003
+💰 Total: Rp 50.000 (Tunai)
 
-Halo Siti, ini kami kirimkan ulang struk pembayaran tanggal 15 Sep 2026 ya.
+Bila ada yang ingin ditanyakan, silakan balas pesan ini ya.
 
-Total: Rp 60.000
-Status: LUNAS
-
-Terima kasih 🙏
-
-— Ratna, PMB Ratna Sejahtera
+PMB Ratna Sejahtera
+📍 https://maps.app.goo.gl/pmb-ratna-sejahtera
 ```
-
----
 
 ## 5. Catatan untuk spek & teknis
 
 | No. | Catatan |
 |---|---|
-| C1 | **Halaman Kasir perlu 4 field baru** agar struk bisa lengkap: **metode pembayaran** (tunai/transfer), **status** (lunas/belum lunas), **jumlah dibayar** (bila DP), dan **nomor struk**. Saat ini Kasir hanya punya daftar Layanan + Biaya. |
-| C2 | **Halaman struk belum ada** di prototype — perlu dibuat layar konfirmasi setelah "Selesai" yang memuat tombol *Kirim struk ke WhatsApp* + *Lihat struk*. |
+| C1 | **Halaman Kasir perlu 3 field baru** agar struk bisa lengkap: **metode bayar** (Tunai · Transfer · QRIS), **status lunas** (default "Lunas"), dan **nomor struk**. **Jumlah dibayar & kembalian tidak dipakai** karena transaksi selalu lunas (PRD PTS-614 · FR-07). |
+| C2 | ~~**Halaman struk belum ada** di prototype~~ **Sudah ada** — layar struk + unduh PDF + kirim WA sudah tersedia di prototype 17 Sep 2026. — perlu dibuat layar konfirmasi setelah "Selesai" yang memuat tombol *Kirim struk ke WhatsApp* + *Lihat struk*. |
 | C3 | **Rincian multi-layanan** mengikuti layanan yang dicatat pada transaksi; bila hanya satu layanan, baris "Rincian" tidak perlu (langsung "Layanan: …"). |
 | C4 | **Ringkasan pemeriksaan** dikirim dari: (a) tombol pada baris riwayat layanan di Profil Pasien, (b) tombol pada layar ringkasan sukses setelah mencatat layanan. |
 | C5 | **Semua pesan memakai template baru** pada dokumen ini — copy lama di prototype (dengan data lab & skrining menular) **diganti**. |
@@ -308,5 +297,6 @@ Terima kasih 🙏
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
+| v2 | 17 Sep 2026 | Disamakan dengan keputusan Kasir & Harga Layanan (PRD PTS-614): nomor struk `<kode klinik>-<yyyymmdd>-<3 digit>`, satu layanan per transaksi, pembayaran selalu lunas (baris Dibayar/Sisa jadi naskah iterasi berikutnya), tanda tangan pesan memakai nama praktik + tautan lokasi, field kasir 4 → 3, layar struk ditandai sudah ada. Naskah 4.2–4.4 disamakan dengan PRD 5.2–5.4. |
 | v1 | 15 Sep 2026 | Copy deck awal: penyaring data sensitif (10 keputusan field), 6 copy ringkasan (ANC, nifas, persalinan, KB, wellness, imunisasi), 3 copy invoice (lunas, belum lunas, kirim ulang), catatan spek & teknis. |
 

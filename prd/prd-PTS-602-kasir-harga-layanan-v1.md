@@ -141,6 +141,7 @@ ANC Reguler            Rp 50.000
 --------------------------------
 TOTAL                  Rp 50.000
 Metode bayar           Tunai
+Status bayar           Lunas
 Terima kasih atas kepercayaan Anda. 🙏
 ```
 

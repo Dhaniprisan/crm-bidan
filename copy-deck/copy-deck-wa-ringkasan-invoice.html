@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<title>Copy Deck — WA Ringkasan Pemeriksaan &amp; Invoice</title>
+<title>Copy Deck — WA Round-up: Ringkasan Pemeriksaan &amp; Invoice</title>
 <style>
   :root{
     --cream:#eaeef1; --paper:#fff; --ink:#111827; --ink-soft:#6b7280;
@@ -51,82 +51,130 @@
 </style>
 </head>
 <body>
-
 <section class="page">
   <div class="eyebrow">Copy Deck · WA Follow-up (CRM Bidan)</div>
   <h1>Ringkasan Pemeriksaan &amp; Invoice</h1>
-  <p class="muted" style="margin-top:1.5mm;font-size:10pt">Naskah pesan WhatsApp untuk fitur <b>kirim ringkasan layanan</b> dan <b>kirim struk pembayaran</b> — disusun dari copy yang sudah berjalan di prototype, lalu <b>disaring</b> agar tidak memuat data medis sensitif.</p>
-
-  <div class="cards">
-    <div class="kpi"><b>6</b><span>ringkasan layanan</span></div>
-    <div class="kpi"><b>3</b><span>struk pembayaran</span></div>
-    <div class="kpi"><b>5</b><span>data sensitif dibuang</span></div>
-    <div class="kpi"><b>4</b><span>field baru di Kasir</span></div>
-  </div>
-
-  <h3>Isi dokumen</h3>
-  <ul>
-    <li><b>Aturan umum</b> — 8 aturan yang berlaku untuk semua pesan (kanal, tanda tangan, format tanggal, sapaan, penyaring field kosong).</li>
-    <li><b>Penyaring data sensitif</b> — daftar field yang <span class="tag drop">dibuang</span> dan <span class="tag keep">dipertahankan</span>, beserta alasannya.</li>
-    <li><b>Copy 6 ringkasan</b> — ANC · nifas · persalinan · KB · layanan lain · imunisasi anak (dikirim ke orang tua).</li>
-    <li><b>Copy 3 struk</b> — lunas · belum lunas (ada sisa) · kirim ulang.</li>
-    <li><b>Catatan spek &amp; teknis</b> — field baru yang dibutuhkan di Kasir, halaman struk yang belum ada.</li>
-  </ul>
-
-  <div class="box sage">
-    <b>Kenapa disaring?</b> Copy lama di prototype mengirim <b>hasil skrining menular</b> (HIV/Sifilis/Hepatitis B), angka laboratorium (Hb, protein urine, gula darah), APGAR, dan perkiraan perdarahan ke WhatsApp pasien. Bila nomor tertukar atau HP dipegang orang lain, data medis itu terbaca pihak yang tidak berhak. Padahal sebagian besar info itu <b>tidak dibutuhkan pasien lewat chat</b> — cukup ditanyakan langsung ke bidan.
-  </div>
-
-  <div class="box blue">
-    <b>Cara pakai:</b> pesan terisi otomatis saat bidan menekan kirim; bidan <b>masih boleh menyunting</b> di WhatsApp sebelum mengirim (mis. menghapus baris biaya bila klinik tidak menampilkan harga).
-  </div>
-
-  <div class="foot">Copy Deck v1 · 15 Sep 2026 · untuk epic PTS-376 (WA Follow-up 1-Click) · prototype acuan: CRMBidan_15sep2026.html</div>
+  <p class="muted" style="margin-top:1.5mm;font-size:10pt">Naskah pesan WhatsApp untuk fitur <b>kirim ringkasan layanan</b> dan <b>kirim struk pembayaran</b>. <b>Versi v2 (17 Sep 2026)</b> — sudah disamakan dengan keputusan Kasir &amp; Harga Layanan (PRD PTS-614): satu layanan per transaksi, pembayaran selalu lunas, nomor struk <code>&lt;kode klinik&gt;-&lt;yyyymmdd&gt;-&lt;3 digit&gt;</code>.</p>
+  <div class="rule"></div>
 </section>
-<section class="page">
-  <div class="eyebrow">Bagian 1</div>
-  <h2>Aturan umum &amp; penyaring data sensitif</h2>
-
-  <table>
-    <tr><th style="width:8mm">#</th><th>Aturan</th></tr>
-    <tr><td>A1</td><td><b>Kanal:</b> tautan <span style="font-family:ui-monospace,monospace">wa.me</span> — pesan terisi otomatis; bidan tetap boleh menyunting di WhatsApp sebelum kirim.</td></tr>
-    <tr><td>A2</td><td><b>Tanda tangan seragam:</b> <span style="font-family:ui-monospace,monospace">— &lt;nama bidan&gt;, &lt;nama praktik/klinik&gt;</span>. Bila nama praktik kosong → <b>Praktik Mandiri Bidan</b>.</td></tr>
-    <tr><td>A3</td><td><b>Tanggal:</b> format Indonesia + nama hari untuk jadwal mendatang (mis. <i>Sabtu, 20 Sep 2026</i>); tanggal lampau tanpa nama hari (<i>12 Agu 2026</i>). <b>Jam tidak disertakan</b> (data kunjungan hanya tanggal).</td></tr>
-    <tr><td>A4</td><td><b>Sapaan:</b> nama pasien tanpa gelar. Pasien dewasa memakai sapaan <b>"Ibu"</b>; pasien <b>&lt;18 tahun</b> memakai bentuk "kamu/-mu". Pesan anak dialamatkan ke <b>orang tua</b>.</td></tr>
-    <tr><td>A5</td><td><b>Field kosong otomatis hilang</b> — tidak ada baris "-" atau "Tidak ada".</td></tr>
-    <tr><td>A6</td><td><b>Bahasa:</b> hangat, singkat, istilah sama dengan yang tertulis di aplikasi.</td></tr>
-    <tr><td>A7</td><td><b>Kalimat privasi wajib</b> di semua ringkasan: <i>"Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain."</i></td></tr>
-    <tr><td>A8</td><td><b>Penyaring data sensitif</b> — lihat tabel di bawah; hasil skrining menular &amp; angka laboratorium tidak dikirim, diganti kalimat arahan.</td></tr>
-  </table>
-
-  <h3>Penyaring data sensitif — keputusan per field</h3>
-  <table>
-    <tr><th style="width:58mm">Field pada copy lama</th><th style="width:26mm">Keputusan</th><th>Alasan</th></tr>
-    <tr><td>Triple Eliminasi (HIV / Sifilis / Hepatitis B)</td><td><span class="tag drop">Dibuang</span></td><td>Risiko privasi &amp; stigma tertinggi bila nomor atau HP salah.</td></tr>
-    <tr><td>Hb, protein urine, gula darah</td><td><span class="tag drop">Dibuang</span></td><td>Angka laboratorium → cukup ditanyakan langsung ke bidan.</td></tr>
-    <tr><td>APGAR &amp; perkiraan perdarahan (persalinan)</td><td><span class="tag drop">Dibuang</span></td><td>Detail klinis yang berpotensi mencemaskan tanpa bisa dijelaskan lewat chat.</td></tr>
-    <tr><td>Partus / Abortus (nifas)</td><td><span class="tag drop">Dibuang</span></td><td>Riwayat obstetri sensitif, tidak menambah nilai bagi pasien.</td></tr>
-    <tr><td>Nama lengkap pasien pada judul</td><td><span class="tag drop">Diganti</span></td><td>Diganti nama praktik/klinik — pesan lebih enak dibaca bila layar terlihat orang lain.</td></tr>
-    <tr><td>Tekanan darah, berat badan, LiLA, TFU, DJJ</td><td><span class="tag keep">Tetap</span></td><td>Hasil pemeriksaan fisik umum yang lazim dibagikan ke pasien.</td></tr>
-    <tr><td>Tanda bahaya (nifas)</td><td><span class="tag keep">Tetap (wajib)</span></td><td>Informasi keselamatan — justru harus sampai ke pasien.</td></tr>
-    <tr><td>Kondisi lokhia, involusi, suhu, kondisi ASI</td><td><span class="tag keep">Tetap</span></td><td>Bagian pemulihan pasien sendiri; berguna untuk pemantauan mandiri.</td></tr>
-    <tr><td>Data bayi (jenis kelamin, BB, PB, IMD, Vit K1, HB0)</td><td><span class="tag keep">Tetap</span></td><td>Informasi kelahiran yang dinanti keluarga.</td></tr>
-    <tr><td>Metode &amp; jadwal ulang KB</td><td><span class="tag keep">Tetap</span></td><td>Inti tujuan pesan.</td></tr>
-    <tr><td>Keluhan &amp; catatan bidan</td><td><span class="tag keep">Tetap</span></td><td>Bagian personal bidan; bidan boleh menghapus sebelum kirim.</td></tr>
-    <tr><td>Biaya / total pembayaran</td><td><span class="tag keep">Tetap</span></td><td>Banyak bidan memakai WA untuk konfirmasi pembayaran; bisa dihapus bila tidak diinginkan.</td></tr>
-  </table>
-
-  <div class="box rose">
-    <b>Ditambahkan sebagai pengganti hasil lab:</b> satu kalimat arahan — <i>"Hasil pemeriksaan laboratorium dapat ditanyakan langsung ke bidan ya."</i>
-  </div>
+<section class="page"><h2>1. Aturan umum (berlaku untuk semua pesan)</h2>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Aturan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td><strong>Kanal:</strong> deep link <code>wa.me</code> — pesan terisi otomatis, bidan masih boleh menyunting di WhatsApp sebelum kirim.</td>
+</tr>
+<tr>
+<td>A2</td>
+<td><strong>Tanda tangan seragam:</strong> <code>— &lt;nama bidan&gt;, &lt;nama praktik/klinik&gt;</code>. Bila nama praktik kosong → <code>Praktik Mandiri Bidan</code>.</td>
+</tr>
+<tr>
+<td>A3</td>
+<td><strong>Format tanggal:</strong> Indonesia + nama hari untuk jadwal mendatang (mis. <code>Sabtu, 20 Sep 2026</code>); tanggal kejadian lampau tanpa nama hari (<code>12 Agu 2026</code>). <strong>Jam tidak disertakan</strong> (data kunjungan hanya tanggal).</td>
+</tr>
+<tr>
+<td>A4</td>
+<td><strong>Sapaan:</strong> nama pasien tanpa gelar (<code>Halo Siti,</code> pada pengingat; pada ringkasan langsung menyebut nama di judul). Sapaan <strong>"Ibu"</strong> untuk pasien dewasa; pasien <strong>&lt;16 tahun</strong> memakai bentuk "kamu/-mu".</td>
+</tr>
+<tr>
+<td>A5</td>
+<td><strong>Baris kosong dikosongkan otomatis:</strong> field yang tidak diisi bidan <strong>tidak dikirim</strong> (tidak ada baris "-" atau "Tidak ada").</td>
+</tr>
+<tr>
+<td>A6</td>
+<td><strong>Bahasa:</strong> hangat, singkat, tanpa istilah medis rumit; istilah yang dipakai harus sama dengan yang tertulis di aplikasi.</td>
+</tr>
+<tr>
+<td>A7</td>
+<td><strong>Kalimat privasi</strong> (wajib di semua ringkasan): <em>"Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain."</em></td>
+</tr>
+<tr>
+<td>A8</td>
+<td><strong>Penyaring data sensitif</strong> (lihat bagian 2) — hasil skrining menular dan angka laboratorium <strong>tidak dikirim</strong>, diganti kalimat arahan.</td>
+</tr>
+</tbody>
+</table>
+<hr />
 </section>
-<section class="page">
-  <div class="eyebrow">Bagian 2 · Ringkasan 1 dari 6</div>
-  <h2>Kunjungan ANC (kehamilan)</h2>
-  <div class="wrap">
-    <div class="wa">
-      <div class="meta">WhatsApp · terisi otomatis</div>
-      <div class="bubble">Ringkasan Pemeriksaan Kehamilan — PMB Ratna Sejahtera
+<section class="page"><h2>2. Penyaring data sensitif — apa yang DIBUANG</h2>
+<p><strong>Prinsip:</strong> pesan ke WhatsApp memuat informasi yang <strong>berguna untuk pasien</strong> dan <strong>tidak berisiko</strong> bila terbaca orang lain (nomor tertukar, HP dipinjam, layar terlihat). Hasil skrining menular dan angka laboratorium <strong>tidak dikirim</strong> — pasien bisa menanyakannya langsung ke bidan.</p>
+<table>
+<thead>
+<tr>
+<th>Field pada copy lama</th>
+<th>Keputusan</th>
+<th>Alasan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Triple Eliminasi (HIV / Sifilis / HepB)</td>
+<td><strong>DIBUANG</strong></td>
+<td>Skrining menular — risiko stigma &amp; privasi tertinggi bila nomor/HP salah.</td>
+</tr>
+<tr>
+<td>Hb, protein urine, gula darah</td>
+<td><strong>DIBUANG</strong></td>
+<td>Angka laboratorium → dipindah ke kalimat arahan.</td>
+</tr>
+<tr>
+<td>Kondisi lokhia, involusi, suhu (nifas)</td>
+<td><strong>DIPERTAHANKAN</strong></td>
+<td>Bagian pemulihan pasien sendiri, berguna untuk pemantauan mandiri.</td>
+</tr>
+<tr>
+<td>Tanda bahaya (nifas)</td>
+<td><strong>DIPERTAHANKAN (wajib)</strong></td>
+<td>Informasi keselamatan — justru harus sampai ke pasien.</td>
+</tr>
+<tr>
+<td>APGAR, perkiraan perdarahan (persalinan)</td>
+<td><strong>DIBUANG</strong></td>
+<td>Detail klinis yang berpotensi membuat cemas tanpa bisa dijelaskan lewat teks.</td>
+</tr>
+<tr>
+<td>Partus / Abortus (nifas)</td>
+<td><strong>DIBUANG</strong></td>
+<td>Riwayat obstetri sensitif; tidak menambah nilai bagi pasien.</td>
+</tr>
+<tr>
+<td>Berat/panjang bayi, IMD, Vit K1, HB0</td>
+<td><strong>DIPERTAHANKAN</strong></td>
+<td>Informasi kelahiran yang dinanti keluarga.</td>
+</tr>
+<tr>
+<td>Metode KB, jadwal ulang KB</td>
+<td><strong>DIPERTAHANKAN</strong></td>
+<td>Inti tujuan pesan (pengingat kontrol KB).</td>
+</tr>
+<tr>
+<td>Keluhan &amp; catatan bidan</td>
+<td><strong>DIPERTAHANKAN, tapi dibatasi</strong></td>
+<td>Bagian personal bidan; bidan boleh menghapus sebelum kirim (pesan bisa diedit di WA).</td>
+</tr>
+<tr>
+<td>Biaya / total pembayaran</td>
+<td><strong>DIPERTAHANKAN</strong></td>
+<td>Banyak bidan memakai WA untuk konfirmasi pembayaran. Bidan bisa hapus bila tidak ingin menampilkan harga.</td>
+</tr>
+<tr>
+<td>Kalimat arahan pengganti hasil lab</td>
+<td><strong>DITAMBAH</strong></td>
+<td><em>"Hasil pemeriksaan laboratorium dapat ditanyakan langsung ke bidan ya."</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section>
+<section class="page"><h2>3. Ringkasan Pemeriksaan — copy per layanan</h2>
+<h3>3.1 Kunjungan ANC (kehamilan)</h3>
+<pre><code>Ringkasan Pemeriksaan Kehamilan — PMB Ratna Sejahtera
 
 Halo Siti, ini ringkasan pemeriksaan Ibu hari ini.
 
@@ -152,29 +200,11 @@ Biaya: Rp 50.000
 
 Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain.
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Yang berubah dari copy lama</h3>
-      <ul>
-        <li><span class="tag drop">Dibuang</span> Triple Eliminasi (HIV/Sifilis/HepB), Hb, protein urine, gula darah.</li>
-        <li><span class="tag keep">Ditambah</span> usia kehamilan + trimester — pasien langsung tahu posisinya.</li>
-        <li><span class="tag keep">Ditambah</span> kalimat arahan laboratorium (pengganti angka lab).</li>
-        <li><span class="tag keep">Ditambah</span> kalimat privasi + nama praktik pada tanda tangan.</li>
-        <li>Judul memakai <b>nama praktik</b>, bukan nama lengkap pasien.</li>
-      </ul>
-      <div class="box blue" style="font-size:8.6pt"><b>Catatan:</b> hasil pemeriksaan fisik (TD, BB, LiLA, TFU, DJJ) tetap dikirim karena lazim dibagikan ke pasien dan berguna untuk pemantauan.</div>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="eyebrow">Bagian 2 · Ringkasan 2 dari 6</div>
-  <h2>Kunjungan Nifas</h2>
-  <div class="wrap">
-    <div class="wa">
-      <div class="meta">WhatsApp · terisi otomatis</div>
-      <div class="bubble">Ringkasan Kunjungan Nifas — PMB Ratna Sejahtera
+— Ratna, PMB Ratna Sejahtera
+</code></pre>
+<p><strong>Perubahan dari copy lama:</strong> Triple Eliminasi, Hb, protein urine, dan gula darah <strong>dihapus</strong>; <strong>ditambahkan</strong> usia kehamilan + trimester, kalimat arahan lab, kalimat privasi, dan nama praktik pada tanda tangan.</p>
+<h3>3.2 Kunjungan Nifas</h3>
+<pre><code>Ringkasan Kunjungan Nifas — PMB Ratna Sejahtera
 
 Halo Siti, ini ringkasan kunjungan nifas Ibu hari ini ya.
 
@@ -188,7 +218,7 @@ Involusi uterus: baik
 Kondisi ASI/menyusui: lancar, bayi menyusu kuat
 
 Keluhan: belum ada
-Catatan bidan: tambah asupan protein & cairan ya, Bu
+Catatan bidan: tambah asupan protein &amp; cairan ya, Bu
 
 Yang perlu segera dihubungi bidan: perdarahan banyak, demam tinggi,
 nyeri kepala hebat, atau pandangan kabur.
@@ -200,27 +230,11 @@ Biaya: Rp 75.000
 
 Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain.
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Yang berubah dari copy lama</h3>
-      <ul>
-        <li><span class="tag drop">Dibuang</span> Partus / Abortus (riwayat obstetri sensitif).</li>
-        <li><span class="tag keep">Dirapikan</span> tanda bahaya: dari daftar simbol menjadi <b>kalimat lengkap</b> yang bisa dipahami pasien — tetap wajib dikirim karena ini informasi keselamatan.</li>
-        <li><span class="tag keep">Ditambah</span> kalimat privasi + nama praktik.</li>
-        <li>Kondisi pemulihan (lokhia, involusi, suhu, ASI) tetap dikirim — berguna untuk pemantauan mandiri.</li>
-      </ul>
-      <div class="box sage" style="font-size:8.6pt"><b>Prinsip:</b> informasi yang menyangkut <b>keselamatan</b> selalu dikirim; yang menyangkut <b>privasi/stigma</b> tidak dikirim.</div>
-    </div>
-  </div>
-</section>
-<section class="page">
-  <div class="eyebrow">Bagian 2 · Ringkasan 3 dari 6</div>
-  <h2>Persalinan</h2>
-  <div class="wrap">
-    <div class="wa">
-      <div class="meta">WhatsApp · terisi otomatis</div>
-      <div class="bubble">Ringkasan Persalinan — PMB Ratna Sejahtera
+— Ratna, PMB Ratna Sejahtera
+</code></pre>
+<p><strong>Perubahan dari copy lama:</strong> Partus/Abortus <strong>dihapus</strong>; kalimat <strong>tanda bahaya</strong> dirapikan jadi kalimat lengkap yang bisa dipahami; ditambah kalimat privasi &amp; nama praktik.</p>
+<h3>3.3 Persalinan</h3>
+<pre><code>Ringkasan Persalinan — PMB Ratna Sejahtera
 
 Selamat ya Bu Siti! Ini ringkasan persalinan Ibu.
 
@@ -235,8 +249,8 @@ Data bayi:
 Bayi 1: perempuan, 3.100 g, 49 cm
 Tanda perawatan: IMD, Vit K1, salep mata, HB0
 
-Bayi sudah otomatis terdaftar sebagai pasien & punya jadwal imunisasi
-dasar di aplikasi. Imunisasi pertama (HB0) sebaiknya segera ya.
+Bayi sudah otomatis terdaftar sebagai pasien &amp; punya jadwal imunisasi dasar
+di aplikasi. Imunisasi pertama (HB0) sebaiknya segera setelah lahir ya.
 
 Catatan bidan: ibu dan bayi sehat, kontrol nifas 6 hari setelah bersalin.
 
@@ -244,28 +258,11 @@ Biaya: Rp 1.500.000
 
 Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain.
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Yang berubah dari copy lama</h3>
-      <ul>
-        <li><span class="tag drop">Dibuang</span> APGAR &amp; perkiraan perdarahan — detail klinis yang berpotensi mencemaskan tanpa bisa dijelaskan lewat chat.</li>
-        <li><span class="tag keep">Ditambah</span> ucapan selamat — momen bahagia, nadanya harus terasa.</li>
-        <li><span class="tag keep">Ditambah</span> penjelasan bahwa bayi otomatis terdaftar + punya jadwal imunisasi dasar (mengurangi kebingungan orang tua).</li>
-        <li>Data bayi (jenis kelamin, BB, PB) + tanda perawatan (IMD, Vit K1, HB0) tetap dikirim.</li>
-      </ul>
-      <div class="box blue" style="font-size:8.6pt"><b>Nada:</b> satu-satunya pesan yang memakai ucapan selamat — jangan digabung dengan pengingat jadwal.</div>
-    </div>
-  </div>
-</section>
-
-<section class="page">
-  <div class="eyebrow">Bagian 2 · Ringkasan 4 &amp; 5 dari 6</div>
-  <h2>Layanan KB &amp; Layanan Lain</h2>
-  <div class="wrap" style="flex-wrap:wrap">
-    <div class="wa" style="width:88mm">
-      <div class="meta">KB · terisi otomatis</div>
-      <div class="bubble">Ringkasan Layanan KB — PMB Ratna Sejahtera
+— Ratna, PMB Ratna Sejahtera
+</code></pre>
+<p><strong>Perubahan dari copy lama:</strong> APGAR &amp; perkiraan perdarahan <strong>dihapus</strong>; ditambah ucapan selamat, ringkasan data bayi yang bisa dipahami, dan penjelasan otomatisnya pendaftaran bayi + jadwal imunisasi.</p>
+<h3>3.4 Layanan KB</h3>
+<pre><code>Ringkasan Layanan KB — PMB Ratna Sejahtera
 
 Halo Siti, ini catatan layanan KB Ibu ya.
 
@@ -283,11 +280,11 @@ Biaya: Rp 100.000
 
 Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain.
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="wa" style="width:88mm">
-      <div class="meta">Layanan Lain · terisi otomatis</div>
-      <div class="bubble">Ringkasan Layanan — PMB Ratna Sejahtera
+— Ratna, PMB Ratna Sejahtera
+</code></pre>
+<p><strong>Perubahan dari copy lama:</strong> judul diseragamkan (dulu <em>"Info KB"</em> → <strong>"Ringkasan Layanan KB"</strong>) + kalimat privasi &amp; nama praktik.</p>
+<h3>3.5 Layanan Lain (Wellness)</h3>
+<pre><code>Ringkasan Layanan — PMB Ratna Sejahtera
 
 Halo Siti, ini catatan layanan Ibu hari ini ya.
 
@@ -300,25 +297,10 @@ Biaya: Rp 75.000
 
 Pesan ini berisi data pemeriksaan Ibu. Mohon tidak dibagikan ke pihak lain.
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Yang berubah dari copy lama</h3>
-      <ul>
-        <li><b>Judul diseragamkan:</b> dulu <i>"Info KB"</i> → sekarang <b>"Ringkasan Layanan KB"</b>, supaya semua pesan memakai pola judul yang sama.</li>
-        <li>Metode KB &amp; jadwal ulang tetap dikirim — itu inti tujuan pesannya.</li>
-        <li>Ditambah kalimat privasi + nama praktik pada kedua pesan.</li>
-      </ul>
-    </div>
-  </div>
-</section>
-<section class="page">
-  <div class="eyebrow">Bagian 2 · Ringkasan 6 dari 6</div>
-  <h2>Imunisasi Anak <span class="muted" style="font-size:9.5pt;font-weight:400">(dikirim ke nomor orang tua)</span></h2>
-  <div class="wrap">
-    <div class="wa">
-      <div class="meta">WhatsApp · terisi otomatis</div>
-      <div class="bubble">Ringkasan Imunisasi — PMB Ratna Sejahtera
+— Ratna, PMB Ratna Sejahtera
+</code></pre>
+<h3>3.6 Imunisasi Anak (dikirim ke nomor orang tua)</h3>
+<pre><code>Ringkasan Imunisasi — PMB Ratna Sejahtera
 
 Halo Ibu Siti, ini ringkasan imunisasi Dinda hari ini ya.
 
@@ -336,144 +318,127 @@ Biaya: Rp 150.000
 
 Pesan ini berisi data kesehatan anak Ibu. Mohon tidak dibagikan ke pihak lain.
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Aturan khusus pesan anak</h3>
-      <ul>
-        <li><b>Sapaan ke orang tua</b> ("Halo Ibu Siti"), bukan ke anak.</li>
-        <li><b>Nomor tujuan:</b> No. HP anak bila ada; jika tidak → <b>No. HP orang tua</b> (perilaku yang sudah dipakai prototype).</li>
-        <li>Kalimat privasi disesuaikan: <i>"data kesehatan anak Ibu"</i>.</li>
-        <li>Antigen yang diberikan, BB/TB, gejala, dan jadwal imunisasi berikutnya selalu disertakan — ini yang paling dicari orang tua.</li>
-      </ul>
-      <div class="box sage" style="font-size:8.6pt"><b>Nilai tambah:</b> menyebut jadwal imunisasi berikutnya sekaligus mengurangi anak yang terlambat imunisasi.</div>
-    </div>
-  </div>
+— Ratna, PMB Ratna Sejahtera
+</code></pre>
+<p><strong>Catatan:</strong> pesan anak <strong>dialamatkan ke orang tua</strong> ("Halo Ibu Siti"), bukan ke anak. Nomor tujuan = No. HP anak bila ada, jika tidak → <strong>No. HP orang tua</strong> (perilaku yang sudah dipakai prototype).</p>
+<hr />
 </section>
+<section class="page"><h2>4. Invoice / Struk Pembayaran via WA (copy baru)</h2>
+<h3>4.1 Aturan</h3>
+<ul>
+<li><strong>Nomor struk:</strong> <code>&lt;kode klinik&gt;-&lt;YYYYMMDD&gt;-&lt;nomor urut 3 digit&gt;</code> (mis. <code>PMB001-20260916-003</code>) — dibuat otomatis saat transaksi disimpan, urut per klinik per hari.</li>
+<li><strong>Kapan dikirim:</strong> dari halaman <strong>Kasir</strong>, setelah bidan menekan <strong>Selesai</strong> (transaksi tersimpan) — tombol <em>Kirim struk ke WhatsApp</em>.</li>
+<li><strong>Bisa dikirim ulang</strong> kapan pun dari riwayat kunjungan (tanpa batas waktu).</li>
+<li><strong>Tanpa lampiran file</strong> — <code>wa.me</code> hanya bisa membawa teks; struk dikirim sebagai teks WhatsApp.</li>
+<li><strong>Boleh disunting bidan</strong> di WhatsApp (sama seperti pengingat).</li>
+<li>Bila klinik tidak ingin menampilkan harga, bidan dapat menghapus baris biaya sebelum mengirim.</li>
+<li><strong>Satu layanan per transaksi</strong> — rincian struk memuat satu layanan (bukan daftar panjang).</li>
+<li><strong>Pembayaran selalu lunas</strong> pada rilis ini; baris "Dibayar / Sisa" hanya disiapkan untuk iterasi pelunasan bertahap (belum dipakai).</li>
+<li><strong>Tanda tangan pesan</strong> memakai nama praktik + tautan lokasi Google Maps (tanpa nama bidan), sama seperti pesan pengingat.</li>
+</ul>
+<h3>4.2 Struk — pembayaran LUNAS (dipakai)</h3>
+<pre><code>Salam sehat, Ibu Siti.
+Terima kasih sudah berkunjung ke PMB Ratna Sejahtera hari ini.
 
-<section class="page">
-  <div class="eyebrow">Bagian 3 · Invoice 1 dari 3</div>
-  <h2>Struk pembayaran — LUNAS</h2>
-  <div class="wrap">
-    <div class="wa">
-      <div class="meta">WhatsApp · dikirim setelah transaksi Kasir</div>
-      <div class="bubble">Struk Pembayaran — PMB Ratna Sejahtera
-No. INV-20260915-012
+Berikut rincian pembayaran kunjungan Ibu:
+🧾 No. Struk: PMB001-20260916-003
+📅 Tanggal: Rabu, 16 September 2026
+💉 Layanan: ANC Reguler
+💰 Total: Rp 50.000
+💳 Metode bayar: Tunai
 
-Halo Siti, berikut struk pembayaran kunjungan Ibu hari ini.
+Struk lengkap (PDF) bisa kami kirimkan bila diperlukan ya.
 
-Tanggal: Selasa, 15 Sep 2026
-Pasien: Siti Nurhaliza
+Semoga Ibu dan calon buah hati selalu sehat. 🙏
 
-Rincian:
-• ANC Reguler — Rp 50.000
-• Tablet Tambah Darah — Rp 10.000
-Total: Rp 60.000
+PMB Ratna Sejahtera
+📍 https://maps.app.goo.gl/pmb-ratna-sejahtera
+</code></pre>
+<h3>4.3 Struk — BELUM LUNAS (belum dipakai)</h3>
+<blockquote>
+<p><strong>Belum dipakai pada rilis ini.</strong> Transaksi CRM Bidan selalu lunas (PRD PTS-614 · FR-07). Naskah ini disiapkan untuk iterasi <strong>pelunasan bertahap/cicilan</strong> berikutnya.</p>
+</blockquote>
+<pre><code>Salam sehat, Ibu Siti.
+Kami mencatat pembayaran kunjungan Ibu pada Rabu, 16 September 2026:
+🧾 No. Struk: PMB001-20260916-003
+💰 Total: Rp 150.000
+✅ Dibayar: Rp 100.000
+⏳ Sisa: Rp 50.000
 
-Pembayaran: Tunai
-Status: LUNAS
+Mohon informasi bila ingin dilunasi ya. Terima kasih 🙏
 
-Terima kasih atas kepercayaannya 🙏 Semoga sehat selalu, Bu.
+PMB Ratna Sejahtera
+📍 https://maps.app.goo.gl/pmb-ratna-sejahtera
+</code></pre>
+<h3>4.4 Struk — kirim ulang (versi ringkas)</h3>
+<pre><code>Salam sehat, Ibu Siti.
+Berikut kami kirimkan kembali rincian pembayaran kunjungan Ibu pada Rabu, 16 September 2026:
+🧾 No. Struk: PMB001-20260916-003
+💰 Total: Rp 50.000 (Tunai)
 
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Aturan struk</h3>
-      <ul>
-        <li><b>Nomor struk:</b> <span style="font-family:ui-monospace,monospace">INV-&lt;YYYYMMDD&gt;-&lt;urut harian&gt;</span>.</li>
-        <li><b>Dikirim dari Kasir</b> setelah bidan menekan "Selesai" (transaksi tersimpan).</li>
-        <li><b>Tanpa lampiran file</b> — WhatsApp lewat tautan hanya membawa teks. Struk = teks.</li>
-        <li>Boleh <b>dikirim ulang</b> kapan pun dari riwayat kunjungan.</li>
-        <li>Bidan boleh <b>menghapus baris biaya</b> sebelum kirim bila klinik tidak menampilkan harga.</li>
-      </ul>
-      <div class="box rose" style="font-size:8.6pt"><b>Belum ada di prototype:</b> halaman struk &amp; tombol kirim — perlu dibuat (lihat halaman terakhir).</div>
-    </div>
-  </div>
+Bila ada yang ingin ditanyakan, silakan balas pesan ini ya.
+
+PMB Ratna Sejahtera
+📍 https://maps.app.goo.gl/pmb-ratna-sejahtera
+</code></pre>
 </section>
-<section class="page">
-  <div class="eyebrow">Bagian 3 · Invoice 2 &amp; 3 dari 3</div>
-  <h2>Struk — belum lunas &amp; kirim ulang</h2>
-  <div class="wrap" style="flex-wrap:wrap">
-    <div class="wa" style="width:91mm">
-      <div class="meta">Ada sisa pembayaran</div>
-      <div class="bubble">Struk Pembayaran — PMB Ratna Sejahtera
-No. INV-20260915-013
-
-Halo Siti, berikut rincian pembayaran kunjungan Ibu hari ini ya.
-
-Tanggal: Selasa, 15 Sep 2026
-Pasien: Siti Nurhaliza
-
-Rincian:
-• ANC Reguler — Rp 50.000
-• Pemeriksaan Lab Dasar — Rp 110.000
-Total: Rp 160.000
-
-Dibayar: Rp 100.000
-Sisa: Rp 60.000
-Status: BELUM LUNAS
-
-Sisa pembayaran dapat dilunasi saat kontrol berikutnya ya, Bu.
-
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="wa" style="width:91mm">
-      <div class="meta">Kirim ulang</div>
-      <div class="bubble">Struk Pembayaran (kirim ulang) — PMB Ratna Sejahtera
-No. INV-20260915-012
-
-Halo Siti, ini kami kirimkan ulang struk pembayaran tanggal 15 Sep 2026 ya.
-
-Total: Rp 60.000
-Status: LUNAS
-
-Terima kasih 🙏
-
-— Ratna, PMB Ratna Sejahtera</div>
-    </div>
-    <div class="notes">
-      <h3>Catatan</h3>
-      <ul>
-        <li><b>Versi belum lunas</b> menampilkan Total · Dibayar · Sisa + status <b>BELUM LUNAS</b>, dan satu kalimat penutup yang tidak menekan pasien.</li>
-        <li><b>Versi kirim ulang</b> sengaja ringkas — pasien biasanya minta struk lama, tidak perlu seluruh rincian lagi.</li>
-        <li>Status &amp; nominal mengikuti data transaksi di Kasir, bukan diketik bidan.</li>
-      </ul>
-    </div>
-  </div>
+<section class="page"><h2>5. Catatan untuk spek &amp; teknis</h2>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Catatan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td><strong>Halaman Kasir perlu 3 field baru</strong> agar struk bisa lengkap: <strong>metode bayar</strong> (Tunai · Transfer · QRIS), <strong>status lunas</strong> (default "Lunas"), dan <strong>nomor struk</strong>. <strong>Jumlah dibayar &amp; kembalian tidak dipakai</strong> karena transaksi selalu lunas (PRD PTS-614 · FR-07).</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>~~<strong>Halaman struk belum ada</strong> di prototype~~ <strong>Sudah ada</strong> — layar struk + unduh PDF + kirim WA sudah tersedia di prototype 17 Sep 2026. — perlu dibuat layar konfirmasi setelah "Selesai" yang memuat tombol <em>Kirim struk ke WhatsApp</em> + <em>Lihat struk</em>.</td>
+</tr>
+<tr>
+<td>C3</td>
+<td><strong>Rincian multi-layanan</strong> mengikuti layanan yang dicatat pada transaksi; bila hanya satu layanan, baris "Rincian" tidak perlu (langsung "Layanan: …").</td>
+</tr>
+<tr>
+<td>C4</td>
+<td><strong>Ringkasan pemeriksaan</strong> dikirim dari: (a) tombol pada baris riwayat layanan di Profil Pasien, (b) tombol pada layar ringkasan sukses setelah mencatat layanan.</td>
+</tr>
+<tr>
+<td>C5</td>
+<td><strong>Semua pesan memakai template baru</strong> pada dokumen ini — copy lama di prototype (dengan data lab &amp; skrining menular) <strong>diganti</strong>.</td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Pesan ringkasan <strong>tidak memuat jam</strong> (data kunjungan hanya tanggal).</td>
+</tr>
+</tbody>
+</table>
 </section>
-
-<section class="page">
-  <div class="eyebrow">Bagian 4</div>
-  <h2>Catatan spek &amp; teknis</h2>
-  <table>
-    <tr><th style="width:9mm">#</th><th>Catatan</th></tr>
-    <tr><td>C1</td><td><b>Halaman Kasir perlu 4 field baru</b> agar struk lengkap: <b>metode pembayaran</b> (tunai/transfer) · <b>status</b> (lunas / belum lunas) · <b>jumlah dibayar</b> (bila DP) · <b>nomor struk</b>. Saat ini Kasir hanya punya daftar Layanan + Biaya.</td></tr>
-    <tr><td>C2</td><td><b>Halaman struk belum ada.</b> Perlu layar konfirmasi setelah "Selesai" yang memuat tombol <i>Kirim struk ke WhatsApp</i> dan <i>Lihat struk</i>.</td></tr>
-    <tr><td>C3</td><td><b>Rincian multi-layanan</b> mengikuti layanan yang dicatat pada transaksi. Bila hanya satu layanan, baris "Rincian" tidak perlu — langsung satu baris layanan.</td></tr>
-    <tr><td>C4</td><td><b>Titik kirim ringkasan:</b> (a) tombol pada baris riwayat layanan di Profil Pasien, (b) tombol pada layar ringkasan sukses setelah mencatat layanan.</td></tr>
-    <tr><td>C5</td><td><b>Copy lama diganti</b> — template pengiriman memakai versi dokumen ini (tanpa hasil lab &amp; skrining menular).</td></tr>
-    <tr><td>C6</td><td>Ringkasan &amp; struk <b>tidak memuat jam</b> (data kunjungan hanya tanggal).</td></tr>
-  </table>
-
-  <div class="rule"></div>
-
-  <h3>Langkah berikutnya</h3>
-  <ul>
-    <li>Naskah ini jadi lampiran <b>PRD Ringkasan &amp; Invoice</b> (epic PTS-376) — terpisah dari PRD WA Reminder yang sudah live di PTS-386, karena batas karakter deskripsi Jira.</li>
-    <li>Perlu keputusan pemilik produk atas 2 hal: <b>tampilan halaman struk</b> (desain baru) dan <b>field pembayaran di Kasir</b> (C1) — keduanya menambah kerja di sisi teknis.</li>
-    <li>Setelah disetujui, naskah ini bisa diuji ke bidan bersamaan dengan uji copy pengingat (satu bahasa produk).</li>
-  </ul>
-
-  <div class="box blue">
-    <b>Prinsip yang dipakai:</b> <i>yang menyangkut keselamatan pasien — dikirim; yang menyangkut privasi &amp; stigma — tidak dikirim; yang sekadar angka klinis — cukup ditanyakan langsung ke bidan.</i>
-  </div>
-
-  <div class="foot">Copy Deck v1 · 15 Sep 2026 · sumber: docs/copy-deck-wa-ringkasan-invoice.md · epic PTS-376 (WA Follow-up 1-Click)</div>
-</section>
-
-
-
-
-
+<section class="page"><h2>6. Riwayat Revisi</h2>
+<table>
+<thead>
+<tr>
+<th>Versi</th>
+<th>Tanggal</th>
+<th>Perubahan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v2</td>
+<td>17 Sep 2026</td>
+<td>Disamakan dengan keputusan Kasir &amp; Harga Layanan (PRD PTS-614): nomor struk <code>&lt;kode klinik&gt;-&lt;yyyymmdd&gt;-&lt;3 digit&gt;</code>, satu layanan per transaksi, pembayaran selalu lunas (baris Dibayar/Sisa jadi naskah iterasi berikutnya), tanda tangan pesan memakai nama praktik + tautan lokasi, field kasir 4 → 3, layar struk ditandai sudah ada. Naskah 4.2–4.4 disamakan dengan PRD 5.2–5.4.</td>
+</tr>
+<tr>
+<td>v1</td>
+<td>15 Sep 2026</td>
+<td>Copy deck awal: penyaring data sensitif (10 keputusan field), 6 copy ringkasan (ANC, nifas, persalinan, KB, wellness, imunisasi), 3 copy invoice (lunas, belum lunas, kirim ulang), catatan spek &amp; teknis.</td>
+</tr>
+</tbody>
+</table></section>
 </body>
 </html>
