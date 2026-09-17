@@ -39,24 +39,26 @@ return(0,P.jsxs)(P.Fragment,{children:[(0,P.jsx)(K,{eyebrow:`Kasir`,title:e,desc
   #jkHubPill{position:fixed;right:14px;bottom:16px;z-index:2147483000;}
   #jkHubPill button{font:600 13px/1 'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;letter-spacing:.01em;
     display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:0;border-radius:999px;cursor:pointer;
-    background:#2f2a26;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.24);transition:transform .15s,background .15s;}
+    background:#2a2320;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.26);transition:transform .15s,background .15s;}
   #jkHubPill button:hover{background:#443c36;transform:translateY(-1px);}
   @media (max-width:560px){ #jkHubPill{bottom:88px} }
-  #jkHubPanel{position:fixed;inset:0;z-index:2147483001;display:none;background:rgba(28,20,16,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);}
-  #jkHubPanel .jk-card{position:absolute;right:14px;bottom:14px;width:min(430px,93vw);max-height:80vh;overflow:auto;
-    background:#fffdfb;border:1px solid #efe4da;border-radius:20px;padding:18px 18px 20px;
-    box-shadow:0 24px 70px rgba(0,0,0,.3);font:400 14px/1.55 'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:#3b332e;}
-  #jkHubPanel h3{margin:0 0 2px;font:700 17px/1.3 'Plus Jakarta Sans',system-ui,sans-serif;color:#2a2320;}
-  #jkHubPanel .jk-sub{margin:0 0 14px;font-size:12.5px;color:#8c7d73;}
-  #jkHubPanel h4{margin:16px 0 7px;font:700 11px/1 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#a5907f;}
-  #jkHubPanel a{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;margin-bottom:5px;border-radius:12px;
-    text-decoration:none;color:#3b332e;background:#fff;border:1px solid #f1e7dd;transition:background .12s,border-color .12s;}
-  #jkHubPanel a:hover{background:#fdf3ec;border-color:#e9d3c2;}
+  #jkHubPanel{position:fixed;inset:0;z-index:2147483001;display:none;background:rgba(28,20,16,.45);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);}
+  #jkHubPanel .jk-card{position:absolute;right:14px;bottom:14px;width:min(430px,93vw);max-height:86vh;overflow:auto;
+    -webkit-overflow-scrolling:touch;background:#fffdfb;border:1px solid #e9dcd0;border-radius:20px;padding:18px 18px 20px;
+    box-shadow:0 24px 70px rgba(0,0,0,.32);font:400 14px/1.55 'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;color:#332c27;}
+  #jkHubPanel h3{margin:0 0 3px;padding-right:24px;font:700 17px/1.3 'Plus Jakarta Sans',system-ui,sans-serif;color:#231d1a;}
+  #jkHubPanel .jk-sub{margin:0 0 4px;font-size:12.5px;color:#7a6b61;}
+  #jkHubPanel .jk-hint{margin:0 0 4px;font-size:11.5px;color:#9a8878;}
+  #jkHubPanel h4{margin:16px 0 7px;font:700 11px/1 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#7a6355;}
+  #jkHubPanel a{position:relative;display:flex;align-items:flex-start;gap:9px;padding:9px 26px 9px 11px;margin-bottom:5px;border-radius:12px;
+    text-decoration:none;color:#332c27;background:#fff;border:1px solid #ecdfd3;transition:background .12s,border-color .12s;}
+  #jkHubPanel a:hover{background:#fdf3ec;border-color:#e3c9b4;}
+  #jkHubPanel a::after{content:'›';position:absolute;right:11px;top:50%;transform:translateY(-50%);color:#c08a5f;font-size:17px;line-height:1;}
   #jkHubPanel a b{display:block;font-weight:600;}
-  #jkHubPanel a span{display:block;font-size:12px;color:#8c7d73;}
-  #jkHubPanel .jk-badge{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#fdeadf;color:#b4551f;font:700 10px/1.4 'Plus Jakarta Sans',sans-serif;letter-spacing:.03em;vertical-align:1px;}
-  #jkHubPanel .jk-foot{margin-top:14px;padding-top:12px;border-top:1px dashed #ece0d5;font-size:12px;color:#8c7d73;}
-  #jkHubPanel .jk-x{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:20px;line-height:1;color:#a5907f;cursor:pointer;}
+  #jkHubPanel a span{display:block;font-size:12px;color:#7a6b61;}
+  #jkHubPanel .jk-badge{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#fbe0cd;color:#8a3d0e;font:700 10px/1.4 'Plus Jakarta Sans',sans-serif;letter-spacing:.03em;vertical-align:1px;}
+  #jkHubPanel .jk-foot{margin-top:14px;padding-top:12px;border-top:1px dashed #e4d5c7;font-size:12px;color:#7a6b61;}
+  #jkHubPanel .jk-x{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:22px;line-height:1;color:#8a7566;cursor:pointer;}
 </style>
 <div id="jkHubPill"><button id="jkHubBtn" type="button" aria-haspopup="dialog"><span>📄</span> Dokumen &amp; Versi</button></div>
 <div id="jkHubPanel" role="dialog" aria-modal="true" aria-label="Dokumen dan versi prototype">
@@ -64,26 +66,27 @@ return(0,P.jsxs)(P.Fragment,{children:[(0,P.jsx)(K,{eyebrow:`Kasir`,title:e,desc
     <button class="jk-x" id="jkHubClose" type="button" aria-label="Tutup">&times;</button>
     <h3>CRM Bidan — Prototype &amp; Dokumen</h3>
     <p class="jk-sub">Semua dalam satu halaman. Kamu sedang memakai build <b>17 September 2026</b><span class="jk-badge">TERBARU</span></p>
+    <p class="jk-hint">Geser panel ini untuk melihat Prototype · PRD · Guidance UX · Copy deck · Repo</p>
 
     <h4>Prototype</h4>
-    <a href="./"><b>Versi 17 Sep 2026 <span class="jk-badge">dibuka</span></b><span>Chips kategori harga · cut-off anak 16 tahun · kategori pasien otomatis · pagination 20+5 · kasir &amp; struk · jadwal kunjungan</span></a>
-    <a href="prototype/CRMBidan_16sep2026.html"><b>Versi 16 Sep 2026 — kasir &amp; layanan</b><span>Metode bayar, struk PDF, tab Transaksi (belum ada jadwal mandiri)</span></a>
-    <a href="prototype/CRMBidan_16sep2026-jadwal-mandiri.html"><b>Jadwal mandiri <span class="jk-badge">arsip</span></b><span>Modal jadwalkan/edit/hapus jadwal, preset agenda kontrol</span></a>
-    <a href="prototype/CRMBidan_15sep2026.html"><b>Versi 15 Sep 2026</b><span>Sebelum kasir &amp; struk</span></a>
-    <a href="prototype/CRMBidan_14sep2026.html"><b>Versi 14 Sep 2026 <span class="jk-badge">arsip</span></b><span>Versi awal</span></a>
+    <a href="./"><b>Versi 17 Sep 2026 <span class="jk-badge">sedang dibuka</span></b><span>Chips kategori harga · cut-off anak 16 tahun · kategori pasien otomatis · pagination 20+5 · kasir &amp; struk · jadwal kunjungan</span></a>
+    <a href="prototype/CRMBidan_16sep2026.html"><b>Versi 16 Sep 2026 — kasir &amp; layanan</b><span>Metode bayar, struk PDF, tab Transaksi di profil. Belum ada jadwal mandiri.</span></a>
+    <a href="prototype/CRMBidan_16sep2026-jadwal-mandiri.html"><b>Jadwal mandiri (16 Sep) <span class="jk-badge">arsip</span></b><span>Modal jadwalkan/edit/hapus jadwal, preset agenda kontrol. Belum ada kasir &amp; struk.</span></a>
+    <a href="prototype/CRMBidan_15sep2026.html"><b>Versi 15 Sep 2026</b><span>Sebelum kasir, harga layanan, dan struk.</span></a>
+    <a href="prototype/CRMBidan_14sep2026.html"><b>Versi 14 Sep 2026 <span class="jk-badge">arsip</span></b><span>Versi awal prototype.</span></a>
 
     <h4>PRD</h4>
-    <a href="prd/prd-PTS-367-v1.md"><b>PTS-367 — Manajemen Data Pasien</b><span>Pagination 20+5 · kategori pasien otomatis</span></a>
-    <a href="prd/prd-PTS-374-v1.md"><b>PTS-374 — Kantong Persalinan</b><span>Termasuk pemisahan daftar per bulan</span></a>
-    <a href="prd/prd-PTS-376-wa-reminder-v3.md"><b>PTS-376 — Pengingat &amp; Jadwal Kunjungan</b><span>Naskah WA, jadwal kunjungan, pagination halaman jadwal</span></a>
-    <a href="prd/prd-PTS-602-kasir-harga-layanan-v1.md"><b>PTS-602 — Kasir &amp; Harga Layanan</b><span>Termasuk FR-24 chips kategori</span></a>
-    <a href="prd/prd-PTS-604-pengaturan-akun-v1.md"><b>PTS-604 — Pengaturan &amp; Akun</b><span>Profil praktik, tautan lokasi, akun read-only</span></a>
+    <a href="prd/prd-PTS-367-v1.md"><b>PTS-367 — Manajemen Data Pasien</b><span>Pagination 20+5 · kategori pasien otomatis · cut-off 16 tahun</span></a>
+    <a href="prd/prd-PTS-374-v1.md"><b>PTS-374 — Kantong Persalinan</b><span>Daftar per bulan · HPL · catatan persalinan</span></a>
+    <a href="prd/prd-PTS-376-wa-reminder-v3.md"><b>PTS-376 — Pengingat &amp; Jadwal Kunjungan</b><span>Naskah WA · jadwal kunjungan · pagination halaman jadwal</span></a>
+    <a href="prd/prd-PTS-602-kasir-harga-layanan-v1.md"><b>PTS-602 — Kasir &amp; Harga Layanan</b><span>Struk, metode bayar, chips kategori (FR-24)</span></a>
+    <a href="prd/prd-PTS-604-pengaturan-akun-v1.md"><b>PTS-604 — Pengaturan &amp; Akun</b><span>Profil praktik · tautan lokasi · akun read-only</span></a>
 
     <h4>Guidance UX &amp; Copy Deck</h4>
     <a href="guidance-ux/guidance-ux-kasir-harga-layanan.pdf"><b>Guidance UX — Kasir &amp; Harga Layanan</b><span>PDF</span></a>
     <a href="guidance-ux/guidance-ux-kantong-persalinan.pdf"><b>Guidance UX — Kantong Persalinan</b><span>PDF</span></a>
     <a href="guidance-ux/guidance-ux-field-baru-bidan.pdf"><b>Guidance UX — Field baru bidan</b><span>PDF</span></a>
-    <a href="copy-deck/copy-deck-wa-ringkasan-invoice.pdf"><b>Copy deck — WA ringkasan &amp; invoice</b><span>PDF · versi HTML juga tersedia</span></a>
+    <a href="copy-deck/copy-deck-wa-ringkasan-invoice.pdf"><b>Copy deck — WA ringkasan &amp; invoice</b><span>PDF · versi HTML juga tersedia di folder copy-deck</span></a>
 
     <h4>Repo</h4>
     <a href="https://github.com/Dhaniprisan/crm-bidan/blob/main/README.md"><b>README</b><span>Ringkasan repo &amp; cara pakai</span></a>
