@@ -9,10 +9,16 @@ Kumpulan **prototype interaktif** dan **dokumen produk** untuk modul **CRM Bidan
 
 | URL | Isi |
 |---|---|
-| **https://dhaniprisan.github.io/crm-bidan/** | **Prototype terbaru (16 Sep 2026)** — langsung jalan di browser |
+| **https://dhaniprisan.github.io/crm-bidan/** | **Prototype terbaru (17 Sep 2026)** — jadwal kunjungan mandiri + kasir & struk pembayaran |
 | https://dhaniprisan.github.io/crm-bidan/docs.html | Daftar dokumen: prototype semua versi, guidance UX, copy deck, PRD |
+| https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_16sep2026.html | Prototype 16 Sep — jalur kasir & harga layanan |
+| https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_16sep2026-jadwal-mandiri.html | Prototype jalur jadwal mandiri (arsip, tanpa kasir) |
 | https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_15sep2026.html | Prototype versi sebelumnya |
 | https://dhaniprisan.github.io/crm-bidan/prototype/CRMBidan_14sep2026.html | Prototype arsip |
+
+**Versi 17 Sep 2026 = hasil gabungan dua jalur pengembangan:**
+- **Jadwal kunjungan mandiri** — jadwal dicatat terpisah dari pelayanan sehingga satu pasien bisa punya lebih dari satu jadwal aktif; modal *Jadwalkan / Edit / Hapus jadwal*, preset agenda kontrol (ANC rutin, KB suntik/implan, imunisasi, nifas KF1–KF4), field agenda/catatan pada langkah jadwal, dan catatan tekanan darah pada pemeriksaan.
+- **Kasir & Harga Layanan** — field metode bayar (Tunai/Transfer/QRIS) + jumlah dibayar & kembalian di layar Kasir, **layar struk pembayaran** (Unduh/Bagikan PDF + Kirim WA), **nomor struk otomatis** `PMB001-YYYYMMDD-NNN`, tab **Transaksi** di profil pasien, penanda **Aktif/Nonaktif** + penghitung SKU di Harga Layanan, serta nomor struk & metode bayar pada baris Keuangan.
 
 Struktur repo: `index.html` = prototype terbaru (agar bisa dibuka langsung), `docs.html` = daftar dokumen, `prototype/` = semua versi, `guidance-ux/`, `copy-deck/`, `prd/` = dokumen.
 
