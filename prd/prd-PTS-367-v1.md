@@ -105,7 +105,7 @@ Konsekuensi teknis: CRM Bidan memerlukan koneksi ke PrimaCare untuk membuat/memb
 | US-05 | Sebagai bidan, saya ingin mencari dan menyaring pasien agar menemukan pasien dengan cepat | Given daftar pasien terbuka, When bidan mengetik nama atau memilih filter/urutan, Then daftar menampilkan hasil yang sesuai tanpa memuat ulang halaman | Must Have |
 | US-06 | Sebagai bidan, saya ingin mencari pasien lama agar bisa langsung mencatat layanan berikutnya | Given bidan membuka Cari Pasien Lama, When memasukkan nama atau tanggal lahir, Then hasil pencarian tampil dan dapat dibuka untuk melanjutkan pencatatan layanan | Must Have |
 | US-07 | Sebagai bidan, saya ingin mendaftarkan pasien baru agar datanya tercatat sejak kunjungan pertama | Given bidan membuka form pendaftaran, When mengisi field wajib dan menyimpan, Then pasien tersimpan dengan nomor RM standar PrimaCare dan muncul di Daftar Pasien | Must Have |
-| US-08 | Sebagai bidan, saya ingin melihat profil pasien agar riwayat dan kondisi pasien mudah dipantau | Given bidan memilih pasien dari daftar, When profil terbuka, Then tampil identitas ringkas, usia kehamilan/HPL, jadwal kontrol berikutnya, dan tab layanan sesuai kategori pasien | Must Have |
+| US-08 | Sebagai bidan, saya ingin melihat profil pasien agar riwayat dan kondisi pasien mudah dipantau | Given bidan memilih pasien dari daftar, When profil terbuka, Then tampil identitas ringkas, usia kehamilan/HPL, jadwal kunjungan berikutnya, dan tab layanan sesuai kategori pasien | Must Have |
 | US-09 | Sebagai bidan, saya ingin menghubungkan pasien dengan keluarganya agar data ibu dan anak saling terhubung | Given bidan membuka tab relasi keluarga, When memilih "Cari Pasien Lain" atau "Diri Sendiri", Then pasien terhubung sebagai anggota keluarga dan dapat dibuka kartu imunisasinya | Should Have |
 | US-10 | Sebagai superadmin, saya ingin mengarsipkan pasien yang sudah tidak ditangani agar daftar pasien tetap relevan | Given bidan membuka profil pasien, When memilih "Arsipkan / Lepas dari daftar pasien" dan mengonfirmasi, Then status pasien menjadi non aktif dan tampil di PrimaCare | Must Have |
 | US-11 | Sebagai bidan, saya ingin data yang saya isi tidak hilang saat layanan PrimaCare bermasalah | Given data pasien diisi saat layanan PrimaCare tidak tersedia, When bidan menyimpan, Then data tersimpan sebagai draft di server CRM Bidan dan disinkronkan otomatis ketika layanan kembali normal | Must Have |
@@ -172,7 +172,7 @@ Konsekuensi teknis: CRM Bidan memerlukan koneksi ke PrimaCare untuk membuat/memb
 |:--|:--|:--|:--|
 | FR-31 | Profil pasien menampilkan header: nama pasien, aksi edit, identitas ringkas (G/P/A · golongan darah · alamat), dan tautan "Lihat detail lengkap" | High | Must |
 | FR-32 | Profil menampilkan tab sesuai kategori pasien: Ringkasan, ANC, Persalinan, Nifas, KB, Imunisasi, Layanan Lain | High | Must |
-| FR-33 | Tab Ringkasan menampilkan usia kehamilan (X mgu Y hr) + badge trimester + progress bar (0 / 12 / 27 / 40 mgu) untuk pasien hamil | High | Must |
+| FR-33 | Tab Ringkasan menampilkan usia kehamilan (X minggu Y hari) + badge trimester + progress bar (0 / 12 / 27 / 40 minggu) untuk pasien hamil | High | Must |
 | FR-34 | Tab Ringkasan menampilkan HPHT, HPL, dan hitungan hari menuju HPL | High | Must |
 | FR-35 | Tab Ringkasan menampilkan jadwal kunjungan berikutnya, kontrol terakhir, dan badge jarak hari | High | Must |
 | FR-36 | Tab Ringkasan menampilkan kontak pasien (No. HP, tanggal lahir, kontak darurat) dan riwayat alergi/penyakit bila diisi | Medium | Should |
@@ -180,6 +180,8 @@ Konsekuensi teknis: CRM Bidan memerlukan koneksi ke PrimaCare untuk membuat/memb
 | FR-38 | Profil menyediakan aksi "Arsipkan / Lepas dari daftar pasien" yang mengubah status pasien menjadi **non aktif**, hanya tersedia untuk akun **superadmin**, dengan dialog konfirmasi | High | Must |
 | FR-39 | Status non aktif membuat pasien tidak tampil pada daftar pasien default, namun tetap dapat ditemukan melalui filter status | High | Must |
 | FR-40 | Perubahan status pasien (non aktif) ikut tersinkron dan **terlihat di PrimaCare** | High | Must |
+| FR-45 | **Pagination Daftar Pasien (20 + 5):** daftar memuat **20 baris pertama**, lalu **5 baris berikutnya** setiap kali bidan menggulir sampai bawah (*infinite scroll*) hingga seluruh pasien tampil; hitungan dimulai ulang saat pencarian/filter berubah. | High | Must |
+| FR-46 | **Kategori pasien diperbarui otomatis:** Ibu (Tidak Hamil) → Ibu Hamil saat data kehamilan (HPHT/HPL USG) terisi; Ibu Hamil → Ibu (Tidak Hamil) saat **HPL sudah lewat atau ada catatan persalinan**; Anak → kategori dewasa saat usia mencapai **16 tahun**. | High | Must |
 
 ## 7. Acceptance Criteria
 
@@ -231,8 +233,8 @@ Konsekuensi teknis: CRM Bidan memerlukan koneksi ke PrimaCare untuk membuat/memb
 
 ### US-08 — Profil Pasien
 1. **Given** bidan membuka profil pasien hamil, **When** halaman dimuat, **Then** tampil nama pasien, aksi edit, identitas ringkas (G/P/A · golongan darah · alamat), dan tab Ringkasan, ANC, Persalinan, Nifas, KB, Imunisasi, Layanan Lain.
-2. **Given** pasien hamil dengan HPHT terisi, **When** tab Ringkasan dibuka, **Then** tampil usia kehamilan (X mgu Y hr), badge trimester, progress bar kehamilan (skala 0 / 12 / 27 / 40 mgu), HPHT, HPL, dan hitungan hari menuju HPL.
-3. **Given** pasien memiliki jadwal kontrol berikutnya, **When** tab Ringkasan dibuka, **Then** tampil tanggal kontrol terakhir, jadwal kontrol berikutnya, dan badge jarak hari.
+2. **Given** pasien hamil dengan HPHT terisi, **When** tab Ringkasan dibuka, **Then** tampil usia kehamilan (X minggu Y hari), badge trimester, progress bar kehamilan (skala 0 / 12 / 27 / 40 minggu), HPHT, HPL, dan hitungan hari menuju HPL.
+3. **Given** pasien memiliki jadwal kunjungan berikutnya, **When** tab Ringkasan dibuka, **Then** tampil tanggal kunjungan terakhir, jadwal kunjungan berikutnya, dan badge jarak hari.
 4. **Given** pasien kategori anak, **When** profil dibuka, **Then** tab yang tampil hanya Ringkasan, Imunisasi, dan Layanan Lain (tanpa ANC/Persalinan/Nifas/KB).
 5. **Given** pasien memiliki pasangan/keluarga terhubung, **When** bagian keluarga dibuka, **Then** sistem menampilkan daftar anggota keluarga terhubung dan dapat membuka Kartu Imunisasi anggota keluarga tersebut.
 

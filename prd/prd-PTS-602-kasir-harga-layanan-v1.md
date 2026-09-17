@@ -20,7 +20,7 @@
 
 **Di dalam cakupan:**
 - **Layar Kasir** sebagai penutup kunjungan, dapat dibuka dari **6 kartu layanan** (ANC · Persalinan · Nifas · KB · Layanan Lain · Imunisasi): pilih layanan dari SKU aktif, biaya terisi otomatis dari harga SKU (tetap bisa diubah), aksi **Selesai** / **Lewati**.
-- **Empat field pembayaran baru:** metode bayar (Tunai · Transfer · QRIS), status lunas (default "Lunas"), jumlah dibayar, dan **nomor struk otomatis** (`<kode klinik>-<yyyymmdd>-<nomor urut>`).
+- **Tiga field pembayaran baru:** metode bayar (Tunai · Transfer · QRIS), status lunas (default "Lunas"), dan **nomor struk otomatis** (`<kode klinik>-<yyyymmdd>-<nomor urut>`).
 - **Struk pembayaran PDF** yang dapat diunduh/dibagikan, plus **kirim ringkasan pembayaran via WhatsApp** (teks invoice) ke nomor pasien.
 - **Halaman Pengaturan → Harga Layanan:** kelola SKU & harga per kategori (tambah, ubah harga, aktif/nonaktif, hapus).
 - Transaksi menjadi **sumber data rekap pemasukan** di halaman Keuangan.
@@ -58,7 +58,7 @@
 | FR-04 | Field **Layanan** berupa pemilih berisi **SKU aktif sesuai kategori layanan pasien**, dengan format opsi `<nama layanan> — Rp <harga>`, disertai keterangan *"Harga otomatis terisi dari pengaturan, tetap bisa diubah manual."* |
 | FR-05 | Field **Biaya (Rp)** terisi otomatis dari harga SKU terpilih, tetap dapat diubah manual, dan tidak menerima nilai negatif. |
 | FR-06 | Field **Metode bayar** (baru) berupa pemilih **Tunai · Transfer · QRIS** dan wajib diisi sebelum transaksi disimpan. |
-| FR-07 | Field **Jumlah dibayar (Rp)** (baru) terisi otomatis sebesar total biaya. Bila diubah, layar menampilkan informasi **kembalian** (bila lebih besar) atau **selisih kurang** (bila lebih kecil); keduanya **tidak memblokir** penyimpanan karena pelunasan bertahap belum termasuk cakupan. |
+| FR-07 | Transaksi CRM Bidan **selalu lunas sebesar total biaya** — layar kasir **tidak meminta jumlah dibayar** dan **tidak menampilkan kembalian/selisih**, karena pembayaran di praktik dilakukan penuh di depan. |
 | FR-08 | Field **Status lunas** (baru) tersimpan dengan nilai default **"Lunas"**; belum ada alur untuk mengubah status pada rilis ini. |
 | FR-09 | **Nomor struk** (baru) dibuat otomatis dengan format **`<kode klinik>-<yyyymmdd>-<nomor urut 3 digit>`** (contoh `PMB001-20260916-003`), urut per klinik per hari, dan tidak dapat diedit bidan. |
 | FR-10 | Aksi **"Selesai"** menyimpan transaksi lalu membuka **layar struk**; aksi **"Lewati"** menutup kunjungan tanpa transaksi dan mengembalikan bidan ke tab layanan pasien, tanpa menambah data keuangan. |
@@ -67,7 +67,7 @@
 
 | ID | Requirement |
 |---|---|
-| FR-11 | Layar struk menampilkan: nama praktik & lokasi, judul **"Struk Pembayaran"**, **nomor struk**, tanggal & waktu transaksi, nama pasien (dan No. RM bila ada), rincian layanan, **total biaya**, **metode bayar**, **jumlah dibayar**, serta kembalian bila ada. |
+| FR-11 | Layar struk menampilkan: nama praktik & lokasi, judul **"Struk Pembayaran"**, **nomor struk**, tanggal & waktu transaksi, nama pasien (dan No. RM bila ada), rincian layanan, **total biaya**, **metode bayar**, dan status **lunas**. |
 | FR-12 | Struk dapat **diunduh/dibagikan sebagai file PDF** (berbagi memakai share sheet perangkat sehingga bidan dapat memilih WhatsApp sendiri). |
 | FR-13 | Layar struk menyediakan tombol **"Kirim WA"** yang membuka WhatsApp berisi **teks ringkasan pembayaran** (nomor struk, rincian, total, metode bayar) ke **No. HP pasien**; tombol tidak tampil bila nomor HP kosong. |
 | FR-14 | Struk dapat dibuka ulang dari **riwayat transaksi pada Profil Pasien**, sehingga bidan dapat mengirim ulang kapan saja. |
@@ -87,9 +87,10 @@
 
 | ID | Requirement |
 |---|---|
-| FR-21 | Transaksi tersimpan **per pasien dan per kunjungan**, memuat seluruh field pembayaran (metode, jumlah dibayar, status lunas, nomor struk) beserta layanan & biaya. |
+| FR-21 | Transaksi tersimpan **per pasien dan per kunjungan**, memuat seluruh field pembayaran (metode, status lunas, nomor struk) beserta layanan & biaya. |
 | FR-22 | Data transaksi menjadi **sumber rekap pemasukan** di halaman Keuangan (epic PTS-603) dan dasar perhitungan laporan. |
 | FR-23 | Master SKU/harga dan transaksi **dikelola mandiri di CRM Bidan** pada rilis ini; belum ada sinkronisasi harga/transaksi ke PrimaCare. |
+| FR-24 | **Pemilihan kategori layanan memakai chips/tab yang selalu terlihat** (bukan dropdown): menampilkan seluruh kategori beserta jumlah SKU-nya, satu tap untuk berpindah kategori, dan form tambah layanan menyebut kategori aktif sehingga SKU tidak salah kategori. | High | Must |
 
 ---
 
@@ -110,7 +111,7 @@
 - **Given** kategori belum punya SKU, **Then** tampil keadaan kosong *"Belum ada SKU untuk kategori ini…"*.
 
 **US-04 — Struk & pengiriman**
-- **Given** transaksi selesai, **When** bidan menekan **unduh/bagikan**, **Then** **PDF struk** terunduh/terkirim berisi nama praktik, nomor struk, tanggal, rincian, total, metode bayar, dan jumlah dibayar.
+- **Given** transaksi selesai, **When** bidan menekan **unduh/bagikan**, **Then** **PDF struk** terunduh/terkirim berisi nama praktik, nomor struk, tanggal, rincian, total, metode bayar, dan status lunas.
 - **Given** pasien punya No. HP, **When** bidan menekan **"Kirim WA"**, **Then** WhatsApp terbuka dengan **teks ringkasan pembayaran** sudah terisi ke nomor pasien.
 - **Given** pasien tanpa No. HP, **Then** tombol "Kirim WA" **tidak ditampilkan** sementara unduh PDF tetap tersedia.
 
@@ -140,9 +141,6 @@ ANC Reguler            Rp 50.000
 --------------------------------
 TOTAL                  Rp 50.000
 Metode bayar           Tunai
-Jumlah dibayar         Rp 50.000
-Kembalian              Rp 0
-
 Terima kasih atas kepercayaan Anda. 🙏
 ```
 
@@ -198,7 +196,7 @@ Mohon informasi bila ingin dilunasi ya. Terima kasih 🙏
 PMB Ratna Sejahtera
 ```
 
-**Catatan naskah:** nama pasien mengikuti aturan sapaan yang berlaku di modul pengingat (dewasa "Ibu"; di bawah 18 tahun tanpa "Ibu"); untuk imunisasi anak, struk & pesan ditujukan ke orang tua dengan menyebut nama anak; PDF **tidak** dilampirkan otomatis oleh tombol WA karena deep link `wa.me` tidak mendukung lampiran file.
+**Catatan naskah:** nama pasien mengikuti aturan sapaan yang berlaku di modul pengingat (dewasa "Ibu"; di bawah 16 tahun tanpa "Ibu"); untuk imunisasi anak, struk & pesan ditujukan ke orang tua dengan menyebut nama anak; PDF **tidak** dilampirkan otomatis oleh tombol WA karena deep link `wa.me` tidak mendukung lampiran file.
 
 ---
 
@@ -209,13 +207,11 @@ PMB Ratna Sejahtera
 | 1 | Kategori layanan **belum punya SKU aktif** | Pemilih layanan kosong dengan ajakan mengatur harga layanan; tombol "Selesai" tidak aktif sampai layanan dipilih. |
 | 2 | **SKU gratis** (harga Rp 0, mis. Edukasi KB) | Transaksi tetap dapat disimpan; struk dan pesan WA menampilkan **Rp 0**. |
 | 3 | **Biaya diubah manual** oleh bidan | Nilai hasil perubahan yang disimpan; harga SKU di pengaturan **tidak ikut berubah**. |
-| 4 | **Jumlah dibayar lebih besar** dari biaya | Layar & struk menampilkan **kembalian**; transaksi tetap tersimpan. |
-| 5 | **Jumlah dibayar lebih kecil** dari biaya | Layar menampilkan **selisih kurang** sebagai informasi; transaksi tetap tersimpan dengan status **Lunas** (pelunasan bertahap di luar cakupan rilis ini). |
-| 6 | Pasien **tanpa No. HP** | Tombol "Kirim WA" tidak ditampilkan; unduh/bagikan PDF tetap tersedia. |
-| 7 | **Imunisasi anak** | Nama pada struk = nama anak; pengiriman WA ke orang tua (No. HP anak, fallback No. HP orang tua). |
-| 8 | Dua transaksi dibuat pada waktu berdekatan | Nomor urut struk tetap **unik** (dihitung per klinik per hari), tidak ada nomor kembar. |
-| 9 | **Gagal membuat PDF** | Muncul pesan kegagalan dan tombol coba lagi; **data transaksi tidak hilang**. |
-| 10 | SKU dihapus setelah dipakai transaksi lama | Riwayat transaksi lama tetap menampilkan nama & biaya yang tersimpan. |
+| 4 | Pasien **tanpa No. HP** | Tombol "Kirim WA" tidak ditampilkan; unduh/bagikan PDF tetap tersedia. |
+| 5 | **Imunisasi anak** | Nama pada struk = nama anak; pengiriman WA ke orang tua (No. HP anak, fallback No. HP orang tua). |
+| 6 | Dua transaksi dibuat pada waktu berdekatan | Nomor urut struk tetap **unik** (dihitung per klinik per hari), tidak ada nomor kembar. |
+| 7 | **Gagal membuat PDF** | Muncul pesan kegagalan dan tombol coba lagi; **data transaksi tidak hilang**. |
+| 8 | SKU dihapus setelah dipakai transaksi lama | Riwayat transaksi lama tetap menampilkan nama & biaya yang tersimpan. |
 
 **Keterbatasan yang diketahui (bukan cacat):** transaksi yang sudah disimpan **tidak dapat diedit** (sesuai peringatan di layar Kasir); koreksi dilakukan dengan mencatat kunjungan baru bila memang diperlukan.
 
@@ -258,6 +254,6 @@ PMB Ratna Sejahtera
 
 | Versi | Tanggal | Perubahan |
 |---|---|---|
-| **v1** | 15 Sep 2026 | PRD awal, disusun dari audit prototype + **grill 10 pertanyaan**. Keputusan: (1) struk **PDF** + teks WA; (2) **4 field pembayaran** (metode bayar, status lunas, jumlah dibayar, nomor struk); (3) metode bayar **Tunai · Transfer · QRIS**; (4) **nomor struk otomatis** `<kode klinik>-<yyyymmdd>-<urut>`; (5) **1 layanan per transaksi** (multi-item = iterasi berikutnya); (6) master SKU/harga & transaksi **mandiri di CRM Bidan** dulu; (7) transaksi **selalu dianggap lunas** (tanpa alur pelunasan); (8) "Lewati" **tanpa transaksi** & tidak masuk keuangan; (9) field **status lunas tetap disimpan** (default "Lunas") sebagai kesiapan fitur bayar bertahap; (10) PDF dibagikan lewat **share sheet** + tombol **WA teks invoice**. |
+| **v1** | 15 Sep 2026 | PRD awal, disusun dari audit prototype + **grill 10 pertanyaan**. Keputusan: (1) struk **PDF** + teks WA; (2) **3 field pembayaran** (metode bayar, status lunas, nomor struk) — jumlah dibayar & kembalian dihapus karena transaksi selalu lunas; (3) metode bayar **Tunai · Transfer · QRIS**; (4) **nomor struk otomatis** `<kode klinik>-<yyyymmdd>-<urut>`; (5) **1 layanan per transaksi** (multi-item = iterasi berikutnya); (6) master SKU/harga & transaksi **mandiri di CRM Bidan** dulu; (7) transaksi **selalu dianggap lunas** (tanpa alur pelunasan); (8) "Lewati" **tanpa transaksi** & tidak masuk keuangan; (9) field **status lunas tetap disimpan** (default "Lunas") sebagai kesiapan fitur bayar bertahap; (10) PDF dibagikan lewat **share sheet** + tombol **WA teks invoice**. |
 
 
