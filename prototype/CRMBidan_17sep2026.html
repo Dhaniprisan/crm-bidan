@@ -71,7 +71,62 @@ function jkKasir(){let{pasien:e,setPasien:t,hargaLayanan:hl}=St(),[tab,setTab]=(
  if(pilihP)return komposisi()
  return daftarView()}
 
-function os(){let[e,t]=ti(wi),[n,r]=ri(),[i,a]=(0,_.useState)(()=>Xn());function o(){$n(),a(null)}return(0,P.jsx)(In,{children:(0,P.jsxs)(Yt,{children:[(0,P.jsx)(N,{path:`/login`,element:i?(0,P.jsx)(Kt,{to:`/`,replace:!0}):(0,P.jsx)(Oi,{onLogin:a})}),(0,P.jsxs)(N,{element:i?(0,P.jsx)(Ur,{pasien:e,setPasien:t,hargaLayanan:n,setHargaLayanan:r,onLogout:o}):(0,P.jsx)(Kt,{to:`/login`,replace:!0}),children:[(0,P.jsx)(N,{path:`/`,element:(0,P.jsx)(Gi,{})}),(0,P.jsx)(N,{path:`/pasien`,element:(0,P.jsx)(ra,{})}),(0,P.jsx)(N,{path:`/pasien/baru`,element:(0,P.jsx)(da,{})}),(0,P.jsx)(N,{path:`/pasien/:id`,element:(0,P.jsx)(Va,{})}),(0,P.jsx)(N,{path:`/pasien/:id/pilih-kartu`,element:(0,P.jsx)(io,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/persalinan`,element:(0,P.jsx)(Do,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/anc`,element:(0,P.jsx)(jo,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/nifas`,element:(0,P.jsx)(Io,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/kb`,element:(0,P.jsx)(Lo,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/wellness`,element:(0,P.jsx)(Ro,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/imunisasi`,element:(0,P.jsx)(zo,{})}),(0,P.jsx)(N,{path:`/kunjungan`,element:(0,P.jsx)(Bo,{})}),(0,P.jsx)(N,{path:`/kantong-bidan`,element:(0,P.jsx)(Ho,{})}),(0,P.jsx)(N,{path:`/kantong-bidan/:year/:month`,element:(0,P.jsx)(Go,{})}),(0,P.jsx)(N,{path:`/edukasi`,element:(0,P.jsx)(qo,{})}),(0,P.jsx)(N,{path:`/laporan`,element:(0,P.jsx)(Zo,{})}),(0,P.jsx)(N,{path:`/keuangan`,element:(0,P.jsx)(ts,{})}),(0,P.jsx)(N,{path:`/kasir`,element:(0,P.jsx)(jkKasir,{})}),(0,P.jsx)(N,{path:`/lainnya`,element:(0,P.jsx)(rs,{})}),(0,P.jsx)(N,{path:`/lainnya/klinik`,element:(0,P.jsx)(is,{})}),(0,P.jsx)(N,{path:`/lainnya/harga`,element:(0,P.jsx)(as,{})})]})]})})}(0,v.createRoot)(document.getElementById(`root`)).render((0,P.jsx)(_.StrictMode,{children:(0,P.jsx)(os,{})}));</script>
+function os(){let[e,t]=ti(wi),[n,r]=ri(),[i,a]=(0,_.useState)(()=>Xn());function o(){$n(),a(null)}return(0,P.jsx)(In,{children:(0,P.jsxs)(Yt,{children:[(0,P.jsx)(N,{path:`/login`,element:i?(0,P.jsx)(Kt,{to:`/`,replace:!0}):(0,P.jsx)(Oi,{onLogin:a})}),(0,P.jsxs)(N,{element:i?(0,P.jsx)(Ur,{pasien:e,setPasien:t,hargaLayanan:n,setHargaLayanan:r,onLogout:o}):(0,P.jsx)(Kt,{to:`/login`,replace:!0}),children:[(0,P.jsx)(N,{path:`/`,element:(0,P.jsx)(Gi,{})}),(0,P.jsx)(N,{path:`/pasien`,element:(0,P.jsx)(ra,{})}),(0,P.jsx)(N,{path:`/pasien/baru`,element:(0,P.jsx)(da,{})}),(0,P.jsx)(N,{path:`/pasien/:id`,element:(0,P.jsx)(Va,{})}),(0,P.jsx)(N,{path:`/pasien/:id/pilih-kartu`,element:(0,P.jsx)(io,{})}),(0,P.jsx)(N,{path:`/pasien/:id/kehamilan/baru`,element:(0,P.jsx)(function(){const jkNav=yt(),jkPar=wt(),jkSt=St();
+ const jkP=(jkSt.pasien||[]).find(function(x){return x.id===jkPar.id});
+ const [jkHpht,setHpht]=(0,_.useState)('');
+ const [jkUsg,setUsg]=(0,_.useState)('');
+ const [jkTt,setTt]=(0,_.useState)('');
+ const [jkA,setA]=(0,_.useState)({});
+ const [jkB,setB]=(0,_.useState)({});
+ const [jkC,setC]=(0,_.useState)({});
+ const [jkErr,setErr]=(0,_.useState)('');
+ const [jkOk,setOk]=(0,_.useState)(false);
+ const jkHpl=jkHpht?si(jkHpht):'';
+ const jkGrup=[
+  ['Riwayat kesehatan sekarang',jkA,setA,[['alergi','Alergi',1],['autoimun','Autoimun',1],['hepatitisB','Hepatitis B',0],['jantung','Jantung',0],['sifilis','Sifilis',0],['asma','Asma',0],['diabetes','Diabetes',0],['hipertensi','Hipertensi',0],['jiwa','Jiwa',1],['tb','TB',1],['lainnya','Lainnya',1]]],
+  ['Riwayat perilaku berisiko 1 bulan sebelum hamil',jkB,setB,[['aktivitasFisikKurang','Aktivitas fisik kurang',0],['alkohol','Alkohol',0],['kosmetikBerbahaya','Kosmetik yang mengandung zat berbahaya',0],['obatTeratogenik','Obat teratogenik',0],['merokok','Merokok',0],['polaMakanBerisiko','Pola makan berisiko',0],['lainnya','Lainnya',1]]],
+  ['Riwayat penyakit keluarga',jkC,setC,[['alergi','Alergi',0],['autoimun','Autoimun',0],['hepatitisB','Hepatitis B',0],['jantung','Jantung',0],['sifilis','Sifilis',0],['asma','Asma',0],['diabetes','Diabetes',0],['hipertensi','Hipertensi',0],['jiwa','Jiwa',0],['tb','TB',0],['lainnya','Lainnya',1]]]
+ ];
+ function jkSimpan(){
+  if(!jkHpht){setErr('HPHT wajib diisi.');return}
+  if(!jkTt){setErr('Status imunisasi tetanus wajib dipilih.');return}
+  const jkRec={id:'kh-'+Date.now(),hpht:jkHpht,hpl:si(jkHpht),hplUsg:jkUsg||'',imunisasiTetanus:jkTt,riwayatKesehatan:jkA,perilakuRisiko:jkB,riwayatKeluarga:jkC,status:'aktif',createdAt:new Date().toISOString(),anc:[],persalinan:[]};
+  jkSt.setPasien(function(lst){return (lst||[]).map(function(p){return p.id!==jkPar.id?p:Object.assign({},p,{kehamilan:(p.kehamilan||[]).concat([jkRec]),hpht:jkHpht,hplUsg:jkUsg||''})})});
+  setErr('');setOk(true);
+ }
+ function jkTb(pr){
+  const on=!!pr.st[pr.k], tx=pr.st[pr.k+'Teks']||'';
+  return (0,P.jsxs)('label',{className:'flex items-start gap-3 rounded-xl border border-clay-200 bg-paper px-3 py-2 text-sm',children:[
+   (0,P.jsx)('input',{type:'checkbox',checked:on,onChange:function(){pr.set(function(o){const n=Object.assign({},o);n[pr.k]=!o[pr.k];return n})},className:'mt-1'}),
+   (0,P.jsxs)('span',{className:'flex flex-1 flex-col',children:[
+    (0,P.jsx)('span',{className:'text-ink',children:pr.label}),
+    (on&&pr.expand)?(0,P.jsx)('input',{value:tx,onChange:function(e){const v=e.target.value;pr.set(function(o){const n=Object.assign({},o);n[pr.k+'Teks']=v;return n})},placeholder:pr.k==='lainnya'?'tulis di sini':'catatan (opsional)',className:'mt-2 rounded-lg border border-clay-300 px-3 py-2 text-sm'}):null
+   ]})
+  ]})
+ }
+ return (0,P.jsxs)(P.Fragment,{children:[
+  (0,P.jsx)(K,{eyebrow:'Kartu Kehamilan',title:'Pencatatan Kehamilan Baru',description:'Data kehamilan ini menjadi wadah pemeriksaan ANC dan persalinan pasien.'}),
+  (0,P.jsxs)('main',{className:'flex flex-1 flex-col gap-5 p-5',children:[
+   (0,P.jsx)('p',{className:'text-sm text-ink-soft',children:jkP?('Pasien: '+jkP.nama):'Pasien tidak ditemukan'}),
+   (0,P.jsxs)('section',{className:'rounded-2xl border border-clay-200 bg-paper p-5',children:[
+    (0,P.jsx)('p',{className:'font-display text-base font-semibold text-ink',children:'Data kehamilan'}),
+    (0,P.jsxs)('div',{className:'mt-3 flex flex-col gap-3',children:[
+     (0,P.jsxs)('label',{className:'flex flex-col gap-1 text-sm text-ink',children:[(0,P.jsxs)('span',{children:['HPHT',(0,P.jsx)('span',{className:'text-terracotta',children:' *'})]}),(0,P.jsx)('input',{type:'date',value:jkHpht,onChange:function(e){setHpht(e.target.value)},className:'rounded-lg border border-clay-300 px-3 py-2 text-sm'})]}),
+     (0,P.jsxs)('label',{className:'flex flex-col gap-1 text-sm text-ink',children:[(0,P.jsx)('span',{children:'HPL (otomatis dari HPHT)'}),(0,P.jsx)('input',{value:jkHpl?z(jkHpl):'-',readOnly:true,className:'rounded-lg border border-clay-200 bg-clay-100 px-3 py-2 text-sm text-ink-soft'})]}),
+     (0,P.jsxs)('label',{className:'flex flex-col gap-1 text-sm text-ink',children:[(0,P.jsx)('span',{children:'HPL USG (opsional)'}),(0,P.jsx)('input',{type:'date',value:jkUsg,onChange:function(e){setUsg(e.target.value)},className:'rounded-lg border border-clay-300 px-3 py-2 text-sm'})]}),
+     (0,P.jsxs)('label',{className:'flex flex-col gap-1 text-sm text-ink',children:[(0,P.jsxs)('span',{children:['Status imunisasi tetanus',(0,P.jsx)('span',{className:'text-terracotta',children:' *'})]}),(0,P.jsxs)('select',{value:jkTt,onChange:function(e){setTt(e.target.value)},className:'rounded-lg border border-clay-300 px-3 py-2 text-sm',children:[(0,P.jsx)('option',{value:'',children:'Pilih status'}),(0,P.jsx)('option',{value:'T1',children:'T1'}),(0,P.jsx)('option',{value:'T2',children:'T2'}),(0,P.jsx)('option',{value:'T3',children:'T3'}),(0,P.jsx)('option',{value:'T4',children:'T4'}),(0,P.jsx)('option',{value:'T5',children:'T5'})]})]})
+    ]})
+   ]}),
+   jkGrup.map(function(g,gi){return (0,P.jsxs)('section',{className:'rounded-2xl border border-clay-200 bg-paper p-5',children:[
+    (0,P.jsx)('p',{className:'font-display text-base font-semibold text-ink',children:g[0]}),
+    (0,P.jsx)('div',{className:'mt-3 flex flex-col gap-2',children:g[3].map(function(it){return (0,P.jsx)(jkTb,{st:g[1],set:g[2],k:it[0],label:it[1],expand:!!it[2],key:it[0]})})})
+   ]},'g'+gi)}),
+   jkErr?(0,P.jsx)('p',{className:'rounded-xl border border-terracotta/30 bg-terracotta/10 px-3 py-2 text-sm text-terracotta-dark',children:jkErr}):null,
+   jkOk?(0,P.jsx)('p',{className:'rounded-xl border border-sage/30 bg-sage/10 px-3 py-2 text-sm text-sage-dark',children:'Data kehamilan tersimpan.'}):null,
+   (0,P.jsx)('button',{type:'button',onClick:jkSimpan,className:'w-full rounded-full bg-terracotta py-3 text-sm font-semibold text-paper shadow-sm hover:bg-terracotta-dark',children:'Simpan data kehamilan'}),
+   (0,P.jsx)('button',{type:'button',onClick:function(){jkNav('/pasien/'+jkPar.id)},className:'w-full rounded-full py-2 text-center text-sm font-medium text-ink-soft hover:text-ink',children:'Batal'})
+  ]})
+ ]})},{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/persalinan`,element:(0,P.jsx)(Do,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/anc`,element:(0,P.jsx)(jo,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/nifas`,element:(0,P.jsx)(Io,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/kb`,element:(0,P.jsx)(Lo,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/wellness`,element:(0,P.jsx)(Ro,{})}),(0,P.jsx)(N,{path:`/pasien/:id/catat/imunisasi`,element:(0,P.jsx)(zo,{})}),(0,P.jsx)(N,{path:`/kunjungan`,element:(0,P.jsx)(Bo,{})}),(0,P.jsx)(N,{path:`/kantong-bidan`,element:(0,P.jsx)(Ho,{})}),(0,P.jsx)(N,{path:`/kantong-bidan/:year/:month`,element:(0,P.jsx)(Go,{})}),(0,P.jsx)(N,{path:`/edukasi`,element:(0,P.jsx)(qo,{})}),(0,P.jsx)(N,{path:`/laporan`,element:(0,P.jsx)(Zo,{})}),(0,P.jsx)(N,{path:`/keuangan`,element:(0,P.jsx)(ts,{})}),(0,P.jsx)(N,{path:`/kasir`,element:(0,P.jsx)(jkKasir,{})}),(0,P.jsx)(N,{path:`/lainnya`,element:(0,P.jsx)(rs,{})}),(0,P.jsx)(N,{path:`/lainnya/klinik`,element:(0,P.jsx)(is,{})}),(0,P.jsx)(N,{path:`/lainnya/harga`,element:(0,P.jsx)(as,{})})]})]})})}(0,v.createRoot)(document.getElementById(`root`)).render((0,P.jsx)(_.StrictMode,{children:(0,P.jsx)(os,{})}));</script>
 
 <style>
   #jkHubPill{position:fixed;right:14px;bottom:16px;z-index:2147483000;}
